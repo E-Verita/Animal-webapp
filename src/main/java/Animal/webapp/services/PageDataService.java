@@ -22,6 +22,8 @@ public class PageDataService {
     PageDataService() {
         availablePages.add(new Page("index", "Home", "Homepage", "/"));
         availablePages.add(new Page("shelterlogin", "Shelter Login", "Shelter Login","/shelterlogin"));
+        availablePages.add(new Page("sheltermenu", "Shelter Menu", "Shelter Menu","/sheltermenu"));
+
     }
 
     public Page getPage(String pageName) {
