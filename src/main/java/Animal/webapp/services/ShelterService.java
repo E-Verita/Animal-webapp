@@ -24,4 +24,7 @@ public class ShelterService {
         return shelter;
     }
 
+    public void createShelter(Shelter shelter) throws Exception{
+        shelterRepository.save(shelter);
+    }
 }

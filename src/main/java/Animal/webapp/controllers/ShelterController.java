@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ShelterController {
@@ -45,6 +46,25 @@ public class ShelterController {
         model.addAttribute("pageInfo", pageDataService.getPage("sheltermenu"));
         model.addAttribute("availablePages", pageDataService.getPages());
         return "sheltermenu";
+    }
+
+    @GetMapping("/shelterregister")
+    @ResponseBody
+    public String showShelterRegisterPage(Model model){
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getPage("shelterregister"));
+        model.addAttribute("availablePages", pageDataService.getPages());
+        return "shelterregister";
+    }
+
+    @PostMapping("/shelterregister")
+    public String showShelterRegisterPage(Shelter shelter){
+        try {
+            shelterService.createShelter(shelter);
+            return "redirect:shelterlogin?status=signup_success";
+        }catch (Exception ex){
+            return "redirect:shelterregister?status=signup_failed&message="+ex.getMessage();
+        }
     }
 
 }

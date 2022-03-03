@@ -14,5 +14,4 @@ public class AnimalWebappApplication {
 	public String error(){
 		return "error";
 	}
-
 }
