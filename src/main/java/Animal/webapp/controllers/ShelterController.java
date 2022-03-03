@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ShelterController {
@@ -23,16 +22,10 @@ public class ShelterController {
     }
 
     @GetMapping("/shelterlogin")
-    public String showShelterLoginPage(
-            @RequestParam(name = "status", required = false) String status,
-            @RequestParam(name = "message", required = false) String message,
-            Model model
-    ){
+    public String showShelterLoginPage(Model model){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterlogin"));
         model.addAttribute("availablePages", pageDataService.getPages());
-        model.addAttribute("status", status);
-        model.addAttribute("message", message);
         return "shelterlogin";
     }
 
@@ -40,10 +33,18 @@ public class ShelterController {
     public String handleShelterLogin(UserLogin userLogin){
         try{
             Shelter shelter = shelterService.verifyShelter(userLogin);
-            return "redirect:sheltermenu/"+ shelter.getId();
+            return "redirect:sheltermenu/" + shelter.getId();
         }catch (Exception exception){
             return "redirect:shelterlogin?status=login_failed&message="+exception.getMessage();
         }
+    }
+
+    @GetMapping("/sheltermenu/{shelterId}")
+    public String showShelterMenu(Model model){
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getPage("sheltermenu"));
+        model.addAttribute("availablePages", pageDataService.getPages());
+        return "sheltermenu";
     }
 
 }
