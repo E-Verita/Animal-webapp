@@ -4,6 +4,7 @@ import Animal.webapp.models.enums.HosingType;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +17,10 @@ public class Adopter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+
     private String username;
+    @NotNull
     private String email;
     private String password;
     private String name;
@@ -27,4 +31,4 @@ public class Adopter {
     private Boolean hasOtherAnimals;
     private Boolean hasActiveLifestyle;
     private Boolean canAdoptSickAnimal;
-}
+    }
