@@ -46,5 +46,4 @@ public class VolunteerController {
         model.addAttribute("availablePages", pageDataService.getPages());
         return "volunteermenu";
     }
-
 }

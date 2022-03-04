@@ -6,7 +6,6 @@ import Animal.webapp.repository.ShelterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class ShelterService {
     ShelterRepository shelterRepository;
@@ -23,6 +22,7 @@ public class ShelterService {
         }
         return shelter;
     }
+
     public void addShelter(Shelter shelter) throws Exception {
         shelterRepository.save(shelter);
     }

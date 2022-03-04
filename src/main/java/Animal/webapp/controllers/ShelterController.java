@@ -56,7 +56,7 @@ public class ShelterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterregister"));
         model.addAttribute("availablePages", pageDataService.getPages());
-        model.addAttribute(new Shelter());
+        model.addAttribute("shelter", new Shelter());
         model.addAttribute("region", Region.values());
         return "shelterregister";
     }
@@ -65,7 +65,7 @@ public class ShelterController {
     public String processShelterRegisterPage(@ModelAttribute @Valid Shelter shelter) {
         try {
             shelterService.addShelter(shelter);
-            return "redirect:shelterlogin?status=signup_success";
+            return "redirect:shelterlogin";
         } catch (Exception ex) {
             return "redirect:shelterregister?status=signup_failed&message=" + ex.getMessage();
         }

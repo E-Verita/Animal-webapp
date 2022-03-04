@@ -20,7 +20,7 @@ public class PageDataService {
     }
 
     PageDataService() {
-        availablePages.add(new Page("index", "Home", "Homepage", "/"));
+        availablePages.add(new Page("index", "Home", "", "/"));
         availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelterlogin"));
         availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/sheltermenu"));
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopterlogin"));
