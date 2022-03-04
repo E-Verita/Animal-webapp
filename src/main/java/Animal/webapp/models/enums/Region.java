@@ -1,5 +1,11 @@
 package Animal.webapp.models.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+
+@AllArgsConstructor
+@Getter
 public enum Region {
     RIGA ("Riga"),
     KURZEME ("Kurzeme"),
@@ -7,9 +13,5 @@ public enum Region {
     VIDZEME ("Vidzeme"),
     LATGALE ("Latgale");
 
-    private final String region;
-
-    Region(String region) {
-        this.region = region;
-    }
+    private final String name;
 }

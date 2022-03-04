@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>Sheltered Animals | Shelter Login</title>
@@ -8,7 +8,8 @@
 <body>
 <header >
     <a href="/"><h1 th:text="${appTitle}"></h1></a>
-    <h2>Shelter Login</h2>
+    <h2 th:text="${pageInfo.getPageTitle}"></h2>
+    <p th:text="${pageInfo.getPageDescription}"></p>
 </header>
 <main>
     <section>
