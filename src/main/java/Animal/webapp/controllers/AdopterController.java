@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -26,10 +27,16 @@ public class AdopterController {
     }
 
     @GetMapping("/adopterlogin")
-    public String showAdopterLoginPage(Model model){
+    public String showAdopterLoginPage(
+            @RequestParam(name = "status", required = false) String status,
+            @RequestParam(name = "message", required = false) String message,
+            Model model
+    ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adopterlogin"));
         model.addAttribute("availablePages", pageDataService.getPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         return "adopterlogin";
     }
 
@@ -65,7 +72,7 @@ public class AdopterController {
     public String processAdopterRegisterPage(@ModelAttribute @Valid Adopter adopter) {
         try {
             adopterService.addAdopter(adopter);
-            return "redirect:adopterlogin";
+            return "redirect:adopterlogin?status=signup_success";
         } catch (Exception ex) {
             return "redirect:adopterregister?status=signup_failed&message=" + ex.getMessage();
         }

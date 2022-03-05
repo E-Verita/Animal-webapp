@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -26,10 +27,16 @@ public class ShelterController {
     }
 
     @GetMapping("/shelterlogin")
-    public String showShelterLoginPage(Model model) {
+    public String showShelterLoginPage(
+            @RequestParam(name = "status", required = false) String status,
+            @RequestParam(name = "message", required = false) String message,
+            Model model
+    ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterlogin"));
         model.addAttribute("availablePages", pageDataService.getPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         return "shelterlogin";
     }
 
@@ -65,7 +72,7 @@ public class ShelterController {
     public String processShelterRegisterPage(@ModelAttribute @Valid Shelter shelter) {
         try {
             shelterService.addShelter(shelter);
-            return "redirect:shelterlogin";
+            return "redirect:shelterlogin?status=signup_success";
         } catch (Exception ex) {
             return "redirect:shelterregister?status=signup_failed&message=" + ex.getMessage();
         }

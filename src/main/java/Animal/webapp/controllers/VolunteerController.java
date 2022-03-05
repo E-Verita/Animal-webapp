@@ -1,7 +1,7 @@
 package Animal.webapp.controllers;
 
-import Animal.webapp.models.Volunteer;
 import Animal.webapp.models.UserLogin;
+import Animal.webapp.models.Volunteer;
 import Animal.webapp.services.PageDataService;
 import Animal.webapp.services.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class VolunteerController {
@@ -22,10 +23,16 @@ public class VolunteerController {
     }
 
     @GetMapping("/volunteerlogin")
-    public String showVolunteerLoginPage(Model model){
+    public String showVolunteerLoginPage(
+            @RequestParam(name = "status", required = false) String status,
+            @RequestParam(name = "message", required = false) String message,
+            Model model
+    ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("volunteerlogin"));
         model.addAttribute("availablePages", pageDataService.getPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         return "volunteerlogin";
     }
 

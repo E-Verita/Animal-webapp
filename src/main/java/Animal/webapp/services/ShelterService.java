@@ -18,7 +18,7 @@ public class ShelterService {
     public Shelter verifyShelter(UserLogin userLogin) throws Exception {
         Shelter shelter = shelterRepository.findByEmailAndPassword(userLogin.getEmail(), userLogin.getPassword());
         if (shelter == null) {
-            throw new Exception("Email or password incorrect");
+            throw new Exception("Email or password incorrect. Please try again!");
         }
         return shelter;
     }
