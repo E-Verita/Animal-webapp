@@ -22,4 +22,8 @@ public class AdopterService {
         }
         return adopter;
     }
+
+    public void addAdopter(Adopter adopter) throws Exception {
+        adopterRepository.save(adopter);
+    }
 }

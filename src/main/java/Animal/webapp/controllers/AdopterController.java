@@ -2,13 +2,17 @@ package Animal.webapp.controllers;
 
 import Animal.webapp.models.Adopter;
 import Animal.webapp.models.UserLogin;
+import Animal.webapp.models.enums.HousingType;
 import Animal.webapp.services.AdopterService;
 import Animal.webapp.services.PageDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class AdopterController {
@@ -45,6 +49,26 @@ public class AdopterController {
         model.addAttribute("pageInfo", pageDataService.getPage("adoptermenu"));
         model.addAttribute("availablePages", pageDataService.getPages());
         return "adoptermenu";
+    }
+
+    @GetMapping("/adopterregister")
+    public String showAdopterRegisterPage(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getPage("adopterregister"));
+        model.addAttribute("availablePages", pageDataService.getPages());
+        model.addAttribute("adopter", new Adopter());
+        model.addAttribute("housingType", HousingType.values());
+        return "adopterregister";
+    }
+
+    @PostMapping("/adopterregister")
+    public String processAdopterRegisterPage(@ModelAttribute @Valid Adopter adopter) {
+        try {
+            adopterService.addAdopter(adopter);
+            return "redirect:adopterlogin";
+        } catch (Exception ex) {
+            return "redirect:adopterregister?status=signup_failed&message=" + ex.getMessage();
+        }
     }
 
 }

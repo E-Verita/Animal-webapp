@@ -28,6 +28,7 @@ public class PageDataService {
         availablePages.add(new Page("volunteerlogin", "Volunteer Login", "","/volunteerlogin"));
         availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
         availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelterregister"));
+        availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopterregister"));
 
     }
 

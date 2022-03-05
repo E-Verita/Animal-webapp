@@ -1,7 +1,7 @@
 package Animal.webapp.models;
 
 import Animal.webapp.models.enums.AdoptionStauts;
-import Animal.webapp.models.enums.HosingType;
+import Animal.webapp.models.enums.HousingType;
 import Animal.webapp.models.enums.Type;
 import lombok.*;
 
@@ -25,7 +25,7 @@ public class Animal {
     private String info;
     private Date registrationDate;
     private Boolean canLiveWithSmallChildren;
-    private HosingType hosingType;
+    private HousingType housingType;
     private Boolean canLiveWithOtherAnimals;
     private Boolean needsActiveLifestyle;
     private Boolean isSick;
