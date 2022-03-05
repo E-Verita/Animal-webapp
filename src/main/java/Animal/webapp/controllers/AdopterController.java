@@ -53,6 +53,7 @@ public class AdopterController {
     public String showAdopterMenu(Model model){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adoptermenu"));
+        model.addAttribute("availablePages", pageDataService.getAdopterPages());
         return "adoptermenu";
     }
 
@@ -74,7 +75,34 @@ public class AdopterController {
             return "redirect:adopterregister?status=signup_failed&message=" + ex.getMessage();
         }
     }
-
+    @GetMapping("/adopterprofile")
+    public String showAdopterProfile(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterprofile"));
+        model.addAttribute("shelterPages", pageDataService.getAdopterPages());
+        return "adopterprofile";
+    }
+    @GetMapping("/adoptersearchpage")
+    public String searchForAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
+        model.addAttribute("shelterPages", pageDataService.getAdopterPages());
+        return "adoptersearchpage";
+    }
+    @GetMapping("/adopterundergoingadoptions")
+    public String showUndergoingAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
+        model.addAttribute("shelterPages", pageDataService.getAdopterPages());
+        return "adopterundergoingadoptions";
+    }
+    @GetMapping("/adopterfinnishedadoptions")
+    public String showFinnishedAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinnishedadoptions"));
+        model.addAttribute("shelterPages", pageDataService.getAdopterPages());
+        return "adopterfinnishedadoptions";
+    }
 }
 
 
