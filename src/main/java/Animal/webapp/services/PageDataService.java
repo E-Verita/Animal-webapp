@@ -14,6 +14,7 @@ public class PageDataService {
     @Value("${animalappsgt.title}")
     String appTitle;
     List<Page> availablePages = new ArrayList<>();
+    List<Page> shelterPages = new ArrayList<>();
 
     public String getAppTitle() {
         return appTitle;
@@ -29,7 +30,9 @@ public class PageDataService {
         availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
         availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelterregister"));
         availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopterregister"));
-
+        shelterPages.add(new Page("shelterprofile", "Profile", "","/shelterprofile"));
+        shelterPages.add(new Page("shelteranimals", "Animals", "","/shelteranimals"));
+        shelterPages.add(new Page("sheltervolunteers", "Volunteers", "","/sheltervolunteers"));
     }
 
     public Page getPage(String pageName) {
@@ -38,8 +41,14 @@ public class PageDataService {
         }
         return null;
     }
+    public Page getShelterPage(String pageName) {
+        for (Page page : this.shelterPages) {
+            if (page.getName().equalsIgnoreCase(pageName)) return page;
+        }
+        return null;
+    }
 
-    public List<Page> getPages() {
-        return availablePages;
+    public List<Page> getShelterPages() {
+        return shelterPages;
     }
 }

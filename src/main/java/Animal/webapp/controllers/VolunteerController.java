@@ -30,7 +30,6 @@ public class VolunteerController {
     ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("volunteerlogin"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "volunteerlogin";
@@ -50,7 +49,6 @@ public class VolunteerController {
     public String showVolunteerMenu(Model model){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("volunteermenu"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         return "volunteermenu";
     }
 }

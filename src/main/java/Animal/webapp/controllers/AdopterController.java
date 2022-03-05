@@ -34,7 +34,6 @@ public class AdopterController {
     ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adopterlogin"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "adopterlogin";
@@ -54,7 +53,6 @@ public class AdopterController {
     public String showAdopterMenu(Model model){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adoptermenu"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         return "adoptermenu";
     }
 
@@ -62,7 +60,6 @@ public class AdopterController {
     public String showAdopterRegisterPage(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adopterregister"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         model.addAttribute("adopter", new Adopter());
         model.addAttribute("housingType", HousingType.values());
         return "adopterregister";

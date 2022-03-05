@@ -34,7 +34,6 @@ public class ShelterController {
     ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterlogin"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "shelterlogin";
@@ -54,7 +53,7 @@ public class ShelterController {
     public String showShelterMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("sheltermenu"));
-        model.addAttribute("availablePages", pageDataService.getPages());
+        model.addAttribute("availablePages", pageDataService.getShelterPages());
         return "sheltermenu";
     }
 
@@ -62,7 +61,6 @@ public class ShelterController {
     public String showShelterRegisterPage(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterregister"));
-        model.addAttribute("availablePages", pageDataService.getPages());
         model.addAttribute("shelter", new Shelter());
         model.addAttribute("region", Region.values());
         return "shelterregister";
@@ -76,5 +74,28 @@ public class ShelterController {
         } catch (Exception ex) {
             return "redirect:shelterregister?status=signup_failed&message=" + ex.getMessage();
         }
+    }
+
+    @GetMapping("/shelterprofile")
+    public String showShelterProfile(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelterprofile"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelterprofile";
+    }
+
+    @GetMapping("/shelteranimals")
+    public String showShelterAnimalMenu(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals";
+    }
+    @GetMapping("/sheltervolunteers")
+    public String showShelterVolunteerMenu(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("sheltervolunteers"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "sheltervolunteers";
     }
 }
