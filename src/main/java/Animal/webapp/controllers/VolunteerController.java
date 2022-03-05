@@ -49,6 +49,23 @@ public class VolunteerController {
     public String showVolunteerMenu(Model model){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("volunteermenu"));
+        model.addAttribute("availablePages", pageDataService.getVolunteerPages());
         return "volunteermenu";
+    }
+
+    @GetMapping("/volunteerprofile")
+    public String showVolunteerProfile(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getVolunteerPage("volunteerprofile"));
+        model.addAttribute("volunteerPages", pageDataService.getVolunteerPages());
+        return "volunteerprofile";
+    }
+
+    @GetMapping("/volunteermessages")
+    public String showVolunteerMessages(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getVolunteerPage("volunteermessages"));
+        model.addAttribute("volunteerPages", pageDataService.getVolunteerPages());
+        return "volunteermessages";
     }
 }
