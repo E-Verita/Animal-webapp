@@ -86,8 +86,18 @@ public class ShelterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("animalButtons",pageDataService.getAnimalButtons());
         return "shelteranimals";
     }
+    @GetMapping("/animals/add")
+    public String addAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals-add"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals-add";
+    }
+
+
     @GetMapping("/volunteers")
     public String showShelterVolunteerMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
