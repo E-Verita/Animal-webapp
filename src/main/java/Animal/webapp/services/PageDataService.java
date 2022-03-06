@@ -24,17 +24,21 @@ public class PageDataService {
 
     PageDataService() {
         availablePages.add(new Page("index", "Home", "", "/"));
-        availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelterlogin"));
-        availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/sheltermenu"));
+        availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelter/login"));
+        availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/shelter/menu"));
+
+        shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
+        shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
+        shelterPages.add(new Page("sheltervolunteers", "Volunteers", "","/shelter/volunteers"));
+
+
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopterlogin"));
         availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adoptermenu"));
         availablePages.add(new Page("volunteerlogin", "Volunteer Login", "","/volunteerlogin"));
         availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
         availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelterregister"));
         availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopterregister"));
-        shelterPages.add(new Page("shelterprofile", "Profile", "","/shelterprofile"));
-        shelterPages.add(new Page("shelteranimals", "Animals", "","/shelteranimals"));
-        shelterPages.add(new Page("sheltervolunteers", "Volunteers", "","/sheltervolunteers"));
+
         volunteerPages.add(new Page("volunteerprofile", "Profile", "","/volunteerprofile"));
         volunteerPages.add(new Page("volunteermessages", "Messages", "","/volunteermessages"));
         adopterPages.add(new Page("adopterprofile", "Profile", "","/adopterprofile"));

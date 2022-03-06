@@ -8,13 +8,10 @@ import Animal.webapp.services.ShelterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+@RequestMapping("/shelter")
 @Controller
 public class ShelterController {
     PageDataService pageDataService;
@@ -26,7 +23,7 @@ public class ShelterController {
         this.shelterService = shelterService;
     }
 
-    @GetMapping("/shelterlogin")
+    @GetMapping("/login")
     public String showShelterLoginPage(
             @RequestParam(name = "status", required = false) String status,
             @RequestParam(name = "message", required = false) String message,
@@ -39,17 +36,17 @@ public class ShelterController {
         return "shelterlogin";
     }
 
-    @PostMapping("/shelterlogin")
+    @PostMapping("/login")
     public String handleShelterLogin(UserLogin userLogin) {
         try {
             Shelter shelter = shelterService.verifyShelter(userLogin);
-            return "redirect:sheltermenu/" + shelter.getId();
+            return "redirect:menu/" + shelter.getId();
         } catch (Exception exception) {
-            return "redirect:shelterlogin?status=login_failed&message=" + exception.getMessage();
+            return "login?status=login_failed&message=" + exception.getMessage();
         }
     }
 
-    @GetMapping("/sheltermenu/{shelterId}")
+    @GetMapping("/menu/{shelterId}")
     public String showShelterMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("sheltermenu"));
@@ -57,7 +54,7 @@ public class ShelterController {
         return "sheltermenu";
     }
 
-    @GetMapping("/shelterregister")
+    @GetMapping("/register")
     public String showShelterRegisterPage(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterregister"));
@@ -66,17 +63,17 @@ public class ShelterController {
         return "shelterregister";
     }
 
-    @PostMapping("/shelterregister")
+    @PostMapping("/register")
     public String processShelterRegisterPage(@ModelAttribute @Valid Shelter shelter) {
         try {
             shelterService.addShelter(shelter);
-            return "redirect:shelterlogin?status=signup_success";
+            return "redirect:shelter/login?status=signup_success";
         } catch (Exception ex) {
-            return "redirect:shelterregister?status=signup_failed&message=" + ex.getMessage();
+            return "redirect:shelter/register?status=signup_failed&message=" + ex.getMessage();
         }
     }
 
-    @GetMapping("/shelterprofile")
+    @GetMapping("/profile")
     public String showShelterProfile(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelterprofile"));
@@ -84,14 +81,14 @@ public class ShelterController {
         return "shelterprofile";
     }
 
-    @GetMapping("/shelteranimals")
+    @GetMapping("/animals")
     public String showShelterAnimalMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals";
     }
-    @GetMapping("/sheltervolunteers")
+    @GetMapping("/volunteers")
     public String showShelterVolunteerMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("sheltervolunteers"));
