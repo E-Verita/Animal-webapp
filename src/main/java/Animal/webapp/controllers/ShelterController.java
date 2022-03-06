@@ -92,9 +92,37 @@ public class ShelterController {
     @GetMapping("/animals/add")
     public String addAnimals(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals-add"));
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-add";
+    }
+    @GetMapping("/animals/edit")
+    public String editAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals-edit";
+    }
+    @GetMapping("/animals/delete")
+    public String deleteAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals-delete";
+
+    }   @GetMapping("/animals/all")
+    public String seeallAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals-seeall";
+
+    }   @GetMapping("/animals/find")
+    public String findAnimals(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelteranimals-find";
     }
 
 
