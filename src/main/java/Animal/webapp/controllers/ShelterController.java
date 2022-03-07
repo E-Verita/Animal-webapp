@@ -1,8 +1,10 @@
 package Animal.webapp.controllers;
 
+import Animal.webapp.models.Animal;
 import Animal.webapp.models.Shelter;
 import Animal.webapp.models.UserLogin;
-import Animal.webapp.models.enums.Region;
+import Animal.webapp.models.enums.*;
+import Animal.webapp.services.AnimalService;
 import Animal.webapp.services.PageDataService;
 import Animal.webapp.services.ShelterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 public class ShelterController {
     PageDataService pageDataService;
     ShelterService shelterService;
+    AnimalService animalService;
 
     @Autowired
     public ShelterController(PageDataService pageDataService, ShelterService shelterService) {
@@ -88,13 +91,34 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("animalButtons",pageDataService.getAnimalButtons());
         return "shelteranimals";
+
     }
     @GetMapping("/animals/add")
-    public String addAnimals(Model model) {
+    public String addAnimals(       @RequestParam(name = "status", required = false) String status,
+                                    @RequestParam(name = "message", required = false) String message,
+                                    Model model
+    ){
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("animal", new Animal());
+        model.addAttribute("type", Type.values());
+        model.addAttribute("ageGroup", AgeGroup.values());
+        model.addAttribute("housingType", HousingType.values());
+        model.addAttribute("adoptionStatus", AdoptionStatus.values());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         return "shelteranimals-add";
+    }
+
+    @PostMapping("/animals/add")
+    public String processAddingAnimal(@ModelAttribute @Valid Animal animal){
+        try{
+            animalService.addAnimal(animal);
+            return "redirect:add?status=animal_adding_successful";
+        }catch (Exception exception){
+            return "redirect:add?status=animal_adding_failed";
+        }
     }
     @GetMapping("/animals/edit")
     public String editAnimals(Model model) {

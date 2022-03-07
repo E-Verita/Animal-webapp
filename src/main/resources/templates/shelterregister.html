@@ -15,60 +15,62 @@
 
 <main>
     <section>
+        <br>
         <form method="post" action="/shelter/register">
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="name" class="form-control" type="text" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="email" class="form-control" type="email" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="password" class="form-control" type="password" required>
                 </div>
             </div>
 
 
-            <div class="row mb-3">
-                <label th:for="region">Region</label>
-                <select name="region">
-                    <option th:each="regionOpt : ${shelter.getRegionList()}"
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label" th:for="region">Region</label>
+                <select class="col-sm-5" name="region">
+                    <option  th:each="regionOpt : ${shelter.getRegionList()}"
                             th:text="${regionOpt.toString}"
                             th:value="${regionOpt}">
                 </select>
             </div>
+            <br>
 
              <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Address</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="address" class="form-control" type="text" required>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Phone</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="phone" class="form-control" type="text" required>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Registration number</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="registrationNumber" class="form-control" type="text" required>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Banking information</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <input name="bankingInfo" class="form-control" type="text" required>
                 </div>
             </div>
