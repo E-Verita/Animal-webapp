@@ -1,10 +1,10 @@
 package Animal.webapp.models.enums;
 
 public enum Type {
-    CAT,
-    DOG,
-    RAT,
-    RABBIT,
-    FISH,
-    OTHER
+    Cat,
+    Dog,
+    Rat,
+    Rabbit,
+    Fish,
+    Other
 }

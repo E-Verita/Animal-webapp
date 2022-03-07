@@ -42,7 +42,7 @@ public class ShelterController {
             Shelter shelter = shelterService.verifyShelter(userLogin);
             return "redirect:menu/" + shelter.getId();
         } catch (Exception exception) {
-            return "login?status=login_failed&message=" + exception.getMessage();
+            return "redirect:login?status=login_failed&message=" + exception.getMessage();
         }
     }
 
@@ -67,9 +67,9 @@ public class ShelterController {
     public String processShelterRegisterPage(@ModelAttribute @Valid Shelter shelter) {
         try {
             shelterService.addShelter(shelter);
-            return "redirect:shelter/login?status=signup_success";
+            return "redirect:login?status=signup_success";
         } catch (Exception ex) {
-            return "redirect:shelter/register?status=signup_failed&message=" + ex.getMessage();
+            return "redirect:register?status=signup_failed&message=" + ex.getMessage();
         }
     }
 

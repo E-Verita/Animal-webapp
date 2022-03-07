@@ -26,8 +26,11 @@ public class PageDataService {
 
     PageDataService() {
         availablePages.add(new Page("index", "Home", "", "/"));
+
+        availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelter/register"));
         availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelter/login"));
         availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/shelter/menu"));
+
 
         shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
         shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
@@ -44,7 +47,6 @@ public class PageDataService {
         availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adoptermenu"));
         availablePages.add(new Page("volunteerlogin", "Volunteer Login", "","/volunteerlogin"));
         availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
-        availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelterregister"));
         availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopterregister"));
 
         volunteerPages.add(new Page("volunteerprofile", "Profile", "","/volunteerprofile"));

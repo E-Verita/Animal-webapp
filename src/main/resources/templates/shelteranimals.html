@@ -13,6 +13,11 @@ top: 50%;
 padding: 20px;
 }
 
+.alert i[class^="bi-"]{
+  font-size: 1.5em;
+  line-height: 1;
+}
+
 </style>
 </head>
 <body>
@@ -28,7 +33,22 @@ padding: 20px;
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
       </span>
         </nav>
+<div>
+    <div>
+        <div th:if="${status == 'animal_adding_successful'}" class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-check-circle-fill"></i>
+            <strong class="mx-2">Success!</strong> Animal shelter registered successfully! Please log in to continue!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
 
+        <div th:if="${status == 'animal_adding_failed'}" class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Error!</strong> Could not register animal. Please try again!<span></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+</div>
 
     <section>
 

@@ -1,12 +1,17 @@
 package Animal.webapp.models;
 
-import Animal.webapp.models.enums.AdoptionStauts;
+import Animal.webapp.models.enums.AdoptionStatus;
+import Animal.webapp.models.enums.AgeGroup;
 import Animal.webapp.models.enums.HousingType;
 import Animal.webapp.models.enums.Type;
+import jdk.jfr.Timestamp;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,14 +26,34 @@ public class Animal {
     private Long id;
     private Type type;
     private String name;
-    private String ageGroup;                                //ToDo - enum, array, let it stay? Options 3-6months, 6-12months,  1-4year, 4-8year, senior
+    private AgeGroup ageGroup;
     private String info;
+    @Timestamp
     private Date registrationDate;
     private Boolean canLiveWithSmallChildren;
     private HousingType housingType;
     private Boolean canLiveWithOtherAnimals;
     private Boolean needsActiveLifestyle;
     private Boolean isSick;
-    private AdoptionStauts adoptionStatus;
+    private AdoptionStatus adoptionStatus;
     private String pictureUrl;
+
+    public List getTypeList() {
+        List<Type> typeList = new ArrayList<Type>(EnumSet.allOf(Type.class));
+        return typeList;
+    }
+
+    public List getAgeGroupList() {
+        List<AgeGroup> ageGroupList = new ArrayList<AgeGroup>(EnumSet.allOf(AgeGroup.class));
+        return ageGroupList;
+    }
+
+    public List getHousingTypeList() {
+        List<HousingType> housingTypeList = new ArrayList<HousingType>(EnumSet.allOf(HousingType.class));
+        return housingTypeList;
+    }
+    public List getAdoptionStatusList() {
+        List<AdoptionStatus> adoptionStatusList = new ArrayList<AdoptionStatus>(EnumSet.allOf(AdoptionStatus.class));
+        return adoptionStatusList;
+    }
 }
