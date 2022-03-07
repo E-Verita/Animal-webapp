@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 @RequestMapping("/shelter")
 @Controller
@@ -21,9 +22,10 @@ public class ShelterController {
     AnimalService animalService;
 
     @Autowired
-    public ShelterController(PageDataService pageDataService, ShelterService shelterService) {
+    public ShelterController(PageDataService pageDataService, ShelterService shelterService, AnimalService animalService) {
         this.pageDataService = pageDataService;
         this.shelterService = shelterService;
+        this.animalService = animalService;
     }
 
     @GetMapping("/login")
@@ -40,9 +42,10 @@ public class ShelterController {
     }
 
     @PostMapping("/login")
-    public String handleShelterLogin(UserLogin userLogin) {
+    public String handleShelterLogin(UserLogin userLogin, HttpServletResponse response) {
         try {
             Shelter shelter = shelterService.verifyShelter(userLogin);
+            shelterService.setCookie(response, shelter.getId());
             return "redirect:menu/" + shelter.getId();
         } catch (Exception exception) {
             return "redirect:login?status=login_failed&message=" + exception.getMessage();
@@ -112,11 +115,14 @@ public class ShelterController {
     }
 
     @PostMapping("/animals/add")
-    public String processAddingAnimal(@ModelAttribute @Valid Animal animal){
+
+    public String processAddingAnimal( @CookieValue(value="shelterId", required=false) Long shelterId, @ModelAttribute Animal animal){
         try{
+            animal.setShelter(shelterService.getShelter(shelterId));
             animalService.addAnimal(animal);
             return "redirect:add?status=animal_adding_successful";
         }catch (Exception exception){
+           exception.getStackTrace();
             return "redirect:add?status=animal_adding_failed";
         }
     }

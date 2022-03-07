@@ -6,7 +6,8 @@ import Animal.webapp.repository.ShelterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class ShelterService {
@@ -29,8 +30,17 @@ public class ShelterService {
         shelterRepository.save(shelter);
     }
 
-    public Optional<Shelter> getShelter(Long sessionUserId) {
-        Optional<Shelter> shelter = shelterRepository.findById(sessionUserId);
+    public Shelter getShelter(Long sessionUserId) throws Exception{
+        Shelter shelter = shelterRepository.findById(sessionUserId).orElseThrow();
         return shelter;
+    }
+
+    public void setCookie(HttpServletResponse response, Long id) {
+        // create a cookie
+        Cookie cookie = new Cookie("shelterId", id.toString());
+
+        //add cookie to response
+        response.addCookie(cookie);
+
     }
 }
