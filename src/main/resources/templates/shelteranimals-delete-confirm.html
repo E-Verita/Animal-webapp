@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Animals: Delete</title>
@@ -13,6 +13,10 @@
   font-size: 1.5em;
   line-height: 1;
 }
+
+
+
+
 
     </style>
 </head>
@@ -28,47 +32,41 @@
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
       </span>
     </nav>
-    <div>
-        <div th:if="${status == 'animal_finding_successful'}"
-             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-check-circle-fill"></i>
-            <strong class="mx-2">Success!</strong>
-            Animal found!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
 
-        <div th:if="${status == 'animal_deletion_canceled'}"
-             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-check-circle-fill"></i>
-            <strong class="mx-2">Canceled!</strong>
-            No animals got deleted!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <!--- after deletion   --->
+    <div th:if="${status == 'animal_deleted'}"
+         class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Success!</strong>
+        Animal deleted!
+        <form>
+            <a href="/shelter/animals/" class="btn btn-light">Return to animal's menu</a>
+        </form>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
 
-        <div th:if="${status == 'animal_finding_failed'}"
+    <!--- before deletion --->
+    <section>
+        <div th:if="${status == 'animal_to_DELETE_found'}"
              class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
             <i class="bi-exclamation-octagon-fill"></i>
-            <strong class="mx-2">Error!</strong>
-            Could not find animal. Please try a different ID!
+            <strong class="mx-2">Warning!</strong>
+            Do you really want to delete this animal?
+            <form method="post" action="/shelter/animals/delete/confirm">
+                <button type="submit" class="btn btn-danger">Delete this animal</button>
+                <a href="/shelter/animals/delete?status=animal_deletion_canceled" class="btn btn-light">Cancel
+                    deletion</a>
+            </form>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    </div>
-    <section>
-        <div th:if="${status == 'animal_finding_successful'}">
-            <div>
-                <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
-                <br>
-                <form method="post" action="/shelter/animals/delete">
-                    <div>
-                        <button type="submit" class="btn btn-primary btn-danger btn-lg btn-block mr-1">Delete this
-                            animal!
-                        </button>
-                    </div>
-                </form>
 
+            <section>
+
+                <br>
                 <br>
                 <h5>General information</h5>
                 <table class="table col-sm-2">
+                    <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
+
                     <thead>
                     <tr>
                         <th scope="col">Animal info</th>
@@ -102,27 +100,8 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
         </div>
-    </section>
-    <br>
-    <section>
-        <br>
-        <h5> Delete animal</h5>
-        <br>
-        <form method="post" action="/shelter/animals/delete">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Animal's ID:</label>
-                <div class="col-sm-5">
-                    <input name="id" class="form-control" type="number" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Find</button>
-        </form>
-        <div>
-            <p th:text="${shelter.getName()}">
-        </div>
-        <br>
     </section>
 </main>
 </body>

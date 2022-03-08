@@ -43,5 +43,13 @@ public class AnimalService {
         response.addCookie(cookie);
     }
 
+    public void deleteCookie(HttpServletResponse response, Long id) {
+        Cookie cookie = new Cookie("animalId", id.toString());
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
 
+    public void deleteAnimal(Long animalId) {
+        animalRepository.deleteById(animalId);
+    }
 }
