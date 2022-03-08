@@ -21,6 +21,17 @@ public class AnimalService {
 
     public Animal findAnimalById(Long id) throws Exception {
         Animal animal = animalRepository.findById(id).orElseThrow();
+        if (animal == null) {
+            throw new Exception("Could not find animal. Please try again!");
+        }
+        return animal;
+    }
+
+    public Animal findByIdAndShelter(Long id, Long sessionUserId) throws Exception {
+        Animal animal = animalRepository.findByIdAndShelterId(id, sessionUserId);
+        if (animal == null) {
+            throw new Exception("Could not find animal. Please try again!");
+        }
         return animal;
     }
 }
