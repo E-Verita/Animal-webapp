@@ -1,10 +1,12 @@
 package Animal.webapp.models;
 
-import Animal.webapp.models.enums.HosingType;
+import Animal.webapp.models.enums.HousingType;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,18 +19,22 @@ public class Adopter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
-
     private String username;
-    @NotNull
     private String email;
     private String password;
     private String name;
     private Integer age;
     private String phone;
     private Boolean hasSmallChildren;
-    private HosingType hosingType;
+    private HousingType housingType;
     private Boolean hasOtherAnimals;
     private Boolean hasActiveLifestyle;
     private Boolean canAdoptSickAnimal;
+
+    public List getHousingTypeList() {
+        List<HousingType> housingTypeList = new ArrayList<HousingType>(EnumSet.allOf(HousingType.class));
+        return housingTypeList;
     }
+}
+
+

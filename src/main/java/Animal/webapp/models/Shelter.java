@@ -6,6 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +32,8 @@ public class Shelter {
     @CreationTimestamp
     private Date registrationDate;
 
+    public List getRegionList() {
+        List<Region> regionList = new ArrayList<Region>(EnumSet.allOf(Region.class));
+        return regionList;
+    }
 }

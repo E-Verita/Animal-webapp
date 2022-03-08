@@ -18,8 +18,12 @@ public class AdopterService {
     public Adopter verifyAdopter(UserLogin userLogin) throws Exception {
         Adopter adopter = adopterRepository.findByEmailAndPassword(userLogin.getEmail(), userLogin.getPassword());
         if (adopter == null) {
-            throw new Exception("Email or password incorrect");
+            throw new Exception("Email or password incorrect. Please try again!");
         }
         return adopter;
+    }
+
+    public void addAdopter(Adopter adopter) throws Exception {
+        adopterRepository.save(adopter);
     }
 }

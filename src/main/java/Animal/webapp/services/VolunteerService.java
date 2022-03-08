@@ -18,7 +18,7 @@ public class VolunteerService {
     public Volunteer verifyVolunteer(UserLogin userLogin) throws Exception {
         Volunteer volunteer = volunteerRepository.findByEmailAndPassword(userLogin.getEmail(), userLogin.getPassword());
         if (volunteer == null) {
-            throw new Exception("Email or password incorrect");
+            throw new Exception("Email or password incorrect. Please try again!");
         }
         return volunteer;
     }
