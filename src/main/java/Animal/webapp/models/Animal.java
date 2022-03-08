@@ -4,8 +4,8 @@ import Animal.webapp.models.enums.AdoptionStatus;
 import Animal.webapp.models.enums.AgeGroup;
 import Animal.webapp.models.enums.HousingType;
 import Animal.webapp.models.enums.Type;
-import jdk.jfr.Timestamp;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -28,7 +28,7 @@ public class Animal {
     private String name;
     private AgeGroup ageGroup;
     private String info;
-    @Timestamp
+    @CreationTimestamp
     private Date registrationDate;
     private Boolean canLiveWithSmallChildren;
     private HousingType housingType;
@@ -59,4 +59,5 @@ public class Animal {
         List<AdoptionStatus> adoptionStatusList = new ArrayList<AdoptionStatus>(EnumSet.allOf(AdoptionStatus.class));
         return adoptionStatusList;
     }
+
 }

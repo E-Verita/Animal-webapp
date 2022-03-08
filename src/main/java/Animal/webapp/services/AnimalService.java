@@ -17,4 +17,10 @@ public class AnimalService {
     public void addAnimal(Animal animal) throws Exception {
         animalRepository.save(animal);
     }
+
+
+    public Animal findAnimalById(Long id) throws Exception {
+        Animal animal = animalRepository.findById(id).orElseThrow();
+        return animal;
+    }
 }

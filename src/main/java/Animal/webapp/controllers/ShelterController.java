@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 @RequestMapping("/shelter")
 @Controller
 public class ShelterController {
@@ -33,7 +34,7 @@ public class ShelterController {
             @RequestParam(name = "status", required = false) String status,
             @RequestParam(name = "message", required = false) String message,
             Model model
-    ){
+    ) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("shelterlogin"));
         model.addAttribute("status", status);
@@ -80,7 +81,8 @@ public class ShelterController {
     }
 
     @GetMapping("/profile")
-    public String showShelterProfile(Model model) {
+    public String showShelterProfile(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) throws Exception {  //?
+        model.addAttribute("shelter", shelterService.getShelter(shelterId)); //?
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelterprofile"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -92,15 +94,16 @@ public class ShelterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
-        model.addAttribute("animalButtons",pageDataService.getAnimalButtons());
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         return "shelteranimals";
 
     }
+
     @GetMapping("/animals/add")
-    public String addAnimals(       @RequestParam(name = "status", required = false) String status,
-                                    @RequestParam(name = "message", required = false) String message,
-                                    Model model
-    ){
+    public String addAnimals(@RequestParam(name = "status", required = false) String status,
+                             @RequestParam(name = "message", required = false) String message,
+                             Model model
+    ) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -116,16 +119,17 @@ public class ShelterController {
 
     @PostMapping("/animals/add")
 
-    public String processAddingAnimal( @CookieValue(value="shelterId", required=false) Long shelterId, @ModelAttribute Animal animal){
-        try{
+    public String processAddingAnimal(@CookieValue(value = "shelterId", required = false) Long shelterId, @ModelAttribute Animal animal) {
+        try {
             animal.setShelter(shelterService.getShelter(shelterId));
             animalService.addAnimal(animal);
             return "redirect:add?status=animal_adding_successful";
-        }catch (Exception exception){
-           exception.getStackTrace();
+        } catch (Exception exception) {
+            exception.getStackTrace();
             return "redirect:add?status=animal_adding_failed";
         }
     }
+
     @GetMapping("/animals/edit")
     public String editAnimals(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
@@ -133,6 +137,7 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-edit";
     }
+
     @GetMapping("/animals/delete")
     public String deleteAnimals(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
@@ -140,19 +145,35 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-delete";
 
-    }   @GetMapping("/animals/all")
+    }
+
+    @GetMapping("/animals/all")
     public String seeallAnimals(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-seeall";
 
-    }   @GetMapping("/animals/find")
-    public String findAnimals(Model model) {
+    }
+
+    @GetMapping("/animals/find")
+    public String findAnimals(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) throws Exception {
+        model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-find";
+    }
+
+
+    @PostMapping("/animals/find")
+    public String processFindingAnimals(@CookieValue(value = "shelterId", required = false) Long shelterId, Long id, @ModelAttribute Animal animal) throws Exception {
+        try {
+            animalService.findAnimalById(id);
+            return "redirect:login?status=signup_success" + animalService.findAnimalById(id).getName();
+        } catch (Exception ex) {
+            return "redirect:register?status=signup_failed&message=" + ex.getMessage();
+        }
     }
 
 
