@@ -159,22 +159,28 @@ public class ShelterController {
     @GetMapping("/animals/find")
     public String findAnimals(@RequestParam(name = "status", required = false) String status,
                               @RequestParam(name = "message", required = false) String message,
-                              @CookieValue(value = "shelterId", required = false)
-                                          Long shelterId, Model model) throws Exception {
+                              @CookieValue(value = "shelterId", required = false) Long shelterId,
+                              @CookieValue(value = "animalId", required = false) Long animalId, Model model) throws Exception {
+        model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
+        System.out.println("Animal id: "+ animalId);
         return "shelteranimals-find";
     }
 
 
     @PostMapping("/animals/find")
-    public String processFindingAnimals(@CookieValue(value = "shelterId", required = false) Long shelterId, Long id, @ModelAttribute Animal animal) throws Exception {
+    public String processFindingAnimals(@CookieValue(value = "shelterId", required = false) Long shelterId,
+                                        Long id, @ModelAttribute Animal animal, HttpServletResponse response)
+            throws Exception {
         try {
             animal = animalService.findByIdAndShelter(id, shelterId);
+            animalService.setCookie(response,animal.getId());
+            System.out.println(animal.getName());
             return "redirect:find?status=animal_finding_successful&name=" + animal.getName();
         } catch (Exception ex) {
             return "redirect:find?status=animal_finding_failed";

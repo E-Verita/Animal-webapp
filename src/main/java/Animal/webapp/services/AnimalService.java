@@ -5,6 +5,9 @@ import Animal.webapp.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Service
 public class AnimalService {
     AnimalRepository animalRepository;
@@ -34,4 +37,11 @@ public class AnimalService {
         }
         return animal;
     }
+
+    public void setCookie(HttpServletResponse response, Long id) {
+        Cookie cookie = new Cookie("animalId", id.toString());
+        response.addCookie(cookie);
+    }
+
+
 }

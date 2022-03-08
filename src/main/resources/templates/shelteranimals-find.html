@@ -13,7 +13,30 @@
   font-size: 1.5em;
   line-height: 1;
 }
-</style>
+
+table{
+border-spacing: 20px;
+}
+
+td, th {
+  border: 1px solid #96D4D4;
+  text-align: center;
+  padding: 20px;
+   border-radius: 100px;
+   }
+   tr:hover {background-color: #D6EEEE;}
+
+
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.25);
+}
+
+
+
+
+
+
+    </style>
 </head>
 <body>
 <header>
@@ -29,20 +52,95 @@
       </span>
         </nav>
         <div>
-            <div th:if="${status == 'animal_finding_successful'}" class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <div th:if="${status == 'animal_finding_successful'}"
+                 class="alert alert-success alert-dismissible d-flex align-items-center fade show">
                 <i class="bi-check-circle-fill"></i>
                 <strong class="mx-2">Success!</strong>
                 Animal found!
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
 
-            <div th:if="${status == 'animal_finding_failed'}" class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <div th:if="${status == 'animal_finding_failed'}"
+                 class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
                 <i class="bi-exclamation-octagon-fill"></i>
                 <strong class="mx-2">Error!</strong>
                 Could not find animal. Please try a different ID!
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         </div>
+
+        <div th:if="${status == 'animal_finding_successful'}">
+            <div>
+                <table class="table col-sm-2">
+                    <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
+                    <br>
+                    <br>
+                    <h5>General information</h5>
+                    <thead>
+                    <tr>
+                        <th scope="col">Animal info</th>
+                        <th scope="col" th:text="${animal.getId()}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row" th:text="${animal.getName()}"></th>
+                        <td>Name</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getType()}"></th>
+                        <td>Type</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getAgeGroup()}"></th>
+                        <td>Age</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getInfo()}"></th>
+                        <td>About</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getRegistrationDate()}"></th>
+                        <td>Registered</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getAdoptionStatus()}"></th>
+                        <td>Adoption status</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table class="table col-sm-2">
+                    <h5> Requirements for adoption</h5>
+
+                    <tbody>
+                    <tr>
+                        <th scope="row" th:text="${animal.getHousingType()}"></th>
+                        <td>Housing type</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getCanLiveWithSmallChildren()}"></th>
+                        <td>Can live with small children</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getCanLiveWithOtherAnimals()}"></th>
+                        <td>Can live with other animals</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getNeedsActiveLifestyle()}"></th>
+                        <td>Very active, needs active owner</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" th:text="${animal.getIsSick()}"></th>
+                        <td>Have pre-known health problems / disabilities?</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
         <br>
         <h5> Find animal</h5>
         <br>
