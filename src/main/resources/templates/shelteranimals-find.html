@@ -25,15 +25,9 @@ td, th {
    border-radius: 100px;
    }
    tr:hover {background-color: #D6EEEE;}
-
-
 tr:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.25);
 }
-
-
-
-
 
 
     </style>
@@ -45,7 +39,6 @@ tr:nth-child(even) {
     <p th:text="${pageInfo.getPageDescription}"></p>
 </header>
 <main>
-    <main>
         <nav class="nav-fill nav mt-3">
       <span class="nav-item" th:each="page:${shelterPages}">
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
@@ -134,17 +127,14 @@ tr:nth-child(even) {
                         <th scope="row" th:text="${animal.getIsSick()}"></th>
                         <td>Have pre-known health problems / disabilities?</td>
                     </tr>
-
                     </tbody>
                 </table>
-
             </div>
         </div>
-
-        <br>
-        <h5> Find animal</h5>
-        <br>
         <section>
+            <br>
+            <h5> Find animal</h5>
+            <br>
             <form method="post" action="/shelter/animals/find">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Animal's ID:</label>
@@ -160,6 +150,5 @@ tr:nth-child(even) {
             <br>
         </section>
     </main>
-</main>
 </body>
 </html>

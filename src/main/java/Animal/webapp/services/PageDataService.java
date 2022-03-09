@@ -42,6 +42,7 @@ public class PageDataService {
         animalButtons.add(new Page("shelteranimals-seeall", "See All Animals", "","/shelter/animals/all"));
         animalButtons.add(new Page("shelteranimals-find", "Find Animal by ID", "","/shelter/animals/find"));
 
+        availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopterlogin"));
         availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adoptermenu"));
