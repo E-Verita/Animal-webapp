@@ -52,7 +52,8 @@
             <i class="bi-exclamation-octagon-fill"></i>
             <strong class="mx-2">Warning!</strong>
             Do you really want to delete this animal?
-            <form method="post" action="/shelter/animals/delete/confirm">
+
+            <form method="post" th:action="'/shelter/animals/delete/confirm?animalId='+ ${animal.getId()}">
                 <button type="submit" class="btn btn-danger">Delete this animal</button>
                 <a href="/shelter/animals/delete?status=animal_deletion_canceled" class="btn btn-light">Cancel
                     deletion</a>
