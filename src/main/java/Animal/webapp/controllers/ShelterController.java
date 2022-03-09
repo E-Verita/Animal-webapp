@@ -157,10 +157,10 @@ public class ShelterController {
 
     @PostMapping("/animals/delete")
     public String processFindAnimalToDelete(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                            Long id, @ModelAttribute Animal animal, HttpServletResponse response)
+                                            Long id, HttpServletResponse response)
             throws Exception {
         try {
-            animal = animalService.findByIdAndShelter(id, shelterId);
+            Animal animal = animalService.findByIdAndShelter(id, shelterId);
             animalService.setCookie(response, animal.getId());
             System.out.println(animal.getName());
             return "redirect:delete/confirm?status=animal_to_DELETE_found";
@@ -197,19 +197,43 @@ public class ShelterController {
     }
 
     @GetMapping("/animals/all")
-    public String seeallAnimals(Model model) {
+    public String seeallAnimals(@RequestParam(name = "status", required = false) String status,
+                                @RequestParam(name = "message", required = false) String message,
+                                @CookieValue(value = "shelterId", required = false) Long shelterId,
+                                Model model) throws Exception {
+        model.addAttribute("animalList", animalService.findAllByShelterId(shelterId));
+        model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        System.out.println("GET-MAPPING");
         return "shelteranimals-seeall";
-
     }
+
+    @RequestMapping("/animals/all")
+    public String processallAnimals(@RequestParam(name = "status", required = false) String status,
+                                    @RequestParam(name = "message", required = false) String message,
+                                    @CookieValue(value = "shelterId", required = false) Long shelterId,
+                                    Model model) throws Exception {
+        model.addAttribute("shelter", shelterService.getShelter(shelterId));
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        System.out.println("REQUEST-MAPPING");
+        return "shelteranimals-seeall";
+    }
+
 
     @GetMapping("/animals/find")
     public String findAnimals(@RequestParam(name = "status", required = false) String status,
                               @RequestParam(name = "message", required = false) String message,
                               @CookieValue(value = "shelterId", required = false) Long shelterId,
-                              @CookieValue(value = "animalId", required = false) Long animalId, Model model) throws Exception {
+                              @CookieValue(value = "animalId", required = false) Long animalId,
+                              Model model) throws Exception {
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
@@ -217,7 +241,7 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("Animal id: "+ animalId);
+        System.out.println("Animal id: " + animalId);
         return "shelteranimals-find";
     }
 
@@ -238,7 +262,7 @@ public class ShelterController {
 
 
     @GetMapping("/volunteers")
-    public String showShelterVolunteerMenu(Model model ) {
+    public String showShelterVolunteerMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("sheltervolunteers"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());

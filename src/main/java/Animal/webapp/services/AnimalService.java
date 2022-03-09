@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
 public class AnimalService {
@@ -51,5 +52,13 @@ public class AnimalService {
 
     public void deleteAnimal(Long animalId) {
         animalRepository.deleteById(animalId);
+    }
+
+    public List findAllByShelterId(Long shelterId) throws Exception {
+        List<Animal> allAnimals = animalRepository.findAllByShelterId(shelterId);
+        if (allAnimals == null) {
+            throw new Exception("Could not find animal. Please try again!");
+        }
+        return allAnimals;
     }
 }
