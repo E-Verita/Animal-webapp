@@ -39,7 +39,6 @@ tr:nth-child(even) {
     <p th:text="${pageInfo.getPageDescription}"></p>
 </header>
 <main>
-    <main>
         <nav class="nav-fill nav mt-3">
       <span class="nav-item" th:each="page:${shelterPages}">
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
@@ -151,6 +150,5 @@ tr:nth-child(even) {
             <br>
         </section>
     </main>
-</main>
 </body>
 </html>

@@ -57,7 +57,7 @@ public class AnimalService {
     public List findAllByShelterId(Long shelterId) throws Exception {
         List<Animal> allAnimals = animalRepository.findAllByShelterId(shelterId);
         if (allAnimals == null) {
-            throw new Exception("Could not find animal. Please try again!");
+            throw new Exception("Could not find any animals. Please try again!");
         }
         return allAnimals;
     }

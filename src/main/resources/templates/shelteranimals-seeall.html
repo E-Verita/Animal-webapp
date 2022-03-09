@@ -29,7 +29,6 @@ tr:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.25);
 }
 
-
     </style>
 </head>
 <body>
@@ -45,10 +44,6 @@ tr:nth-child(even) {
       </span>
     </nav>
     <br>
-
-    <!--        <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">-->
-    <!--        <br>-->
-    <!--        <br>-->
     <table>
         <thead>
         <tr>
@@ -56,6 +51,7 @@ tr:nth-child(even) {
             <th> Name</th>
             <th>Picture</th>
             <th>Type</th>
+            <th>Availability for adoption</th>
             <th>Age Group</th>
             <th>Information</th>
             <th>Registration date</th>
@@ -73,10 +69,12 @@ tr:nth-child(even) {
         <tr th:each="animal : ${animalList}">
             <td><span th:text="${animal.getId()}"> ID </span></td>
             <td><span th:text="${animal.getName()}"> Name </span></td>
-           <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
+            <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
+            <td><span th:text="${animal.getType()}"> Status </span></td>
             <td><span th:text="${animal.getAdoptionStatus()}"> Status </span></td>
             <td><span th:text="${animal.getAgeGroup()}"> Age Group </span></td>
-            <td style="white-space:pre-wrap; word-wrap:break-word" ><span th:text="${animal.getInfo()}"> About </span></td>
+            <td style="white-space:pre-wrap; word-wrap:break-word"><span th:text="${animal.getInfo()}"> About </span>
+            </td>
             <td><span th:text="${animal.getRegistrationDate()}"> ID </span></td>
             <td><span th:text="${animal.getHousingType()}"> ID </span></td>
             <td><span th:text="${animal.getCanLiveWithSmallChildren()}"> ID </span></td>
@@ -87,7 +85,6 @@ tr:nth-child(even) {
         </tr>
         </tbody>
     </table>
-
 </main>
 </body>
 </html>
