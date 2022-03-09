@@ -28,63 +28,69 @@ td, th {
 tr:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.25);
 }
-
     </style>
 </head>
 <body>
+
+<!-- Navigation -->
+
 <header>
     <a href="/"><h1 th:text="${appTitle}"></h1></a>
     <h2 th:text="${pageInfo.getPageTitle}"></h2>
     <p th:text="${pageInfo.getPageDescription}"></p>
-</header>
-<main>
+
     <nav class="nav-fill nav mt-3">
       <span class="nav-item" th:each="page:${shelterPages}">
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
       </span>
     </nav>
-    <br>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th> Name</th>
-            <th>Picture</th>
-            <th>Type</th>
-            <th>Availability for adoption</th>
-            <th>Age Group</th>
-            <th>Information</th>
-            <th>Registration date</th>
-            <th>Housing type</th>
-            <th>Can live with small children</th>
-            <th>Can live with other animals</th>
-            <th>Very active, needs active owner</th>
-            <th>Health problems</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${animalList.empty}">
-            <td colspan="2"> No Animals currently in this shelter!</td>
-        </tr>
-        <tr th:each="animal : ${animalList}">
-            <td><span th:text="${animal.getId()}"> ID </span></td>
-            <td><span th:text="${animal.getName()}"> Name </span></td>
-            <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
-            <td><span th:text="${animal.getType()}"> Status </span></td>
-            <td><span th:text="${animal.getAdoptionStatus()}"> Status </span></td>
-            <td><span th:text="${animal.getAgeGroup()}"> Age Group </span></td>
-            <td style="white-space:pre-wrap; word-wrap:break-word"><span th:text="${animal.getInfo()}"> About </span>
-            </td>
-            <td><span th:text="${animal.getRegistrationDate()}"> ID </span></td>
-            <td><span th:text="${animal.getHousingType()}"> ID </span></td>
-            <td><span th:text="${animal.getCanLiveWithSmallChildren()}"> ID </span></td>
-            <td><span th:text="${animal.getCanLiveWithOtherAnimals()}"> ID </span></td>
-            <td><span th:text="${animal.getCanLiveWithOtherAnimals()}"> ID </span></td>
-            <td><span th:text="${animal.getIsSick()}"> ID </span></td>
+</header>
 
-        </tr>
-        </tbody>
-    </table>
+<!--    Table - all animals-->
+
+<main>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th> Name</th>
+                <th>Picture</th>
+                <th>Type</th>
+                <th>Availability for adoption</th>
+                <th>Age Group</th>
+                <th>Information</th>
+                <th>Registration date</th>
+                <th>Housing type</th>
+                <th>Can live with small children</th>
+                <th>Can live with other animals</th>
+                <th>Very active, needs active owner</th>
+                <th>Health problems</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${animalList.empty}">
+                <td colspan="2"> No Animals currently in this shelter!</td>
+            </tr>
+            <tr th:each="animal : ${animalList}">
+                <td><span th:text="${animal.getId()}"> </span></td>
+                <td><span th:text="${animal.getName()}"> </span></td>
+                <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
+                <td><span th:text="${animal.getType()}"></span></td>
+                <td><span th:text="${animal.getAdoptionStatus()}"></span></td>
+                <td><span th:text="${animal.getAgeGroup()}"></span></td>
+                <td><span th:text="${animal.getInfo()}"></span>
+                </td>
+                <td><span th:text="${animal.getRegistrationDate()}"></span></td>
+                <td><span th:text="${animal.getHousingType()}"> </span></td>
+                <td><span th:text="${animal.getCanLiveWithSmallChildren()}"></span></td>
+                <td><span th:text="${animal.getCanLiveWithOtherAnimals()}"></span></td>
+                <td><span th:text="${animal.getCanLiveWithOtherAnimals()}"></span></td>
+                <td><span th:text="${animal.getIsSick()}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 </body>
 </html>
