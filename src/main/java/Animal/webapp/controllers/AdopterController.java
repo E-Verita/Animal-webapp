@@ -85,6 +85,7 @@ public class AdopterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterprofile"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterprofile";
     }
 
@@ -101,18 +102,19 @@ public class AdopterController {
 
     @GetMapping("/undergoingadoptions")
     public String showUndergoingAdoptions(Model model) {
+
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterundergoingadoptions";
     }
 
-    @GetMapping("/finnishedadoptions")
-    public String showFinnishedAdoptions(Model model) {
+    @GetMapping("/finishedadoptions")
+    public String showFinishedAdoptions(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinnishedadoptions"));
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-        return "adopterfinnishedadoptions";
+        return "adopterfinishedadoptions";
     }
 }
 

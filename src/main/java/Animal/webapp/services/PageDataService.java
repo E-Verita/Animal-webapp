@@ -56,10 +56,12 @@ public class PageDataService {
 
         volunteerPages.add(new Page("volunteerprofile", "Profile", "","/volunteerprofile"));
         volunteerPages.add(new Page("volunteermessages", "Messages", "","/volunteermessages"));
+
+
         adopterPages.add(new Page("adopterprofile", "Profile", "","/adopter/profile"));
         adopterPages.add(new Page("adoptersearchpage", "Search for animal", "","/adopter/search/"));
         adopterPages.add(new Page("adopterundergoingadoptions", "Undergoing adoptions", "","/adopter/undergoingadoptions"));
-        adopterPages.add(new Page("adopterfinnishedadoptions", "Finished adoptions", "","/adopter/finnishedadoptions"));
+        adopterPages.add(new Page("adopterfinishedadoptions", "Finished adoptions", "","/adopter/finishedadoptions"));
     }
 
     public Page getPage(String pageName) {
