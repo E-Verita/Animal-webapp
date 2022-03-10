@@ -275,11 +275,29 @@ public class ShelterController {
     }
 
 
-    @GetMapping("/volunteers")
-    public String showShelterVolunteerMenu(Model model) {
+    @GetMapping("/adoptions")
+    public String showShelterAdoptionMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("sheltervolunteers"));
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
-        return "sheltervolunteers";
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
+               return "shelter-adoptions";
     }
+
+    @GetMapping("/adoptions/undergoing")
+    public String showUndergoingAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelter-adoptions-undergoing";
+    }
+
+    @GetMapping("/adoptions/finished")
+    public String showFinishedAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        return "shelter-adoptions-finished";
+    }
+
 }
