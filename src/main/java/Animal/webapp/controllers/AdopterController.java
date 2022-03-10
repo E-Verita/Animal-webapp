@@ -6,6 +6,7 @@ import Animal.webapp.models.Animal;
 import Animal.webapp.models.UserLogin;
 import Animal.webapp.models.enums.AdoptionStatus;
 import Animal.webapp.models.enums.HousingType;
+import Animal.webapp.models.enums.Status;
 import Animal.webapp.services.AdopterService;
 import Animal.webapp.services.AnimalService;
 import Animal.webapp.services.PageDataService;
@@ -132,7 +133,6 @@ public class AdopterController {
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("GET search/apply");
         return "adopter-apply-for-adoption";
     }
 
@@ -142,13 +142,13 @@ public class AdopterController {
                                          @ModelAttribute Adoption adoption)
             throws Exception {
         try {
-            adopterService.addAdoption(adoption);
-            System.out.println(animalId + " IS ADOPTED!!!!");
-            //TODO: Business logic for adoption
-            System.out.println(" @Post Mapping   search/apply/confirm  out try catch  ");
-            return "redirect:?status=animal_adopted";  //!
+            Adopter adopter = adopterService.getAdopter(adopterId);
+            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+            Animal animal = animalService.findAnimalById(animalId);
+//            Adopter adopter = adopterService.getAdopter(adopterId);
+//            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+            return "redirect:?status=animal_adopted";
         } catch (Exception ex) {
-            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  ");
             return "redirect:?status=animal_adoption_failed";
         }
     }

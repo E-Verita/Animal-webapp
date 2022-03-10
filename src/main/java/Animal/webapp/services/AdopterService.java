@@ -5,6 +5,7 @@ import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
 import Animal.webapp.models.UserLogin;
 import Animal.webapp.models.enums.AdoptionStatus;
+import Animal.webapp.models.enums.Status;
 import Animal.webapp.repository.AdopterRepository;
 import Animal.webapp.repository.AdoptionRepository;
 import Animal.webapp.repository.AnimalRepository;
@@ -59,7 +60,9 @@ public class AdopterService {
         return availableAnimals;
     }
 
-    public void addAdoption(Adoption adoption) {
+    public void addAdoption(Adoption adoption, Adopter adopter, Status status) {
+        adoption.setAdopterId(adopter);
+        adoption.setStatus(status);
         adoptionRepository.save(adoption);
     }
 }

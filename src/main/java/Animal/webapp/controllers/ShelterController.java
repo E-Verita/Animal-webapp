@@ -267,7 +267,6 @@ public class ShelterController {
             throws Exception {
         try {
             animal = animalService.findByIdAndShelter(id, shelterId);
-//            animalService.setCookie(response, animal.getId());
             System.out.println(animal.getName());
             return "redirect:find?status=animal_finding_successful&name=" + animal.getName() + "&animalId=" + animal.getId();
         } catch (Exception ex) {
