@@ -1,10 +1,12 @@
 package Animal.webapp.services;
 
 import Animal.webapp.models.Adopter;
+import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
 import Animal.webapp.models.UserLogin;
 import Animal.webapp.models.enums.AdoptionStatus;
 import Animal.webapp.repository.AdopterRepository;
+import Animal.webapp.repository.AdoptionRepository;
 import Animal.webapp.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,13 @@ import java.util.List;
 public class AdopterService {
     AdopterRepository adopterRepository;
     AnimalRepository animalRepository;
+    AdoptionRepository adoptionRepository;
 
     @Autowired
-    public AdopterService(AdopterRepository adopterRepository, AnimalRepository animalRepository) {
+    public AdopterService(AdopterRepository adopterRepository, AnimalRepository animalRepository, AdoptionRepository adoptionRepository) {
         this.adopterRepository = adopterRepository;
         this.animalRepository = animalRepository;
-
+        this.adoptionRepository = adoptionRepository;
 
     }
 
@@ -54,5 +57,9 @@ public class AdopterService {
             throw new Exception("Could not find any animals available for adoption. Please try again!");
         }
         return availableAnimals;
+    }
+
+    public void addAdoption(Adoption adoption) {
+        adoptionRepository.save(adoption);
     }
 }

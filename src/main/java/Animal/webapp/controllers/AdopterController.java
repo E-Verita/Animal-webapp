@@ -1,6 +1,7 @@
 package Animal.webapp.controllers;
 
 import Animal.webapp.models.Adopter;
+import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
 import Animal.webapp.models.UserLogin;
 import Animal.webapp.models.enums.AdoptionStatus;
@@ -109,10 +110,10 @@ public class AdopterController {
     @PostMapping("/search")
     public String processSearchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
                                           Long id) throws Exception {
-            Animal animal = animalService.findAnimalById(id);
-            System.out.println(id + animal.getName());
-            System.out.println("POST /search  out of try catch");
-            return "redirect:search/apply?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
+        Animal animal = animalService.findAnimalById(id);
+        System.out.println(id + animal.getName());
+        System.out.println("POST /search  out of try catch");
+        return "redirect:search/apply?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
 
     }
 
@@ -122,6 +123,7 @@ public class AdopterController {
                                   @RequestParam(name = "message", required = false) String message,
                                   @RequestParam(value = "animalId", required = false) Long animalId,
                                   Model model) throws Exception {
+        model.addAttribute("adoption", new Adoption());
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
         model.addAttribute("adopter", adopterService.getAdopter(adopterId));
@@ -135,9 +137,12 @@ public class AdopterController {
     }
 
     @PostMapping("/search/apply")
-    public String processApplyForAnimals(@RequestParam(value = "animalId", required = false) Long animalId)
+    public String processApplyForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                         @RequestParam(value = "animalId", required = false) Long animalId,
+                                         @ModelAttribute Adoption adoption)
             throws Exception {
         try {
+            adopterService.addAdoption(adoption);
             System.out.println(animalId + " IS ADOPTED!!!!");
             //TODO: Business logic for adoption
             System.out.println(" @Post Mapping   search/apply/confirm  out try catch  ");
