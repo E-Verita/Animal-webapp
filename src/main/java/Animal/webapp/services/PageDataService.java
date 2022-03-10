@@ -18,7 +18,7 @@ public class PageDataService {
     List<Page> volunteerPages = new ArrayList<>();
     List<Page> adopterPages = new ArrayList<>();
     List<Page> animalButtons = new ArrayList<>();
-
+    List<Page> adoptionPages = new ArrayList<>();
 
     public String getAppTitle() {
         return appTitle;
@@ -31,10 +31,13 @@ public class PageDataService {
         availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelter/login"));
         availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/shelter/menu"));
 
-
         shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
         shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
-        shelterPages.add(new Page("sheltervolunteers", "Volunteers", "","/shelter/volunteers"));
+        shelterPages.add(new Page("shelter-adoptions", "Adoptions", "","/shelter/adoptions"));
+
+
+        adoptionPages.add(new Page("shelter-adoptions-undergoing", "Undergoing adoptions", "","/shelter/adoptions/undergoing"));
+        adoptionPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/adoptions/finished"));
 
         animalButtons.add(new Page("shelteranimals-add", "Add Animal", "","/shelter/animals/add"));
         animalButtons.add(new Page("shelteranimals-edit", "Edit Animal", "","/shelter/animals/edit"));
@@ -44,18 +47,14 @@ public class PageDataService {
 
         availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
 
-        availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopterlogin"));
-        availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adoptermenu"));
-        availablePages.add(new Page("volunteerlogin", "Volunteer Login", "","/volunteerlogin"));
-        availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
-        availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopterregister"));
+        availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
+        availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adopter/menu"));
 
-        volunteerPages.add(new Page("volunteerprofile", "Profile", "","/volunteerprofile"));
-        volunteerPages.add(new Page("volunteermessages", "Messages", "","/volunteermessages"));
-        adopterPages.add(new Page("adopterprofile", "Profile", "","/adopterprofile"));
-        adopterPages.add(new Page("adoptersearchpage", "Search for animal", "","/adoptersearchpage"));
-        adopterPages.add(new Page("adopterundergoingadoptions", "Undergoing adoptions", "","/adopterundergoingadoptions"));
-        adopterPages.add(new Page("adopterfinnishedadoptions", "Finished adoptions", "","/adopterfinnishedadoptions"));
+
+        adopterPages.add(new Page("adopterprofile", "Profile", "","/adopter/profile"));
+        adopterPages.add(new Page("adoptersearchpage", "Search for animal", "","/adopter/search/"));
+        adopterPages.add(new Page("adopterundergoingadoptions", "Undergoing adoptions", "","/adopter/undergoingadoptions"));
+        adopterPages.add(new Page("adopterfinishedadoptions", "Finished adoptions", "","/adopter/finishedadoptions"));
     }
 
     public Page getPage(String pageName) {
@@ -106,6 +105,10 @@ public class PageDataService {
 
     public List<Page> getAnimalButtons() {
         return animalButtons;
+    }
+
+    public List<Page> getAdoptionPages() {
+        return adoptionPages;
     }
 }
 

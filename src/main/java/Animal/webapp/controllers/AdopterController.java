@@ -1,9 +1,12 @@
 package Animal.webapp.controllers;
 
 import Animal.webapp.models.Adopter;
+import Animal.webapp.models.Adoption;
+import Animal.webapp.models.Animal;
 import Animal.webapp.models.UserLogin;
 import Animal.webapp.models.enums.AdoptionStatus;
 import Animal.webapp.models.enums.HousingType;
+import Animal.webapp.models.enums.Status;
 import Animal.webapp.services.AdopterService;
 import Animal.webapp.services.AnimalService;
 import Animal.webapp.services.PageDataService;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+@RequestMapping("/adopter")
 @Controller
 public class AdopterController {
     PageDataService pageDataService;
@@ -28,7 +32,7 @@ public class AdopterController {
         this.animalService = animalService;
     }
 
-    @GetMapping("/adopterlogin")
+    @GetMapping("/login")
     public String showAdopterLoginPage(
             @RequestParam(name = "status", required = false) String status,
             @RequestParam(name = "message", required = false) String message,
@@ -41,19 +45,18 @@ public class AdopterController {
         return "adopterlogin";
     }
 
-    @PostMapping("/adopterlogin")
-    public String handleAdopterLogin(UserLogin userLogin, HttpServletResponse response)
-    {
+    @PostMapping("/login")
+    public String handleAdopterLogin(UserLogin userLogin, HttpServletResponse response) {
         try {
             Adopter adopter = adopterService.verifyAdopter(userLogin);
             adopterService.setCookie(response, adopter.getId());
-            return "redirect:adoptermenu/" + adopter.getId();
+            return "redirect:menu/" + adopter.getId();
         } catch (Exception exception) {
-            return "redirect:adopterlogin?status=login_failed&message=" + exception.getMessage();
+            return "redirect:login?status=login_failed&message=" + exception.getMessage();
         }
     }
 
-    @GetMapping("/adoptermenu/{adopterId}")
+    @GetMapping("menu/{adopterId}")
     public String showAdopterMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adoptermenu"));
@@ -61,7 +64,7 @@ public class AdopterController {
         return "adoptermenu";
     }
 
-    @GetMapping("/adopterregister")
+    @GetMapping("/register")
     public String showAdopterRegisterPage(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getPage("adopterregister"));
@@ -70,49 +73,102 @@ public class AdopterController {
         return "adopterregister";
     }
 
-    @PostMapping("/adopterregister")
+    @PostMapping("/register")
     public String processAdopterRegisterPage(@ModelAttribute @Valid Adopter adopter) {
         try {
             adopterService.addAdopter(adopter);
-            return "redirect:adopterlogin?status=signup_success";
+            return "redirect:login?status=signup_success";
         } catch (Exception ex) {
-            return "redirect:adopterregister?status=signup_failed&message=" + ex.getMessage();
+            return "redirect:register?status=signup_failed&message=" + ex.getMessage();
         }
     }
 
-    @GetMapping("/adopterprofile")
+    @GetMapping("/profile")
     public String showAdopterProfile(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterprofile"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterprofile";
     }
 
-    @GetMapping("/adoptersearchpage")
-    public String searchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId, Model model) throws Exception {
+    @GetMapping("/search")
+    public String searchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                   @RequestParam(name = "status", required = false) String status,
+                                   @RequestParam(name = "message", required = false) String message,
+                                   Model model) throws Exception {
         model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
         model.addAttribute("adopter", adopterService.getAdopter(adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-        System.out.println("GET MAPPING");
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        System.out.println("GET /search");
         return "adoptersearchpage";
     }
 
-    @GetMapping("/adopterundergoingadoptions")
+    @PostMapping("/search")
+    public String processSearchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                          Long id) throws Exception {
+        Animal animal = animalService.findAnimalById(id);
+        System.out.println(id + animal.getName());
+        System.out.println("POST /search  out of try catch");
+        return "redirect:search/apply?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
+
+    }
+
+    @GetMapping("/search/apply")
+    public String applyForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                  @RequestParam(name = "status", required = false) String status,
+                                  @RequestParam(name = "message", required = false) String message,
+                                  @RequestParam(value = "animalId", required = false) Long animalId,
+                                  Model model) throws Exception {
+        model.addAttribute("adoption", new Adoption());
+        model.addAttribute("animal", animalService.findAnimalById(animalId));
+        model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
+        model.addAttribute("adopter", adopterService.getAdopter(adopterId));
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        return "adopter-apply-for-adoption";
+    }
+
+    @PostMapping("/search/apply")
+    public String processApplyForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                         @RequestParam(value = "animalId", required = false) Long animalId,
+                                         @ModelAttribute Adoption adoption)
+            throws Exception {
+        try {
+            Adopter adopter = adopterService.getAdopter(adopterId);
+            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+            Animal animal = animalService.findAnimalById(animalId);
+//            Adopter adopter = adopterService.getAdopter(adopterId);
+//            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+            return "redirect:?status=animal_adopted";
+        } catch (Exception ex) {
+            return "redirect:?status=animal_adoption_failed";
+        }
+    }
+
+
+    @GetMapping("/undergoingadoptions")
     public String showUndergoingAdoptions(Model model) {
+
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterundergoingadoptions";
     }
 
-    @GetMapping("/adopterfinnishedadoptions")
-    public String showFinnishedAdoptions(Model model) {
+    @GetMapping("/finishedadoptions")
+    public String showFinishedAdoptions(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinnishedadoptions"));
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-        return "adopterfinnishedadoptions";
+        return "adopterfinishedadoptions";
     }
 }
 

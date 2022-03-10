@@ -21,14 +21,22 @@
     <a href="/"><h1 th:text="${appTitle}"></h1></a>
     <h2 th:text="${pageInfo.getPageTitle}"></h2>
     <p th:text="${pageInfo.getPageDescription}"></p>
-</header>
-<main>
+
     <nav class="nav-fill nav mt-3">
       <span class="nav-item" th:each="page:${shelterPages}">
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
       </span>
     </nav>
+
+</header>
+<main>
+
+    <!--    Warnings-->
+
     <div>
+
+        <!-- Found -->
+
         <div th:if="${status == 'animal_finding_successful'}"
              class="alert alert-success alert-dismissible d-flex align-items-center fade show">
             <i class="bi-check-circle-fill"></i>
@@ -36,6 +44,8 @@
             Animal found!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
+
+        <!-- Canceled-->
 
         <div th:if="${status == 'animal_deletion_canceled'}"
              class="alert alert-success alert-dismissible d-flex align-items-center fade show">
@@ -45,14 +55,39 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
-        <div th:if="${status == 'animal_finding_failed'}"
+        <!-- Fail-->
+
+    <div th:if="${status == 'animal_finding_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong>
+        Could not find animal. Please try a different ID!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+        <!-- Deleted-->
+
+        <div th:if="${status == 'animal_deleted'}"
              class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
             <i class="bi-exclamation-octagon-fill"></i>
-            <strong class="mx-2">Error!</strong>
-            Could not find animal. Please try a different ID!
+            <strong class="mx-2">Animal Deleted!</strong>
+            You can now delete another one!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     </div>
+
+    <!-- Delete failed-->
+
+    <div th:if="${status == 'animal_delete_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong>
+        Could not delete animal from database.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+        <!-- Confirmation window for deleting with animalinfo-->
+
     <section>
         <div th:if="${status == 'animal_finding_successful'}">
             <div>
@@ -105,7 +140,9 @@
             </div>
         </div>
     </section>
-    <br>
+
+    <!--    Find animal form:  -->
+
     <section>
         <br>
         <h5> Delete animal</h5>
@@ -119,11 +156,7 @@
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">Find</button>
         </form>
-        <div>
-            <p th:text="${shelter.getName()}">
-        </div>
-        <br>
-    </section>
+      </section>
 </main>
 </body>
 </html>

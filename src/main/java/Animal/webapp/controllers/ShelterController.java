@@ -143,28 +143,29 @@ public class ShelterController {
     public String findAnimalToDelete(@RequestParam(name = "status", required = false) String status,
                                      @RequestParam(name = "message", required = false) String message,
                                      @CookieValue(value = "shelterId", required = false) Long shelterId,
-                                     @CookieValue(value = "animalId", required = false) Long animalId, Model model) throws Exception {
-        model.addAttribute("animal", animalService.findAnimalById(animalId));
+                                     Model model) throws Exception {
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("Animal id: " + animalId);
+        System.out.println(" @GetMapping     (animals/delete");
         return "shelteranimals-delete";
     }
 
     @PostMapping("/animals/delete")
     public String processFindAnimalToDelete(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                            Long id, HttpServletResponse response)
+                                            Long id)
             throws Exception {
         try {
             Animal animal = animalService.findByIdAndShelter(id, shelterId);
-            animalService.setCookie(response, animal.getId());
             System.out.println(animal.getName());
-            return "redirect:delete/confirm?status=animal_to_DELETE_found";
+            System.out.println(" @PostMapping   animals/delete      out of try-catch"  );
+            return "redirect:delete/confirm?status=animal_to_DELETE_found" +"&animalId="+ animal.getId();
+
         } catch (Exception ex) {
+            System.out.println(" @PostMapping   animals/delete   in try-catch"  );
             return "redirect:delete?status=animal_finding_failed";
         }
     }
@@ -173,7 +174,7 @@ public class ShelterController {
     public String deleteAnimals(@RequestParam(name = "status", required = false) String status,
                                 @RequestParam(name = "message", required = false) String message,
                                 @CookieValue(value = "shelterId", required = false) Long shelterId,
-                                @CookieValue(value = "animalId", required = false) Long animalId, Model model) throws Exception {
+                                @RequestParam(value = "animalId", required = false) Long animalId, Model model) throws Exception {
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
@@ -182,17 +183,22 @@ public class ShelterController {
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         System.out.println("Animal id: " + animalId);
+        System.out.println(" @Get Mapping   animals/delete/confirm   "  );
         return "shelteranimals-delete-confirm";
     }
 
     @PostMapping("/animals/delete/confirm")
-    public String confirmDeletingAnimal(@CookieValue(value = "animalId", required = false) Long animalId, @ModelAttribute Animal animal)
+    public String confirmDeletingAnimal(@RequestParam(value = "animalId", required = false) Long animalId,
+                                        @ModelAttribute Animal animal)
             throws Exception {
         try {
+            System.out.println(animalId);
             animalService.deleteAnimal(animalId);
-            return "redirect:delete/confirm?status=animal_deleted";
+            System.out.println(" @Post Mapping   animals/delete/confirm  out try catch  "  );
+            return "redirect:?status=animal_deleted";  //!
         } catch (Exception ex) {
-            return "redirect:delete?status=animal_delete_failed";
+            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  "  );
+            return "redirect:?status=animal_delete_failed";
         }
     }
 
@@ -232,10 +238,18 @@ public class ShelterController {
     public String findAnimals(@RequestParam(name = "status", required = false) String status,
                               @RequestParam(name = "message", required = false) String message,
                               @CookieValue(value = "shelterId", required = false) Long shelterId,
-                              @CookieValue(value = "animalId", required = false) Long animalId,
+                              @RequestParam(value = "animalId", required = false) Long animalId,
                               Model model) throws Exception {
-        model.addAttribute("animal", animalService.findAnimalById(animalId));
-        model.addAttribute("shelter", shelterService.getShelter(shelterId));
+
+        try {
+            model.addAttribute("animal", animalService.findAnimalById(animalId));
+            model.addAttribute("shelter", shelterService.getShelter(shelterId));
+
+        } catch (Exception ex) {
+            status = status == null ? "animal_finding_failed" : status;
+            message = message ==null?  "Could not find animal" : message;
+
+        }
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -243,6 +257,7 @@ public class ShelterController {
         model.addAttribute("message", message);
         System.out.println("Animal id: " + animalId);
         return "shelteranimals-find";
+
     }
 
 
@@ -252,20 +267,39 @@ public class ShelterController {
             throws Exception {
         try {
             animal = animalService.findByIdAndShelter(id, shelterId);
-            animalService.setCookie(response, animal.getId());
             System.out.println(animal.getName());
-            return "redirect:find?status=animal_finding_successful&name=" + animal.getName();
+            return "redirect:find?status=animal_finding_successful&name=" + animal.getName() + "&animalId=" + animal.getId();
         } catch (Exception ex) {
             return "redirect:find?status=animal_finding_failed";
         }
     }
 
 
-    @GetMapping("/volunteers")
-    public String showShelterVolunteerMenu(Model model) {
+    @GetMapping("/adoptions")
+    public String showShelterAdoptionMenu(Model model) {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("sheltervolunteers"));
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
-        return "sheltervolunteers";
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
+               return "shelter-adoptions";
     }
+
+    @GetMapping("/adoptions/undergoing")
+    public String showUndergoingAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
+        return "shelter-adoptions-undergoing";
+    }
+
+    @GetMapping("/adoptions/finished")
+    public String showFinishedAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
+        model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
+        return "shelter-adoptions-finished";
+    }
+
 }
