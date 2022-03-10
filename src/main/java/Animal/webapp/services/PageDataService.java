@@ -44,18 +44,11 @@ public class PageDataService {
         animalButtons.add(new Page("shelteranimals-delete", "Delete Animal", "","/shelter/animals/delete"));
         animalButtons.add(new Page("shelteranimals-seeall", "See All Animals", "","/shelter/animals/all"));
         animalButtons.add(new Page("shelteranimals-find", "Find Animal by ID", "","/shelter/animals/find"));
-        animalButtons.add(new Page("shelteranimals-adoptions", "Adoptions", "","/shelter/animals/adoptions"));
 
         availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
         availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adopter/menu"));
-        availablePages.add(new Page("volunteerlogin", "Volunteer Login", "","/volunteerlogin"));
-        availablePages.add(new Page("volunteermenu", "Volunteer Menu", "","/volunteermenu"));
-        availablePages.add(new Page("adopterregister", "Register as an adopter", "","/adopter/register"));
-
-        volunteerPages.add(new Page("volunteerprofile", "Profile", "","/volunteerprofile"));
-        volunteerPages.add(new Page("volunteermessages", "Messages", "","/volunteermessages"));
 
 
         adopterPages.add(new Page("adopterprofile", "Profile", "","/adopter/profile"));
