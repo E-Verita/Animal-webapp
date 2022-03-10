@@ -18,5 +18,11 @@
         <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
       </span>
     </nav>
+
+    <nav class="nav-fill nav mt-3">
+      <span class="nav-item" th:each="page:${adoptionPages}">
+        <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+      </span>
+    </nav>
 </header>
 </html>

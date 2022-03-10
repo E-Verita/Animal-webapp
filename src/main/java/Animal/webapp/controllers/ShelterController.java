@@ -289,6 +289,7 @@ public class ShelterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
         return "shelter-adoptions-undergoing";
     }
 
@@ -297,6 +298,7 @@ public class ShelterController {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("adoptionPages", pageDataService.getAdoptionPages());
         return "shelter-adoptions-finished";
     }
 
