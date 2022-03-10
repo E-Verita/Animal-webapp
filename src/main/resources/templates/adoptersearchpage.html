@@ -85,8 +85,9 @@ tr:nth-child(even) {
                 <td><span th:text="${animal.getShelter().getAddress()}"></span></td>
                 <td><span th:text="${animal.getShelter().getBankingInfo()}"></span></td>
                 <td>
-                    <form method="post" action="/adopter/search/apply">
-                        <button type="submit" class="btn btn-primary btn-lg">I want to adopt this animal!
+                    <form method="post" action="/adopter/search">
+                        <input type="hidden"  th:value="${animal.getId()}" id="id" name="id" />
+                        <button type="submit"  class="btn btn-primary btn-lg">I want to adopt this animal!
                         </button>
                     </form>
                 </td>
