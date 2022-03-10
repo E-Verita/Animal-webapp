@@ -92,12 +92,16 @@ public class AdopterController {
 
     @GetMapping("/search")
     public String searchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                   @RequestParam(name = "status", required = false) String status,
+                                   @RequestParam(name = "message", required = false) String message,
                                    Model model) throws Exception {
         model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
         model.addAttribute("adopter", adopterService.getAdopter(adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
         System.out.println("GET /search");
         return "adoptersearchpage";
     }
@@ -105,56 +109,62 @@ public class AdopterController {
     @PostMapping("/search")
     public String processSearchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
                                           Long id) throws Exception {
-        try {
-            System.out.println(id);
             Animal animal = animalService.findAnimalById(id);
-            System.out.println(id);
-            System.out.println(animal.getName());
+            System.out.println(id + animal.getName());
             System.out.println("POST /search  out of try catch");
-            return "redirect:search/apply?status=animal_to_DELETE_found" + "&animalId=" + animal.getId();
+            return "redirect:search/apply?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
 
+    }
+
+    @GetMapping("/search/apply")
+    public String applyForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                  @RequestParam(name = "status", required = false) String status,
+                                  @RequestParam(name = "message", required = false) String message,
+                                  @RequestParam(value = "animalId", required = false) Long animalId,
+                                  Model model) throws Exception {
+        model.addAttribute("animal", animalService.findAnimalById(animalId));
+        model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
+        model.addAttribute("adopter", adopterService.getAdopter(adopterId));
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        System.out.println("GET search/apply");
+        return "adopter-apply-for-adoption";
+    }
+
+    @PostMapping("/search/apply")
+    public String processApplyForAnimals(@RequestParam(value = "animalId", required = false) Long animalId)
+            throws Exception {
+        try {
+            System.out.println(animalId + " IS ADOPTED!!!!");
+            //TODO: Business logic for adoption
+            System.out.println(" @Post Mapping   search/apply/confirm  out try catch  ");
+            return "redirect:?status=animal_adopted";  //!
         } catch (Exception ex) {
-            System.out.println(id);
-            System.out.println("POST /search in try catch");
-            return "redirect:search?status=animal_finding_failed";
+            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  ");
+            return "redirect:?status=animal_adoption_failed";
         }
     }
 
-        @GetMapping("/search/apply")
-        public String applyForAnimals (@CookieValue(value = "adopterId", required = false) Long adopterId,
-                @RequestParam(name = "status", required = false) String status,
-                @RequestParam(name = "message", required = false) String message,
-                @RequestParam(value = "animalId", required = false) Long animalId,
-                Model model) throws Exception {
-            model.addAttribute("animal", animalService.findAnimalById(animalId));
-            model.addAttribute("animalList", adopterService.findAllAnimalsAvailableForAdoption(AdoptionStatus.Available));
-            model.addAttribute("adopter", adopterService.getAdopter(adopterId));
-            model.addAttribute("appTitle", pageDataService.getAppTitle());
-            model.addAttribute("pageInfo", pageDataService.getAdopterPage("adoptersearchpage"));
-            model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-            model.addAttribute("status", status);
-            model.addAttribute("message", message);
-            System.out.println("GET search/apply");
-            return "adopter-apply-for-adoption";
-        }
 
+    @GetMapping("/undergoingadoptions")
+    public String showUndergoingAdoptions(Model model) {
 
-        @GetMapping("/undergoingadoptions")
-        public String showUndergoingAdoptions (Model model){
-
-            model.addAttribute("appTitle", pageDataService.getAppTitle());
-            model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
-            model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-            return "adopterundergoingadoptions";
-        }
-
-        @GetMapping("/finishedadoptions")
-        public String showFinishedAdoptions (Model model){
-            model.addAttribute("appTitle", pageDataService.getAppTitle());
-            model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
-            model.addAttribute("adopterPages", pageDataService.getAdopterPages());
-            return "adopterfinishedadoptions";
-        }
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        return "adopterundergoingadoptions";
     }
+
+    @GetMapping("/finishedadoptions")
+    public String showFinishedAdoptions(Model model) {
+        model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
+        model.addAttribute("adopterPages", pageDataService.getAdopterPages());
+        return "adopterfinishedadoptions";
+    }
+}
 
 

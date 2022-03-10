@@ -188,7 +188,8 @@ public class ShelterController {
     }
 
     @PostMapping("/animals/delete/confirm")
-    public String confirmDeletingAnimal(@RequestParam(value = "animalId", required = false) Long animalId, @ModelAttribute Animal animal)
+    public String confirmDeletingAnimal(@RequestParam(value = "animalId", required = false) Long animalId,
+                                        @ModelAttribute Animal animal)
             throws Exception {
         try {
             System.out.println(animalId);
