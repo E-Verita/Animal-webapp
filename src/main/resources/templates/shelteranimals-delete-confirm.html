@@ -14,13 +14,10 @@
   line-height: 1;
 }
 
-
-
-
-
     </style>
 </head>
 <body>
+            <!--Navigation-->
 <header>
     <a href="/"><h1 th:text="${appTitle}"></h1></a>
     <h2 th:text="${pageInfo.getPageTitle}"></h2>
@@ -33,19 +30,8 @@
       </span>
     </nav>
 
-    <!--- after deletion   --->
-    <div th:if="${status == 'animal_deleted'}"
-         class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-        <i class="bi-exclamation-octagon-fill"></i>
-        <strong class="mx-2">Success!</strong>
-        Animal deleted!
-        <form>
-            <a href="/shelter/animals/" class="btn btn-light">Return to animal's menu</a>
-        </form>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+            <!--Confirmation warning-->
 
-    <!--- before deletion --->
     <section>
         <div th:if="${status == 'animal_to_DELETE_found'}"
              class="alert alert-danger alert-dismissible d-flex align-items-center fade show">

@@ -57,13 +57,33 @@
 
         <!-- Fail-->
 
-        <div th:if="${status == 'animal_finding_failed'}"
+    <div th:if="${status == 'animal_finding_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong>
+        Could not find animal. Please try a different ID!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+        <!-- Deleted-->
+
+        <div th:if="${status == 'animal_deleted'}"
              class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
             <i class="bi-exclamation-octagon-fill"></i>
-            <strong class="mx-2">Error!</strong>
-            Could not find animal. Please try a different ID!
+            <strong class="mx-2">Animal Deleted!</strong>
+            You can now delete another one!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
+    </div>
+
+    <!-- Delete failed-->
+
+    <div th:if="${status == 'animal_delete_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong>
+        Could not delete animal from database.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 
         <!-- Confirmation window for deleting with animalinfo-->

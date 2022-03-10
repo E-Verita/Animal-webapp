@@ -150,18 +150,22 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
+        System.out.println(" @GetMapping     (animals/delete");
         return "shelteranimals-delete";
     }
 
     @PostMapping("/animals/delete")
     public String processFindAnimalToDelete(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                            Long id, HttpServletResponse response)
+                                            Long id)
             throws Exception {
         try {
             Animal animal = animalService.findByIdAndShelter(id, shelterId);
             System.out.println(animal.getName());
+            System.out.println(" @PostMapping   animals/delete      out of try-catch"  );
             return "redirect:delete/confirm?status=animal_to_DELETE_found" +"&animalId="+ animal.getId();
+
         } catch (Exception ex) {
+            System.out.println(" @PostMapping   animals/delete   in try-catch"  );
             return "redirect:delete?status=animal_finding_failed";
         }
     }
@@ -179,6 +183,7 @@ public class ShelterController {
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         System.out.println("Animal id: " + animalId);
+        System.out.println(" @Get Mapping   animals/delete/confirm   "  );
         return "shelteranimals-delete-confirm";
     }
 
@@ -188,8 +193,10 @@ public class ShelterController {
         try {
             System.out.println(animalId);
             animalService.deleteAnimal(animalId);
+            System.out.println(" @Post Mapping   animals/delete/confirm  out try catch  "  );
             return "redirect:?status=animal_deleted";  //!
         } catch (Exception ex) {
+            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  "  );
             return "redirect:?status=animal_delete_failed";
         }
     }
