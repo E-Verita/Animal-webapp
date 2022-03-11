@@ -276,7 +276,8 @@ public class ShelterController {
 
 
     @GetMapping("/adoptions")
-    public String showShelterAdoptionMenu(Model model) {
+    public String showShelterAdoptionMenu(AdoptionStatus adoptionStatus, Model model
+                                        ) throws Exception {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -285,7 +286,9 @@ public class ShelterController {
     }
 
     @GetMapping("/adoptions/undergoing")
-    public String showUndergoingAdoptions(Model model) {
+    public String showUndergoingAdoptions(  @CookieValue(value = "shelterId", required = false) Long shelterId,
+                                            Model model) throws Exception {
+        model.addAttribute("animalList", animalService.findAllAdoptionsByStatusAndShelterId(AdoptionStatus.Undergoing, shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());

@@ -56,4 +56,12 @@ public class AnimalService {
         animal.setAdoptionStatus(status);
         animalRepository.save(animal);
     }
+
+    public List<Animal> findAllAdoptionsByStatusAndShelterId(AdoptionStatus adoptionStatus, Long shelterId) throws Exception {
+        List<Animal> allFromShelterUndergoing = animalRepository.findAllByAdoptionStatusAndShelterId(adoptionStatus, shelterId);
+        if (allFromShelterUndergoing == null) {
+            throw new Exception("Could not find any animals. Please try again!");
+        }
+        return allFromShelterUndergoing;
+    }
 }
