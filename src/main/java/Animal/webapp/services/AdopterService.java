@@ -66,4 +66,13 @@ public class AdopterService {
         adoption.setStatus(status);
         adoptionRepository.save(adoption);
     }
+
+    public List <Adoption> findAllByStatusAndAdopterId(Status status, Long adopterId) throws Exception {
+        Adopter adopter = getAdopter(adopterId);
+        List<Adoption> adoptionList = adoptionRepository.findAllByStatusAndAdopterId(status, adopter);
+        if (adoptionList == null) {
+            throw new Exception("You don't have any applications for adoption!");
+        }
+        return adoptionList;
+    }
 }
