@@ -60,7 +60,8 @@ public class AdopterService {
         return availableAnimals;
     }
 
-    public void addAdoption(Adoption adoption, Adopter adopter, Status status) {
+    public void addAdoption(Adoption adoption, Status status, Long adopterId) {
+        Adopter adopter = getAdopter(adopterId);
         adoption.setAdopterId(adopter);
         adoption.setStatus(status);
         adoptionRepository.save(adoption);

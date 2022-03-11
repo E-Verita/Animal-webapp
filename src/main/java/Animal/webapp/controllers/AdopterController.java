@@ -142,11 +142,15 @@ public class AdopterController {
                                          @ModelAttribute Adoption adoption)
             throws Exception {
         try {
-            Adopter adopter = adopterService.getAdopter(adopterId);
-            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
             Animal animal = animalService.findAnimalById(animalId);
+            adopterService.addAdoption( adoption, Status.UNDERGOING,  adopterId);
+            animalService.setAdoptionStatus(animalId, AdoptionStatus.Undergoing);
+//            Adopter adopter = adopterService.getAdopter(adopterId);
+
+
 //            Adopter adopter = adopterService.getAdopter(adopterId);
 //            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+//            Animal animal = animalService.findAnimalById(animalId);
             return "redirect:?status=animal_adopted";
         } catch (Exception ex) {
             return "redirect:?status=animal_adoption_failed";

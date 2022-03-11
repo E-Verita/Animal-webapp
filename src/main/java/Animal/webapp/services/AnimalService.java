@@ -1,12 +1,11 @@
 package Animal.webapp.services;
 
 import Animal.webapp.models.Animal;
+import Animal.webapp.models.enums.AdoptionStatus;
 import Animal.webapp.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -39,16 +38,6 @@ public class AnimalService {
         return animal;
     }
 
-    public void setCookie(HttpServletResponse response, Long id) {
-        Cookie cookie = new Cookie("animalId", id.toString());
-        response.addCookie(cookie);
-    }
-
-    public void deleteCookie(HttpServletResponse response, Long id) {
-        Cookie cookie = new Cookie("animalId", id.toString());
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }
 
     public void deleteAnimal(Long animalId) {
         animalRepository.deleteById(animalId);
@@ -62,4 +51,9 @@ public class AnimalService {
         return allAnimals;
     }
 
+    public void setAdoptionStatus(Long animalId, AdoptionStatus status) throws Exception {
+        Animal animal = findAnimalById(animalId);
+        animal.setAdoptionStatus(status);
+        animalRepository.save(animal);
+    }
 }
