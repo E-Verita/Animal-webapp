@@ -24,6 +24,9 @@ public class Adoption {
     @OneToOne
     @JoinColumn(name = "adopter_id")
     private Adopter adopterId;
+    @OneToOne
+    @JoinColumn(name = "shelter_id")
+    private Shelter shelterId;
     @CreationTimestamp
     private Timestamp sent;
     private Timestamp processed;

@@ -69,20 +69,21 @@ tr:nth-child(even) {
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${animalList.empty}">
+    <tr th:if="${adoptionList.empty}">
         <td colspan="2"> No Animals currently available in any of the shelters!</td>
     </tr>
-    <tr th:each="animal : ${animalList}">
-        <td><span th:text="${animal.getName()}"> Name </span></td>
-        <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
-        <td><span th:text="${animal.getType()}"> Type </span></td>
-        <td><span th:text="${animal.getAgeGroup()}"> Age Group </span></td>
+    <tr th:each="adoption : ${adoptionList}">
+        <td><span th:text="${adoption.getAnimalId().getName()}"> Name </span></td>
+        <td><span th:text="${adoption.getAnimalId().getAdoptionStatus()}"> Name </span></td>
+        <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100" alt="${adoption.getAnimalId().getName()}"></td>
+        <td><span th:text="${adoption.getAnimalId().getType()}"> Type </span></td>
+        <td><span th:text="${adoption.getAnimalId().getAgeGroup()}"> Age Group </span></td>
         <td style="white-space:pre-wrap; word-wrap:break-word"><span
-                th:text="${animal.getInfo()}"> About </span></td>
-        <td><span th:text="${animal.getShelter().getName()}"></span></td>
+                th:text="${adoption.getAnimalId().getInfo()}"> About </span></td>
+        <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"></span></td>
         <td>
             <form method="post" action="/adopter/search">
-                <input type="hidden" th:value="${animal.getId()}" id="id" name="id"/>
+                <input type="hidden" th:value="${adoption.getAnimalId().getId()}" id="id" name="id"/>
                 <button type="submit" class="btn btn-primary btn-lg">POST!
                 </button>
             </form>

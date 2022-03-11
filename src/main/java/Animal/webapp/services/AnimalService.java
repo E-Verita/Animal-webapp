@@ -1,7 +1,10 @@
 package Animal.webapp.services;
 
+import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
 import Animal.webapp.models.enums.AdoptionStatus;
+import Animal.webapp.models.enums.Status;
+import Animal.webapp.repository.AdoptionRepository;
 import Animal.webapp.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +14,12 @@ import java.util.List;
 @Service
 public class AnimalService {
     AnimalRepository animalRepository;
+    AdoptionRepository adoptionRepository;
 
     @Autowired
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository, AdoptionRepository adoptionRepository) {
         this.animalRepository = animalRepository;
+        this.adoptionRepository = adoptionRepository;
     }
 
     public void addAnimal(Animal animal) throws Exception {
@@ -57,11 +62,18 @@ public class AnimalService {
         animalRepository.save(animal);
     }
 
-    public List<Animal> findAllAdoptionsByStatusAndShelterId(AdoptionStatus adoptionStatus, Long shelterId) throws Exception {
+    public List<Animal> findAllAnimalsByStatusAndShelterId(AdoptionStatus adoptionStatus, Long shelterId) throws Exception {
         List<Animal> allFromShelterUndergoing = animalRepository.findAllByAdoptionStatusAndShelterId(adoptionStatus, shelterId);
         if (allFromShelterUndergoing == null) {
             throw new Exception("Could not find any animals. Please try again!");
         }
         return allFromShelterUndergoing;
     }
+
+    public List <Adoption> findAllAdoptionsByStatusAndShelterId(Long shelterId, Status status){
+        return adoptionRepository.findAllByStatusAndShelterIdId(status, shelterId);
+    }
+
+
+
 }

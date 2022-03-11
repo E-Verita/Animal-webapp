@@ -12,5 +12,13 @@ import java.util.List;
 public interface AdoptionRepository extends CrudRepository<Adoption, Long> {
     List<Adoption> findAll();
     List<Adoption> findAllByStatusAndAdopterId (Status status, Adopter adopterId);
+
+//    List<Adoption> findAllByStatusAndShelterId(Status status, Long shelterId);
+
+//    List<Adoption> findAllByShelterId(Long shelterId);
+
+//    List<Adoption> findAllByStatus(Status status);
+
+    List<Adoption> findAllByStatusAndShelterIdId(Status status, Long shelterId);
 }
 

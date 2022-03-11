@@ -288,7 +288,8 @@ public class ShelterController {
     @GetMapping("/adoptions/undergoing")
     public String showUndergoingAdoptions(  @CookieValue(value = "shelterId", required = false) Long shelterId,
                                             Model model) throws Exception {
-        model.addAttribute("animalList", animalService.findAllAdoptionsByStatusAndShelterId(AdoptionStatus.Undergoing, shelterId));
+        System.out.println(shelterId);
+        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.UNDERGOING));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
