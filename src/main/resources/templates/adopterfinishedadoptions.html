@@ -55,6 +55,8 @@ tr:nth-child(even) {
                 <th>Shelter</th>
                 <th>Email</th>
                 <th>Your submission to the shelter</th>
+                <th>Shelters answer</th>
+                <th>Approval date</th>
             </tr>
             </thead>
             <tbody>
@@ -67,7 +69,8 @@ tr:nth-child(even) {
                 <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"> </span></td>
                 <td><span th:text="${adoption.getAnimalId().getShelter().getEmail()}"> </span></td>
                 <td><span th:text="${adoption.getAdoptersText()}"> </span></td>
-
+                <td><span th:text="${adoption.getSheltersText()}"> </span></td>
+                <td><span th:text="${adoption.getProcessed()}"> </span></td>
             </tr>
             </tbody>
         </table>

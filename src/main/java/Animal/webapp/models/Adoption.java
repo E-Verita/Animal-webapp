@@ -29,4 +29,6 @@ public class Adoption {
     private Timestamp processed;
     private Status status;
     private String adoptersText;
+    private String sheltersText;
+
 }
