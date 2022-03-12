@@ -126,7 +126,6 @@ public class ShelterController {
     }
 
     @PostMapping("/animals/add")
-
     public String processAddingAnimal(@CookieValue(value = "shelterId", required = false) Long shelterId, @ModelAttribute Animal animal) {
         try {
             animal.setShelter(shelterService.getShelter(shelterId));
@@ -264,6 +263,9 @@ public class ShelterController {
             return "redirect:find?status=animal_finding_failed";
         }
     }
+
+
+
 
 
     @GetMapping("/adoptions")

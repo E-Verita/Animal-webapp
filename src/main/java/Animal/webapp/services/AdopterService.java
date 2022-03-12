@@ -63,7 +63,6 @@ public class AdopterService {
     }
 
     public void addAdoption(Adoption adoption, Status status, Long adopterId) {
-//        Animal animal = (Animal) animalRepository.findBy(adoption.getAnimalId()).orElseThrow();
         Adopter adopter = getAdopter(adopterId);
         adoption.setAdopterId(adopter);
         adoption.setStatus(status);

@@ -36,11 +36,8 @@ public class ShelterService {
     }
 
     public void setCookie(HttpServletResponse response, Long id) {
-        // create a cookie
         Cookie cookie = new Cookie("shelterId", id.toString());
-
-        //add cookie to response
-        response.addCookie(cookie);
+       response.addCookie(cookie);
 
     }
 

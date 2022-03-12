@@ -15,7 +15,6 @@ public class PageDataService {
     String appTitle;
     List<Page> availablePages = new ArrayList<>();
     List<Page> shelterPages = new ArrayList<>();
-    List<Page> volunteerPages = new ArrayList<>();
     List<Page> adopterPages = new ArrayList<>();
     List<Page> animalButtons = new ArrayList<>();
     List<Page> adoptionPages = new ArrayList<>();
@@ -34,7 +33,6 @@ public class PageDataService {
         shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
         shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
         shelterPages.add(new Page("shelter-adoptions", "Adoptions", "","/shelter/adoptions"));
-
 
         adoptionPages.add(new Page("shelter-adoptions-undergoing", "Undergoing adoptions", "","/shelter/adoptions/undergoing"));
         adoptionPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/adoptions/finished"));
@@ -74,16 +72,6 @@ public class PageDataService {
         return shelterPages;
     }
 
-    public Page getVolunteerPage(String pageName) {
-        for (Page page : this.volunteerPages) {
-            if (page.getName().equalsIgnoreCase(pageName)) return page;
-        }
-        return null;
-    }
-
-    public List<Page> getVolunteerPages() {
-        return volunteerPages;
-    }
 
     public Page getAdopterPage(String pageName) {
         for (Page page : this.adopterPages) {
@@ -94,13 +82,6 @@ public class PageDataService {
 
     public List<Page> getAdopterPages() {
         return adopterPages;
-    }
-
-    public Page getAnimalButton(String pageName) {
-        for (Page page : this.animalButtons) {
-            if (page.getName().equalsIgnoreCase(pageName)) return page;
-        }
-        return null;
     }
 
     public List<Page> getAnimalButtons() {
