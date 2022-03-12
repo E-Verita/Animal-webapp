@@ -1,5 +1,6 @@
 package Animal.webapp.controllers;
 
+import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
 import Animal.webapp.models.Shelter;
 import Animal.webapp.models.UserLogin;
@@ -276,8 +277,7 @@ public class ShelterController {
 
 
     @GetMapping("/adoptions")
-    public String showShelterAdoptionMenu(AdoptionStatus adoptionStatus, Model model
-    ) throws Exception {
+    public String showShelterAdoptionMenu(Model model) throws Exception {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -302,8 +302,7 @@ public class ShelterController {
     }
 
     @PostMapping("/adoptions/undergoing")
-    public String processUndergoingGoingAdoption(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                                 Long id) throws Exception {
+    public String processUndergoingGoingAdoption(Long id) throws Exception {
         try {
             Animal animal = animalService.findAnimalById(id);
             return "redirect:undergoing/confirm?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
@@ -329,12 +328,18 @@ public class ShelterController {
         return "shelter-adoptions-undergoing-confirm";
     }
 
+    //            Adoption adoption = animalService.findByAnimalId(animalId);
     @PostMapping("/adoptions/undergoing/confirm")
     public String processConfirmAdoption(@RequestParam(value = "animalId", required = false) Long animalId,
-                                         @ModelAttribute Animal animal)
+                                         @RequestParam(value = "sheltersText", required = false) String shelterText)
+//                                         @RequestParam(value = "animalId", required = false) Long animalId)
             throws Exception {
         try {
-            System.out.println(animalId + " ADOPTED!");
+            Adoption adoption = animalService.findByAnimalId(animalId);
+            animalService.processAdoption(adoption, shelterText, AdoptionStatus.Adopted, Status.FINNINSHED, animalId);
+//           System.out.println(animalId + " ADOPTED!");
+            System.out.println(adoption);
+            System.out.println("Adoption id:" + adoption.getId() + " text:" + adoption.getSheltersText());
 //            TODO Business logic
             return "redirect:?status=animal_adopted";
         } catch (Exception ex) {

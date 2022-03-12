@@ -78,4 +78,11 @@ public class AnimalService {
     public Adoption findByAnimalId(Long animalId) {
         return adoptionRepository.findByAnimalIdId(animalId);
     }
+
+    public void processAdoption(Adoption adoption, String shelterText, AdoptionStatus adoptionStatus, Status status, Long animalId) throws Exception {
+        adoption.setStatus(status);
+        adoption.setSheltersText(shelterText);
+        adoptionRepository.save(adoption);
+        setAdoptionStatus(animalId, adoptionStatus);
+    }
 }
