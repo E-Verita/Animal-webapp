@@ -30,6 +30,11 @@ public class ShelterController {
         this.animalService = animalService;
     }
 
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("msg", "Welcome to the Netherlands!");
+    }
+
     @GetMapping("/login")
     public String showShelterLoginPage(
             @RequestParam(name = "status", required = false) String status,
@@ -43,13 +48,14 @@ public class ShelterController {
         return "shelterlogin";
     }
 
+
     @PostMapping("/login")
-    public String handleShelterLogin(UserLogin userLogin, HttpServletResponse response) {  //??
+    public String handleShelterLogin(UserLogin userLogin, HttpServletResponse response) {
         try {
             Shelter shelter = shelterService.verifyShelter(userLogin);
             shelterService.setCookie(response, shelter.getId());
-//
             return "redirect:menu/" + shelter.getId();
+
         } catch (Exception exception) {
             return "redirect:login?status=login_failed&message=" + exception.getMessage();
         }
@@ -83,8 +89,8 @@ public class ShelterController {
     }
 
     @GetMapping("/profile")
-    public String showShelterProfile(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) throws Exception {  //?
-        model.addAttribute("shelter", shelterService.getShelter(shelterId)); //?
+    public String showShelterProfile(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) throws Exception {
+        model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelterprofile"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -126,6 +132,7 @@ public class ShelterController {
             animal.setShelter(shelterService.getShelter(shelterId));
             animalService.addAnimal(animal);
             return "redirect:add?status=animal_adding_successful";
+
         } catch (Exception exception) {
             exception.getStackTrace();
             return "redirect:add?status=animal_adding_failed";
@@ -151,22 +158,17 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println(" @GetMapping     (animals/delete");
         return "shelteranimals-delete";
     }
 
     @PostMapping("/animals/delete")
     public String processFindAnimalToDelete(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                            Long id)
-            throws Exception {
+                                            Long id) throws Exception {
         try {
             Animal animal = animalService.findByIdAndShelter(id, shelterId);
-            System.out.println(animal.getName());
-            System.out.println(" @PostMapping   animals/delete      out of try-catch");
             return "redirect:delete/confirm?status=animal_to_DELETE_found" + "&animalId=" + animal.getId();
 
         } catch (Exception ex) {
-            System.out.println(" @PostMapping   animals/delete   in try-catch");
             return "redirect:delete?status=animal_finding_failed";
         }
     }
@@ -183,22 +185,15 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("Animal id: " + animalId);
-        System.out.println(" @Get Mapping   animals/delete/confirm   ");
         return "shelteranimals-delete-confirm";
     }
 
     @PostMapping("/animals/delete/confirm")
-    public String confirmDeletingAnimal(@RequestParam(value = "animalId", required = false) Long animalId,
-                                        @ModelAttribute Animal animal)
-            throws Exception {
+    public String confirmDeletingAnimal(@RequestParam(value = "animalId", required = false)  Long animalId) throws Exception {
         try {
-            System.out.println(animalId);
             animalService.deleteAnimal(animalId);
-            System.out.println(" @Post Mapping   animals/delete/confirm  out try catch  ");
-            return "redirect:?status=animal_deleted";  //!
+            return "redirect:?status=animal_deleted";
         } catch (Exception ex) {
-            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  ");
             return "redirect:?status=animal_delete_failed";
         }
     }
@@ -215,7 +210,6 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("GET-MAPPING");
         return "shelteranimals-seeall";
     }
 
@@ -230,7 +224,6 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("REQUEST-MAPPING");
         return "shelteranimals-seeall";
     }
 
@@ -256,7 +249,6 @@ public class ShelterController {
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("Animal id: " + animalId);
         return "shelteranimals-find";
 
     }
@@ -264,11 +256,9 @@ public class ShelterController {
 
     @PostMapping("/animals/find")
     public String processFindingAnimals(@CookieValue(value = "shelterId", required = false) Long shelterId,
-                                        Long id, @ModelAttribute Animal animal, HttpServletResponse response)
-            throws Exception {
+                                        Long id) throws Exception {
         try {
-            animal = animalService.findByIdAndShelter(id, shelterId);
-            System.out.println(animal.getName());
+            Animal animal = animalService.findByIdAndShelter(id, shelterId);
             return "redirect:find?status=animal_finding_successful&name=" + animal.getName() + "&animalId=" + animal.getId();
         } catch (Exception ex) {
             return "redirect:find?status=animal_finding_failed";
@@ -306,7 +296,6 @@ public class ShelterController {
         try {
             Animal animal = animalService.findAnimalById(id);
             return "redirect:undergoing/confirm?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
-
         } catch (Exception ex) {
             return "redirect:undergoing?status=animal_finding_failed";
         }
@@ -328,30 +317,20 @@ public class ShelterController {
         return "shelter-adoptions-undergoing-confirm";
     }
 
-    //            Adoption adoption = animalService.findByAnimalId(animalId);
     @PostMapping("/adoptions/undergoing/confirm")
     public String processConfirmAdoption(@RequestParam(value = "animalId", required = false) Long animalId,
-                                         @RequestParam(value = "sheltersText", required = false) String shelterText)
-//                                         @RequestParam(value = "animalId", required = false) Long animalId)
-            throws Exception {
+                                         @RequestParam(value = "sheltersText", required = false) String shelterText) throws Exception {
         try {
             Adoption adoption = animalService.findByAnimalId(animalId);
             animalService.processAdoption(adoption, shelterText, AdoptionStatus.Adopted, Status.Finished, animalId);
-//           System.out.println(animalId + " ADOPTED!");
-            System.out.println(adoption);
-            System.out.println("Adoption id:" + adoption.getId() + " text:" + adoption.getSheltersText());
-//            TODO Business logic
             return "redirect:?status=animal_adopted";
         } catch (Exception ex) {
-            System.out.println(" @Post Mapping   animals/delete/confirm   in try catch  ");
             return "redirect:?undergoing?status=animal_adoption_failed";
         }
     }
 
-
     @GetMapping("/adoptions/finished")
-    public String showFinishedAdoptions( @CookieValue(value = "shelterId", required = false) Long shelterId,
-                                         Model model) {
+    public String showFinishedAdoptions( @CookieValue(value = "shelterId", required = false) Long shelterId, Model model) {
         model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.Finished));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));

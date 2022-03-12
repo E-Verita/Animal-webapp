@@ -58,9 +58,11 @@ tr:nth-child(even) {
 <main>
 
     <section th:if="${adoptionList.empty}">
-        <h5> You don't have any applications for adoption!</h5>
+        <h5> You don't have any finnished adoptions!</h5>
     </section>
     <section th:unless="${adoptionList.empty}">
+        <h5>Finished adoptions:</h5>
+
         <table>
             <thead>
             <tr>
