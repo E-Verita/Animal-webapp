@@ -109,11 +109,8 @@ public class AdopterController {
     }
 
     @PostMapping("/search")
-    public String processSearchForAnimals(@CookieValue(value = "adopterId", required = false) Long adopterId,
-                                          Long id) throws Exception {
+    public String processSearchForAnimals(Long id) throws Exception {
         Animal animal = animalService.findAnimalById(id);
-        System.out.println(id + animal.getName());
-        System.out.println("POST /search  out of try catch");
         return "redirect:search/apply?status=animal_to_adopt_found" + "&animalId=" + animal.getId();
 
     }
@@ -142,11 +139,8 @@ public class AdopterController {
                                          @ModelAttribute Adoption adoption)
             throws Exception {
         try {
-            Adopter adopter = adopterService.getAdopter(adopterId);
-            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
-            Animal animal = animalService.findAnimalById(animalId);
-//            Adopter adopter = adopterService.getAdopter(adopterId);
-//            adopterService.addAdoption(adoption, adopter, Status.UNDERGOING);
+            adopterService.addAdoption(adoption, Status.Undergoing, adopterId);
+            animalService.setAdoptionStatus(animalId, AdoptionStatus.Undergoing);
             return "redirect:?status=animal_adopted";
         } catch (Exception ex) {
             return "redirect:?status=animal_adoption_failed";
@@ -155,8 +149,9 @@ public class AdopterController {
 
 
     @GetMapping("/undergoingadoptions")
-    public String showUndergoingAdoptions(Model model) {
-
+    public String showUndergoingAdoptions(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                          Model model) throws Exception {
+        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.Undergoing, adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
@@ -164,8 +159,10 @@ public class AdopterController {
     }
 
     @GetMapping("/finishedadoptions")
-    public String showFinishedAdoptions(Model model) {
+    public String showFinishedAdoptions(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                        Model model) throws Exception {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
+        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.Finished, adopterId));
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterfinishedadoptions";

@@ -36,7 +36,7 @@ public class Animal {
     private Boolean needsActiveLifestyle;
     private Boolean isSick;
     private AdoptionStatus adoptionStatus;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
     private String pictureUrl;

@@ -9,6 +9,7 @@ import Animal.webapp.models.enums.Status;
 import Animal.webapp.repository.AdopterRepository;
 import Animal.webapp.repository.AdoptionRepository;
 import Animal.webapp.repository.AnimalRepository;
+import Animal.webapp.repository.ShelterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class AdopterService {
     AdopterRepository adopterRepository;
     AnimalRepository animalRepository;
     AdoptionRepository adoptionRepository;
+    ShelterRepository shelterRepository;
 
     @Autowired
     public AdopterService(AdopterRepository adopterRepository, AnimalRepository animalRepository, AdoptionRepository adoptionRepository) {
@@ -60,9 +62,23 @@ public class AdopterService {
         return availableAnimals;
     }
 
-    public void addAdoption(Adoption adoption, Adopter adopter, Status status) {
+    public void addAdoption(Adoption adoption, Status status, Long adopterId) {
+        Adopter adopter = getAdopter(adopterId);
         adoption.setAdopterId(adopter);
         adoption.setStatus(status);
+        adoption.setShelterId(adoption.getAnimalId().getShelter());
         adoptionRepository.save(adoption);
     }
+
+    public List<Adoption> findAllByStatusAndAdopterId(Status status, Long adopterId) throws Exception {
+        Adopter adopter = getAdopter(adopterId);
+        List<Adoption> adoptionList = adoptionRepository.findAllByStatusAndAdopterId(status, adopter);
+        if (adoptionList == null) {
+            throw new Exception("You don't have any applications for adoption!");
+        }
+        return adoptionList;
+    }
+
+
+
 }

@@ -23,9 +23,15 @@
 </header>
 
 <main>
+    <div>ID: <h5 th:text="${shelter.getId()}"></h5></div>
     <div>Shelter name: <h5 th:text="${shelter.getName()}"></h5></div>
-    <div>Shelter name: <h5 th:text="${shelter.getId()}"></h5></div>
-    <div>Shelter name: <h5 th:text="${shelter.getId()}"></h5></div>
+    <div>Email: <h5 th:text="${shelter.getEmail()}"></h5></div>
+    <div>Region: <h5 th:text="${shelter.getRegion()}"></h5></div>
+    <div>Address: <h5 th:text="${shelter.getAddress()}"></h5></div>
+    <div>Phone number: <h5 th:text="${shelter.getPhone()}"></h5></div>
+    <div>Registration number: <h5 th:text="${shelter.getRegistrationNumber()}"></h5></div>
+    <div>Banking info: <h5 th:text="${shelter.getBankingInfo()}"></h5></div>
+    <div>Date registered: <h5 th:text="${shelter.getRegistrationDate()}"></h5></div>
 
 </main>
 </body>

@@ -1,21 +1,25 @@
 package Animal.webapp.services;
 
+import Animal.webapp.models.Adoption;
 import Animal.webapp.models.Animal;
+import Animal.webapp.models.enums.AdoptionStatus;
+import Animal.webapp.models.enums.Status;
+import Animal.webapp.repository.AdoptionRepository;
 import Animal.webapp.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
 public class AnimalService {
     AnimalRepository animalRepository;
+    AdoptionRepository adoptionRepository;
 
     @Autowired
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository, AdoptionRepository adoptionRepository) {
         this.animalRepository = animalRepository;
+        this.adoptionRepository = adoptionRepository;
     }
 
     public void addAnimal(Animal animal) throws Exception {
@@ -39,16 +43,6 @@ public class AnimalService {
         return animal;
     }
 
-    public void setCookie(HttpServletResponse response, Long id) {
-        Cookie cookie = new Cookie("animalId", id.toString());
-        response.addCookie(cookie);
-    }
-
-    public void deleteCookie(HttpServletResponse response, Long id) {
-        Cookie cookie = new Cookie("animalId", id.toString());
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }
 
     public void deleteAnimal(Long animalId) {
         animalRepository.deleteById(animalId);
@@ -62,4 +56,25 @@ public class AnimalService {
         return allAnimals;
     }
 
+    public void setAdoptionStatus(Long animalId, AdoptionStatus status) throws Exception {
+        Animal animal = findAnimalById(animalId);
+        animal.setAdoptionStatus(status);
+        animalRepository.save(animal);
+    }
+
+    public List <Adoption> findAllAdoptionsByStatusAndShelterId(Long shelterId, Status status){
+        return adoptionRepository.findAllByStatusAndShelterIdId(status, shelterId);
+    }
+
+
+    public Adoption findByAnimalId(Long animalId) {
+        return adoptionRepository.findByAnimalIdId(animalId);
+    }
+
+    public void processAdoption(Adoption adoption, String shelterText, AdoptionStatus adoptionStatus, Status status, Long animalId) throws Exception {
+        adoption.setStatus(status);
+        adoption.setSheltersText(shelterText);
+        adoptionRepository.save(adoption);
+        setAdoptionStatus(animalId, adoptionStatus);
+    }
 }
