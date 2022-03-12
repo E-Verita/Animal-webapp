@@ -291,7 +291,7 @@ public class ShelterController {
                                           @CookieValue(value = "shelterId", required = false) Long shelterId,
                                           Model model) throws Exception {
         System.out.println(shelterId);
-        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.UNDERGOING));
+        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.Undergoing));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -336,7 +336,7 @@ public class ShelterController {
             throws Exception {
         try {
             Adoption adoption = animalService.findByAnimalId(animalId);
-            animalService.processAdoption(adoption, shelterText, AdoptionStatus.Adopted, Status.FINNINSHED, animalId);
+            animalService.processAdoption(adoption, shelterText, AdoptionStatus.Adopted, Status.Finished, animalId);
 //           System.out.println(animalId + " ADOPTED!");
             System.out.println(adoption);
             System.out.println("Adoption id:" + adoption.getId() + " text:" + adoption.getSheltersText());
@@ -352,7 +352,7 @@ public class ShelterController {
     @GetMapping("/adoptions/finished")
     public String showFinishedAdoptions( @CookieValue(value = "shelterId", required = false) Long shelterId,
                                          Model model) {
-        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.FINNINSHED));
+        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.Finished));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());

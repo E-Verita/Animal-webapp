@@ -139,7 +139,7 @@ public class AdopterController {
                                          @ModelAttribute Adoption adoption)
             throws Exception {
         try {
-            adopterService.addAdoption(adoption, Status.UNDERGOING, adopterId);
+            adopterService.addAdoption(adoption, Status.Undergoing, adopterId);
             animalService.setAdoptionStatus(animalId, AdoptionStatus.Undergoing);
             return "redirect:?status=animal_adopted";
         } catch (Exception ex) {
@@ -151,7 +151,7 @@ public class AdopterController {
     @GetMapping("/undergoingadoptions")
     public String showUndergoingAdoptions(@CookieValue(value = "adopterId", required = false) Long adopterId,
                                           Model model) throws Exception {
-        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.UNDERGOING, adopterId));
+        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.Undergoing, adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterundergoingadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
@@ -162,7 +162,7 @@ public class AdopterController {
     public String showFinishedAdoptions(@CookieValue(value = "adopterId", required = false) Long adopterId,
                                         Model model) throws Exception {
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.FINNINSHED, adopterId));
+        model.addAttribute("undergoingAdoptionList", adopterService.findAllByStatusAndAdopterId(Status.Finished, adopterId));
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterfinishedadoptions"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         return "adopterfinishedadoptions";

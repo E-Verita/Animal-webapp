@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+
 table{
 border-spacing: 20px;
 }
@@ -23,7 +24,6 @@ td, th {
 tr:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.25);
 }
-
 
 
 
@@ -44,14 +44,22 @@ tr:nth-child(even) {
       </span>
     </nav>
 </header>
+
+
 <main>
+
+    <!--   No applications -->
+
     <section th:if="${undergoingAdoptionList.empty}">
         <h5> You don't have any applications for adoption!</h5>
     </section>
+
+    <!--    Results-->
+
     <section th:unless="${undergoingAdoptionList.empty}">
-        <table>
+
+        <table >
             <thead>
-            <tr>
                 <th>Registration date</th>
                 <th>ID</th>
                 <th>Image</th>
@@ -64,15 +72,15 @@ tr:nth-child(even) {
             </thead>
             <tbody>
             <tr th:each="adoption : ${undergoingAdoptionList}">
-                <td><span th:text="${adoption.getSent()}"> </span></td>
-                <td><span th:text="${adoption.getId()}"> </span></td>
+                <td th:text="${adoption.getSent()}"></td>
+                <td th:text="${adoption.getId()}"></td>
                 <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
                          alt="${animal.getName()}"></td>
-                <td><span th:text="${adoption.getAnimalId().getName()}"> </span></td>
-                <td><span th:text="${adoption.getAnimalId().getInfo()}"> </span></td>
-                <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"> </span></td>
-                <td><span th:text="${adoption.getAnimalId().getShelter().getEmail()}"> </span></td>
-                <td><span th:text="${adoption.getAdoptersText()}"> </span></td>
+                <td th:text="${adoption.getAnimalId().getName()}"></td>
+                <td th:text="${adoption.getAnimalId().getInfo()}"></td>
+                <td th:text="${adoption.getAnimalId().getShelter().getName()}"></td>
+                <td th:text="${adoption.getAnimalId().getShelter().getEmail()}"></td>
+                <td th:text="${adoption.getAdoptersText()}"></td>
 
             </tr>
             </tbody>
