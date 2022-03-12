@@ -13,6 +13,5 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     List<Animal> findAll();
     List<Animal> findAllByShelterId (Long shelterId);
     List<Animal> findAllByAdoptionStatus (AdoptionStatus adoptionStatus);
-
     List<Animal> findAllByAdoptionStatusAndShelterId(AdoptionStatus adoptionStatus, Long shelterId);
 }

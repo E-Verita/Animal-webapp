@@ -350,7 +350,9 @@ public class ShelterController {
 
 
     @GetMapping("/adoptions/finished")
-    public String showFinishedAdoptions(Model model) {
+    public String showFinishedAdoptions( @CookieValue(value = "shelterId", required = false) Long shelterId,
+                                         Model model) {
+        model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.FINNINSHED));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());

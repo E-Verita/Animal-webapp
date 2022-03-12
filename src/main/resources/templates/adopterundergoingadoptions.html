@@ -26,6 +26,7 @@ tr:nth-child(even) {
 
 
 
+
     </style>
 </head>
 <body>
@@ -44,38 +45,39 @@ tr:nth-child(even) {
     </nav>
 </header>
 <main>
-        <section th:if="${undergoingAdoptionList.empty}">
-            <h5> You don't have any applications for adoption!</h5>
-        </section>
-        <section th:unless="${undergoingAdoptionList.empty}">
-    <table>
-        <thead>
-        <tr>
-            <th>Registration date</th>
-            <th>ID</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Info</th>
-            <th>Shelter</th>
-            <th>Email</th>
-            <th>Your submission to the shelter</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="adoption : ${undergoingAdoptionList}">
-            <td><span th:text="${adoption.getSent()}"> </span></td>
-            <td><span th:text="${adoption.getId()}"> </span></td>
-            <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
-            <td><span th:text="${adoption.getAnimalId().getName()}"> </span></td>
-            <td><span th:text="${adoption.getAnimalId().getInfo()}"> </span></td>
-            <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"> </span></td>
-            <td><span th:text="${adoption.getAnimalId().getShelter().getEmail()}"> </span></td>
-            <td><span th:text="${adoption.getAdoptersText()}"> </span></td>
+    <section th:if="${undergoingAdoptionList.empty}">
+        <h5> You don't have any applications for adoption!</h5>
+    </section>
+    <section th:unless="${undergoingAdoptionList.empty}">
+        <table>
+            <thead>
+            <tr>
+                <th>Registration date</th>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Info</th>
+                <th>Shelter</th>
+                <th>Email</th>
+                <th>Your submission to the shelter</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="adoption : ${undergoingAdoptionList}">
+                <td><span th:text="${adoption.getSent()}"> </span></td>
+                <td><span th:text="${adoption.getId()}"> </span></td>
+                <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
+                         alt="${animal.getName()}"></td>
+                <td><span th:text="${adoption.getAnimalId().getName()}"> </span></td>
+                <td><span th:text="${adoption.getAnimalId().getInfo()}"> </span></td>
+                <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"> </span></td>
+                <td><span th:text="${adoption.getAnimalId().getShelter().getEmail()}"> </span></td>
+                <td><span th:text="${adoption.getAdoptersText()}"> </span></td>
 
-        </tr>
-        </tbody>
-    </table>
-        </section>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 </body>
 </html>

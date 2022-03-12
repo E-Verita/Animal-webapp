@@ -29,6 +29,7 @@ tr:nth-child(even) {
 }
 
 
+
     </style>
 
 </head>
@@ -111,57 +112,61 @@ tr:nth-child(even) {
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Adoption started</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Picture</th>
-            <th>Type</th>
-            <th>Age Group</th>
-            <th>Information</th>
-            <th>Adoption status</th>
-            <th>Shelter Name</th>
-            <th>Adopter's Name</th>
-            <th>Adopter's e-mail</th>
-            <th>Adopter's phone</th>
-            <th>Message from adopter</th>
-            <th>Adoption confirmed</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${adoptionList.empty}">
-            <td colspan="2"> No undergoing adoptions currently!</td>
-        </tr>
-        <tr th:each="adoption : ${adoptionList}">
-            <td><span th:text="${adoption.getSent()}"></span></td>
-            <td><span th:text="${adoption.getAnimalId().getId()}"></span></td>
-            <td><span th:text="${adoption.getAnimalId().getName()}"></span></td>
-            <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
-                     alt="${adoption.getAnimalId().getName()}"></td>
-            <td><span th:text="${adoption.getAnimalId().getType()}">  </span></td>
-            <td><span th:text="${adoption.getAnimalId().getAgeGroup()}"></span></td>
-            <td style="white-space:pre-wrap; word-wrap:break-word"><span
-                    th:text="${adoption.getAnimalId().getInfo()}"></span></td>
-            <td><span th:text="${adoption.getAnimalId().getAdoptionStatus()}"></span></td>
 
-            <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"></span></td>
-            <td><span th:text="${adoption.getAdopterId().getName()}"></span></td>
-            <td><span th:text="${adoption.getAdopterId().getEmail()}"></span></td>
-            <td><span th:text="${adoption.getAdopterId().getPhone()}"></span></td>
-            <td><span th:text="${adoption.getAdoptersText()}"></span></td>
+    <section th:if="${adoptionList.empty}">
+        <h5> You don't have any applications for adoption!</h5>
+    </section>
+    <section th:unless="${adoptionList.empty}">
+        <table>
+            <thead>
+            <tr>
+                <th>Adoption started</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Picture</th>
+                <th>Type</th>
+                <th>Age Group</th>
+                <th>Information</th>
+                <th>Adoption status</th>
+                <th>Shelter Name</th>
+                <th>Adopter's Name</th>
+                <th>Adopter's e-mail</th>
+                <th>Adopter's phone</th>
+                <th>Message from adopter</th>
+                <th>Adoption confirmed</th>
+            </tr>
+            </thead>
+            <tbody>
 
-            <td>
-                <form method="post" action="/shelter/adoptions/undergoing">
-                    <input type="hidden" th:value="${adoption.getAnimalId().getId()}" id="id" name="id"/>
-                    <button type="submit" class="btn btn-primary btn-lg">Confirm this adoption!
-                    </button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            <tr th:each="adoption : ${adoptionList}">
+                <td><span th:text="${adoption.getSent()}"></span></td>
+                <td><span th:text="${adoption.getAnimalId().getId()}"></span></td>
+                <td><span th:text="${adoption.getAnimalId().getName()}"></span></td>
+                <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
+                         alt="${adoption.getAnimalId().getName()}"></td>
+                <td><span th:text="${adoption.getAnimalId().getType()}">  </span></td>
+                <td><span th:text="${adoption.getAnimalId().getAgeGroup()}"></span></td>
+                <td style="white-space:pre-wrap; word-wrap:break-word"><span
+                        th:text="${adoption.getAnimalId().getInfo()}"></span></td>
+                <td><span th:text="${adoption.getAnimalId().getAdoptionStatus()}"></span></td>
+
+                <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"></span></td>
+                <td><span th:text="${adoption.getAdopterId().getName()}"></span></td>
+                <td><span th:text="${adoption.getAdopterId().getEmail()}"></span></td>
+                <td><span th:text="${adoption.getAdopterId().getPhone()}"></span></td>
+                <td><span th:text="${adoption.getAdoptersText()}"></span></td>
+
+                <td>
+                    <form method="post" action="/shelter/adoptions/undergoing">
+                        <input type="hidden" th:value="${adoption.getAnimalId().getId()}" id="id" name="id"/>
+                        <button type="submit" class="btn btn-primary btn-lg">Confirm this adoption!
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 </body>
 </html>
