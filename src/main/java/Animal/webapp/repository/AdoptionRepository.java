@@ -20,5 +20,6 @@ public interface AdoptionRepository extends CrudRepository<Adoption, Long> {
 //    List<Adoption> findAllByStatus(Status status);
 
     List<Adoption> findAllByStatusAndShelterIdId(Status status, Long shelterId);
+    Adoption findByAnimalIdId(Long animalId);
 }
 

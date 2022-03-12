@@ -3,6 +3,7 @@ package Animal.webapp.models;
 import Animal.webapp.models.enums.Status;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,7 +19,7 @@ public class Adoption {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "animal_id")
     private Animal animalId;
     @OneToOne
@@ -29,6 +30,7 @@ public class Adoption {
     private Shelter shelterId;
     @CreationTimestamp
     private Timestamp sent;
+    @UpdateTimestamp
     private Timestamp processed;
     private Status status;
     private String adoptersText;

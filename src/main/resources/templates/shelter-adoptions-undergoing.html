@@ -29,8 +29,6 @@ tr:nth-child(even) {
 }
 
 
-
-
     </style>
 
 </head>
@@ -55,58 +53,115 @@ tr:nth-child(even) {
       </span>
     </nav>
 </header>
+<main>
 
 
-<table>
-    <thead>
-    <tr>
-        <th>Adoption started</th>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Picture</th>
-        <th>Type</th>
-        <th>Age Group</th>
-        <th>Information</th>
-        <th>Adoption status</th>
-        <th>Shelter Name</th>
-        <th>Adopter's Name</th>
-        <th>Adopter's e-mail</th>
-        <th>Adopter's phone</th>
-        <th>Message from adopter</th>
-        <th>Adoption confirmed</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${adoptionList.empty}">
-        <td colspan="2"> No Animals currently available in any of the shelters!</td>
-    </tr>
-    <tr th:each="adoption : ${adoptionList}">
-        <td><span th:text="${adoption.getSent()}"></span></td>
-        <td><span th:text="${adoption.getAnimalId().getId()}"></span></td>
-        <td><span th:text="${adoption.getAnimalId().getName()}"></span></td>
-        <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
-                 alt="${adoption.getAnimalId().getName()}"></td>
-        <td><span th:text="${adoption.getAnimalId().getType()}">  </span></td>
-        <td><span th:text="${adoption.getAnimalId().getAgeGroup()}"></span></td>
-        <td style="white-space:pre-wrap; word-wrap:break-word"><span
-                th:text="${adoption.getAnimalId().getInfo()}"></span></td>
-        <td><span th:text="${adoption.getAnimalId().getAdoptionStatus()}"></span></td>
+    <!--    Warnings-->
 
-        <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"></span></td>
-        <td><span th:text="${adoption.getAdopterId().getName()}"></span></td>
-        <td><span th:text="${adoption.getAdopterId().getEmail()}"></span></td>
-        <td><span th:text="${adoption.getAdopterId().getPhone()}"></span></td>
-        <td><span th:text="${adoption.getAdoptersText()}"></span></td>
+    <div>
 
-        <td>
-            <form method="post" action="/adopter/search">
-                <input type="hidden" th:value="${adoption.getAnimalId().getId()}" id="id" name="id"/>
-                <button type="submit" class="btn btn-primary btn-lg">POST!
-                </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        <!-- Found -->
+
+        <div th:if="${status == 'animal_finding_successful'}"
+             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-check-circle-fill"></i>
+            <strong class="mx-2">Success!</strong>
+            Animal found!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Canceled-->
+
+        <div th:if="${status == 'animal_adoption_canceled'}"
+             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-check-circle-fill"></i>
+            <strong class="mx-2">Canceled!</strong>
+            No adoptions got approved!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Fail-->
+
+        <div th:if="${status == 'animal_finding_failed'}"
+             class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Error!</strong>
+            Could not get animal from database!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Deleted-->
+
+        <div th:if="${status == 'animal_adopted'}"
+             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <strong class="mx-2">Adoption finalized!</strong>
+            Here are other adoptions that need processing:
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <!-- Delete failed-->
+
+    <div th:if="${status == 'animal_adoption_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Warning!</strong>
+        Adoption could not get processed! Please try again.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Adoption started</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Picture</th>
+            <th>Type</th>
+            <th>Age Group</th>
+            <th>Information</th>
+            <th>Adoption status</th>
+            <th>Shelter Name</th>
+            <th>Adopter's Name</th>
+            <th>Adopter's e-mail</th>
+            <th>Adopter's phone</th>
+            <th>Message from adopter</th>
+            <th>Adoption confirmed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${adoptionList.empty}">
+            <td colspan="2"> No undergoing adoptions currently!</td>
+        </tr>
+        <tr th:each="adoption : ${adoptionList}">
+            <td><span th:text="${adoption.getSent()}"></span></td>
+            <td><span th:text="${adoption.getAnimalId().getId()}"></span></td>
+            <td><span th:text="${adoption.getAnimalId().getName()}"></span></td>
+            <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
+                     alt="${adoption.getAnimalId().getName()}"></td>
+            <td><span th:text="${adoption.getAnimalId().getType()}">  </span></td>
+            <td><span th:text="${adoption.getAnimalId().getAgeGroup()}"></span></td>
+            <td style="white-space:pre-wrap; word-wrap:break-word"><span
+                    th:text="${adoption.getAnimalId().getInfo()}"></span></td>
+            <td><span th:text="${adoption.getAnimalId().getAdoptionStatus()}"></span></td>
+
+            <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"></span></td>
+            <td><span th:text="${adoption.getAdopterId().getName()}"></span></td>
+            <td><span th:text="${adoption.getAdopterId().getEmail()}"></span></td>
+            <td><span th:text="${adoption.getAdopterId().getPhone()}"></span></td>
+            <td><span th:text="${adoption.getAdoptersText()}"></span></td>
+
+            <td>
+                <form method="post" action="/shelter/adoptions/undergoing">
+                    <input type="hidden" th:value="${adoption.getAnimalId().getId()}" id="id" name="id"/>
+                    <button type="submit" class="btn btn-primary btn-lg">Confirm this adoption!
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

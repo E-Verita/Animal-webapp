@@ -75,5 +75,7 @@ public class AnimalService {
     }
 
 
-
+    public Adoption findByAnimalId(Long animalId) {
+        return adoptionRepository.findByAnimalIdId(animalId);
+    }
 }
