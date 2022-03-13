@@ -5,141 +5,153 @@
     <title>Sheltered Animals | Register Adopter</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/myFormStyle.css" rel="stylesheet">
 </head>
+
 <body>
-<header>
-    <a href="/"><h1 th:text="${appTitle}"></h1></a>
-    <h2 th:text="${pageInfo.getPageTitle}"></h2>
-    <p th:text="${pageInfo.getPageDescription}"></p>
-</header>
-<section>
-    <form method="post" action="/adopter/register">
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-5">
-                <input name="username" class="form-control" type="text" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-5">
-                <input name="email" class="form-control" type="email" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-5">
-                <input name="password" class="form-control" type="password" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-5">
-                <input name="name" class="form-control" type="text" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Age</label>
-            <div class="col-sm-5">
-                <input name="age" class="form-control" type="text" min="12" max="99" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">Phone</label>
-            <div class="col-sm-5">
-                <input name="phone" class="form-control" type="text" requiredpattern="^[2-9]{1}[0-9]{7}">
-            </div>
-        </div>
 
-        <div class="form-group">
-            <label class="col-sm-15 col-form-label" th:for="housingType">Housing type</label>
-            <select name="housingType">
-                <option th:each="housingTypeOpt : ${adopter.getHousingTypeList()}"
-                        th:text="${housingTypeOpt.toString}"
-                        th:value="${housingTypeOpt}">
-            </select>
-        </div>
+<!--Video-->
 
-        <div>
-            <label class="col-sm-15 col-form-label">Household members:</label>
+<video autoplay muted loop id="myVideo">
+    <source src="/dog.mp4" type="video/mp4">
+</video>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasSmallChildren" id="hasSmallChildren0" value="0"
-                       checked>
-                <label class="form-check-label" for="hasSmallChildren0">
-                    I don't have small child/children in my household
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasSmallChildren" id="hasSmallChildren1" value="1">
-                <label class="form-check-label" for="hasSmallChildren1">
-                    I have small child/children in my household
-                </label>
-            </div>
-        </div>
-        <br>
-        <div>
-            <label class="col-sm-15 col-form-label">Other animals:</label>
+<div class="content">
+    <button id="myBtn" onclick="myFunction()">Pause</button>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasOtherAnimals" id="hasOtherAnimals0" value="0"
-                       checked>
-                <label class="form-check-label" for="hasOtherAnimals0">
-                    I don't have other animals in my household
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasOtherAnimals" id="hasOtherAnimals1" value="1">
-                <label class="form-check-label" for="hasOtherAnimals1">
-                    I have other animals in my household
-                </label>
-            </div>
-        </div>
-        <br>
-        <div>
-            <label class="col-sm-15 col-form-label">Can you describe your lifestyle as active:</label>
+    <!-- Registration form -->
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasActiveLifestyle" id="hasActiveLifestyle0"
-                       value="0"
-                       checked>
-                <label class="form-check-label" for="hasActiveLifestyle0">
-                    No </label>
+    <section>
+        <form method="post" action="/adopter/register">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-2">
+                    <input name="username" class="form-control" type="text" required>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="hasActiveLifestyle" id="hasActiveLifestyle1"
-                       value="1">
-                <label class="form-check-label" for="hasActiveLifestyle1">
-                    Yes </label>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-2">
+                    <input name="email" class="form-control" type="email" required>
+                </div>
             </div>
-        </div>
-        <br>
-        <div>
-            <label class="col-sm-15 col-form-label">Are you willing to adopt an animal with pre-known health problems /
-                disabilities?</label>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-2">
+                    <input name="password" class="form-control" type="password" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-2">
+                    <input name="name" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Age</label>
+                <div class="col-sm-2">
+                    <input name="age" class="form-control" type="text" min="12" max="99" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-2">
+                    <input name="phone" class="form-control" type="text" requiredpattern="^[2-9]{1}[0-9]{7}">
+                </div>
+            </div>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="canAdoptSickAnimal" id="canAdoptSickAnimal0"
-                       value="0"
-                       checked>
-                <label class="form-check-label" for="canAdoptSickAnimal0">
-                    No </label>
+            <div class="form-group">
+                <label class="col-sm-15 col-form-label" th:for="housingType">Housing type</label>
+                <select name="housingType">
+                    <option th:each="housingTypeOpt : ${adopter.getHousingTypeList()}"
+                            th:text="${housingTypeOpt.toString}"
+                            th:value="${housingTypeOpt}">
+                </select>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="canAdoptSickAnimal" id="canAdoptSickAnimal1"
-                       value="1">
-                <label class="form-check-label" for="canAdoptSickAnimal1">
-                    Yes </label>
-            </div>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Register</button>
-        <button type="button" class="btn btn-secondary"><a href="/" style="color:white; text-decoration:none">Cancel</a>
-        </button>
-    </form>
-</section>
-<main>
 
-</main>
+            <div>
+                <label class="col-sm-15 col-form-label">Household members:</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasSmallChildren" id="hasSmallChildren0"
+                           value="0"
+                           checked>
+                    <label class="form-check-label" for="hasSmallChildren0">
+                        I don't have small child/children in my household
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasSmallChildren" id="hasSmallChildren1"
+                           value="1">
+                    <label class="form-check-label" for="hasSmallChildren1">
+                        I have small child/children in my household
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div>
+                <label class="col-sm-15 col-form-label">Other animals:</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasOtherAnimals" id="hasOtherAnimals0" value="0"
+                           checked>
+                    <label class="form-check-label" for="hasOtherAnimals0">
+                        I don't have other animals in my household
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasOtherAnimals" id="hasOtherAnimals1" value="1">
+                    <label class="form-check-label" for="hasOtherAnimals1">
+                        I have other animals in my household
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div>
+                <label class="col-sm-15 col-form-label">Can you describe your lifestyle as active:</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasActiveLifestyle" id="hasActiveLifestyle0"
+                           value="0"
+                           checked>
+                    <label class="form-check-label" for="hasActiveLifestyle0">
+                        No </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="hasActiveLifestyle" id="hasActiveLifestyle1"
+                           value="1">
+                    <label class="form-check-label" for="hasActiveLifestyle1">
+                        Yes </label>
+                </div>
+            </div>
+            <br>
+            <div>
+                <label class="col-sm-15 col-form-label">Are you willing to adopt an animal with pre-known health
+                    problems /
+                    disabilities?</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="canAdoptSickAnimal" id="canAdoptSickAnimal0"
+                           value="0"
+                           checked>
+                    <label class="form-check-label" for="canAdoptSickAnimal0">
+                        No </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="canAdoptSickAnimal" id="canAdoptSickAnimal1"
+                           value="1">
+                    <label class="form-check-label" for="canAdoptSickAnimal1">
+                        Yes </label>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-secondary"><a href="/"
+                                                               style="color:white; text-decoration:none">Cancel</a>
+            </button>
+        </form>
+    </section>
+</div>
+<script src="/myFormScript.js"></script>
 </body>
 </html>

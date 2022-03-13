@@ -6,20 +6,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-.alert i[class^="bi-"]{
-  font-size: 1.5em;
-  line-height: 1;
-}
-</style>
+    <link href="/myFormStyle.css" rel="stylesheet">
 </head>
+
 <body>
-<header >
-    <a href="/"><h1 th:text="${appTitle}"></h1></a>
-    <h2 th:text="${pageInfo.getPageTitle}"></h2>
-    <p th:text="${pageInfo.getPageDescription}"></p>
-</header>
-<main>
+<!--Video-->
+
+<video autoplay muted loop id="myVideo">
+    <source src="/dog.mp4" type="video/mp4">
+</video>
+
+
+<div class="content">
+    <button id="myBtn" onclick="myFunction()">Pause</button>
+
+
+    <main>
+
     <div>
         <div th:if="${status == 'signup_success'}" class="alert alert-success alert-dismissible d-flex align-items-center fade show">
             <i class="bi-check-circle-fill"></i>
@@ -37,13 +40,13 @@
         <form method="post" action="/adopter/login">
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
+                <div class="col-sm-2">
                     <input name="email" class="form-control" type="text" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
+                <div class="col-sm-2">
                     <input name="password" class="form-control" type="password" required>
                 </div>
             </div>
@@ -54,7 +57,7 @@
     </section>
 </main>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</div>
+<script src="/myFormScript.js"></script>
 </body>
 </html>
