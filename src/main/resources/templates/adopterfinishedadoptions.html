@@ -24,6 +24,7 @@
                 </ul>
             </div>
         </nav>
+    </div>
 
     <nav class="nav-fill nav mt-3">
       <span class="nav-item" th:each="page:${adopterPages}">
@@ -31,12 +32,13 @@
       </span>
     </nav>
 </header>
+
 <main>
     <section th:if="${undergoingAdoptionList.empty}">
         <h5> You don't have any finished adoptions!</h5>
     </section>
     <section th:unless="${undergoingAdoptionList.empty}">
-        <table>
+        <table class="center">
             <thead>
             <tr>
                 <th>Registration date</th>
@@ -55,7 +57,8 @@
             <tr th:each="adoption : ${undergoingAdoptionList}">
                 <td><span th:text="${adoption.getSent()}"> </span></td>
                 <td><span th:text="${adoption.getId()}"> </span></td>
-                <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
+                <td><img th:src="${adoption.getAnimalId().getPictureUrl()}" height="100" width="100"
+                         alt="${animal.getName()}"></td>
                 <td><span th:text="${adoption.getAnimalId().getName()}"> </span></td>
                 <td><span th:text="${adoption.getAnimalId().getInfo()}"> </span></td>
                 <td><span th:text="${adoption.getAnimalId().getShelter().getName()}"> </span></td>

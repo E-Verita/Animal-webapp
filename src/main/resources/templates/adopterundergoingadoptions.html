@@ -37,19 +37,19 @@
 </header>
 
 
-<main>
 
-    <!--   No applications -->
+
+<!--       No applications -->
 
     <section th:if="${undergoingAdoptionList.empty}">
         <h5> You don't have any applications for adoption!</h5>
     </section>
 
-    <!--    Results-->
+<!--        Results-->
 
     <section th:unless="${undergoingAdoptionList.empty}">
 
-        <table >
+        <table class="center" >
             <thead>
                 <th>Registration date</th>
                 <th>ID</th>

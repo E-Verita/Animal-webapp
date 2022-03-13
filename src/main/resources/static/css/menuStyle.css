@@ -1,6 +1,8 @@
 
 /* base source :  https://codepen.io/h3xc0ntr0l/details/BoNEXq */
 
+
+
 .hoverable{
   display:inline-block;
   backface-visibility: hidden;
@@ -82,7 +84,6 @@
 
 /*everything below here is just setting up the page, so dont worry about it */
 
-
 @media (min-width: 768px) {
   .navbar{
     text-align: center !important;
@@ -90,10 +91,16 @@
     display: inline-block;
   }
 }
-
+/*background-image: linear-gradient(to right bottom, #071f27, #003c41, #005b4a, #297940, #72922a);  background-color: rgb(0, 128, 64);
+*/
 body {
-  background-color: rgba(0,0,0,1);
-  font-weight:600;
+background-image: linear-gradient(to right bottom, #071f27, #003c41, #005b4a, #297940, #72922a);  background-color: rgb(0, 128, 64)
+background-repeat: no-repeat;
+background-position: center;
+background-attachment: scroll;
+background-size: cover;
+
+ font-weight:600;
   text-align:center !important;
   color: white;
   text-decoration:none
@@ -121,7 +128,10 @@ nav {
 }
 
 table{
+
 border-spacing: 20px;
+width: 90%
+
 }
 
 td, th {
@@ -130,7 +140,11 @@ td, th {
   padding: 20px;
    border-radius: 100px;
    }
-   tr:hover {background-color: #D6EEEE;}
 tr:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.25);
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }
