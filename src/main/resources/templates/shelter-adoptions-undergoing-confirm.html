@@ -39,7 +39,7 @@
         <strong class="mx-2">Warning!</strong>
         <h5> You are now finalizing adoption process.</h5>
 
-        <form method="post" th:action="'/shelter/adoptions/undergoing/confirm?animalId='+ ${animal.getId()}">
+        <form method="post" th:action="'/shelter/undergoingadoptions/confirm?animalId='+ ${animal.getId()}">
             <div>
                 <label>
                     Additional information to adopter:
@@ -49,7 +49,7 @@
                     <textarea name="sheltersText" id="sheltersText" rows="4" cols="100" required> </textarea>
                 </div>
                 <button type="submit" class="btn btn-danger">Submit application</button>
-                <a href="/shelter/adoptions/undergoing?status=animal_adoption_canceled" class="btn btn-light">Cancel
+                <a href="/shelter/undergoingadoptions?status=animal_adoption_canceled" class="btn btn-light">Cancel
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 

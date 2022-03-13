@@ -20,6 +20,7 @@
                     <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
                     <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
                             th:text="${pageInfo.getPageTitle}"></h1></a></li>
+
                     <li><span class="nav-item" th:each="page:${adopterPages}"><span style="opacity:0;"> invisible</span>
                      <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
                    </span></li>

@@ -165,7 +165,8 @@ nav {
 /* TABLE  */
 
 table{
-margin:20px
+  margin-left: auto;
+  margin-right: auto;
 border-spacing: 20px;
 width: 90%
 

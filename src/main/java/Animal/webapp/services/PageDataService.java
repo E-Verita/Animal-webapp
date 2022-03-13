@@ -28,14 +28,14 @@ public class PageDataService {
 
         availablePages.add(new Page("shelterregister", "Register a shelter", "","/shelter/register"));
         availablePages.add(new Page("shelterlogin", "Shelter Login", "","/shelter/login"));
-        availablePages.add(new Page("sheltermenu", "Shelter Menu", "","/shelter/menu"));
+
 
         shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
         shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
-        shelterPages.add(new Page("shelter-adoptions", "Adoptions", "","/shelter/adoptions"));
+        shelterPages.add(new Page("shelter-adoptions-undergoing", "Undergoing adoptions", "","/shelter/undergoingadoptions"));
+        shelterPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/finishedadoptions"));
 
-        adoptionPages.add(new Page("shelter-adoptions-undergoing", "Undergoing adoptions", "","/shelter/adoptions/undergoing"));
-        adoptionPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/adoptions/finished"));
+
 
         animalButtons.add(new Page("shelteranimals-add", "Add Animal", "","/shelter/animals/add"));
         animalButtons.add(new Page("shelteranimals-edit", "Edit Animal", "","/shelter/animals/edit"));
@@ -46,6 +46,9 @@ public class PageDataService {
         availablePages.add(new Page("shelteranimals-find-results", "Find Animal: Results", "","/shelter/animals/find/results"));
 
         availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
+
+
+
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
         availablePages.add(new Page("adopterregister", "Adopter Register", "","/adopter/register"));
