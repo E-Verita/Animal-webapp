@@ -7,15 +7,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-.alert i[class^="bi-"]{
-  font-size: 1.5em;
-  line-height: 1;
-}
-
-
-    </style>
+    <link href="/css/menuStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,47 +15,61 @@
 <!-- Navigation -->
 
 <header>
-    <a href="/"><h1 th:text="${appTitle}"></h1></a>
-    <h2 th:text="${pageInfo.getPageTitle}"></h2>
-    <p th:text="${pageInfo.getPageDescription}"></p>
-
-    <nav class="nav-fill nav mt-3">
-      <span class="nav-item" th:each="page:${shelterPages}">
-        <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
-      </span>
-    </nav>
-
+    <div class="container-fluid">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
+                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
+                            th:text="${pageInfo.getPageTitle()}"></h1></a></li>
+                    <li><span class="nav-item" th:each="page:${shelterPages}"><span style="opacity:0;"> invisible</span>
+                     <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+                    </span></li>
+                </ul>
+            </div>
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><span class="nav-item" th:each="page:${animalButtons}"><span
+                            style="opacity:0;"> invisibleinvi</span>
+                     <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
+                        th:text="${page.getPageTitle()}"></a>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
-<main>
 
-    <!--    Warnings-->
+<!--    Warnings-->
 
-    <div>
+<div>
 
-        <!-- Fail-->
+    <!-- Fail-->
 
-        <div th:if="${status == 'animal_adding_successful'}"
-             class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-check-circle-fill"></i>
-            <strong class="mx-2">Success!</strong>
-            Animal added! You can now add another animal.
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-
-        <!-- Success -->
-
-        <div th:if="${status == 'animal_adding_failed'}"
-             class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-exclamation-octagon-fill"></i>
-            <strong class="mx-2">Error!</strong>
-            Could not register animal. Please try again!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <div th:if="${status == 'animal_adding_successful'}"
+         class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-check-circle-fill"></i>
+        <strong class="mx-2">Success!</strong>
+        Animal added! You can now add another animal.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 
-    <!-- Registration form -->
+    <!-- Success -->
 
-    <section>
+    <div th:if="${status == 'animal_adding_failed'}"
+         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong>
+        Could not register animal. Please try again!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+
+<!-- Registration form -->
+
+<section>
+    <div style="align:left">
         <form method="post" action="/shelter/animals/add">
             <div><h3>Register a new animal</h3></div>
             <br>
@@ -217,8 +223,11 @@
             <button type="button" class="btn btn-secondary"><a href="/shelter/animals"
                                                                style="color:white; text-decoration:none">Cancel</a>
             </button>
-                    </form>
-    </section>
+        </form>
+    </div>
+</section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/menuScript.js"></script>
 </body>
 </html>

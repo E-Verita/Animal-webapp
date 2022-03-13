@@ -1,0 +1,27 @@
+
+/* background */
+
+body {
+  background-color: lightblue;
+}
+
+
+/* table */
+
+table{
+border-spacing: 20px;
+}
+
+td, th {
+  border: 1px solid #96D4D4;
+  text-align: center;
+  padding: 20px;
+   border-radius: 100px;
+   }
+   tr:hover {background-color: #D6EEEE;}
+tr:nth-child(even) {
+}
+
+
+
+  /*  <link  href="/mystyle.css" rel="stylesheet">  */

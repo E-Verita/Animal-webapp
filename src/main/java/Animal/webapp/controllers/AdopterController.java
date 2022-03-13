@@ -50,18 +50,10 @@ public class AdopterController {
         try {
             Adopter adopter = adopterService.verifyAdopter(userLogin);
             adopterService.setCookie(response, adopter.getId());
-            return "redirect:menu/" + adopter.getId();
+            return "redirect:profile";
         } catch (Exception exception) {
             return "redirect:login?status=login_failed&message=" + exception.getMessage();
         }
-    }
-
-    @GetMapping("menu/{adopterId}")
-    public String showAdopterMenu(Model model) {
-        model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getPage("adoptermenu"));
-        model.addAttribute("availablePages", pageDataService.getAdopterPages());
-        return "adoptermenu";
     }
 
     @GetMapping("/register")
@@ -83,8 +75,10 @@ public class AdopterController {
         }
     }
 
-    @GetMapping("/profile")
-    public String showAdopterProfile(Model model) {
+    @GetMapping("/profile")  // - if time, add {adopterId}
+    public String showAdopterProfile(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                     Model model) {
+        model.addAttribute("adopter", adopterService.getAdopter(adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterprofile"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
@@ -104,7 +98,6 @@ public class AdopterController {
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
-        System.out.println("GET /search");
         return "adoptersearchpage";
     }
 

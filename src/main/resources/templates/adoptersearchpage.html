@@ -7,47 +7,29 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-.alert i[class^="bi-"]{
-  font-size: 1.5em;
-  line-height: 1;
-}
+    <link href="/css/menuStyle.css" rel="stylesheet">
 
-table{
-border-spacing: 20px;
-}
-
-td, th {
-  border: 1px solid #96D4D4;
-  text-align: center;
-  padding: 20px;
-   border-radius: 100px;
-   }
-   tr:hover {background-color: #D6EEEE;}
-tr:nth-child(even) {
-  background-color: rgba(150, 212, 212, 0.25);
-}
-
-
-    </style>
 </head>
 <body>
+<!--Navigation-->
+
 <header>
-    <a href="/"><h1 th:text="${appTitle}"></h1></a>
-    <h2 th:text="${pageInfo.getPageTitle}"></h2>
-    <p th:text="${pageInfo.getPageDescription}"></p>
-
-    <nav class="nav-fill nav mt-3">
-      <span class="nav-item" th:each="page:${adopterPages}">
-        <a class="btn bg-white text-primary" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
-      </span>
-    </nav>
-
+    <div class="container-fluid">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
+                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1 th:text="${pageInfo.getPageTitle}"></h1></a></li>
+                    <li><span class="nav-item" th:each="page:${adopterPages}"><span style="opacity:0;"> invisible</span>
+                     <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+                   </span></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
+
 <section>
-
-
     <main>
         <div>
 
@@ -90,7 +72,7 @@ tr:nth-child(even) {
             <p> here you can see all animals that are open for <strong>adoption:</strong></p>
         </div>
 
-        <table>
+        <table class="center">
             <thead>
             <tr>
                 <th> Name</th>
@@ -134,5 +116,7 @@ tr:nth-child(even) {
         </table>
     </main>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/menuScript.js"></script>
 </body>
 </html>
