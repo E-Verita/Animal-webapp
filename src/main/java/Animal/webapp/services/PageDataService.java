@@ -18,6 +18,8 @@ public class PageDataService {
     List<Page> adopterPages = new ArrayList<>();
     List<Page> animalButtons = new ArrayList<>();
     List<Page> adoptionPages = new ArrayList<>();
+    List<Page> animalConfirmButtons = new ArrayList<>();
+
 
     public String getAppTitle() {
         return appTitle;
@@ -43,16 +45,14 @@ public class PageDataService {
         animalButtons.add(new Page("shelteranimals-seeall", "See All Animals", "","/shelter/animals/all"));
         animalButtons.add(new Page("shelteranimals-find", "Find Animal by ID", "","/shelter/animals/find"));
 
-        availablePages.add(new Page("shelteranimals-find-results", "Find Animal: Results", "","/shelter/animals/find/results"));
-
-        availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
+        animalConfirmButtons.add(new Page("shelteranimals-find-results", "Find Animal: Results", "","/shelter/animals/find/results"));
+        animalConfirmButtons.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
 
 
 
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
         availablePages.add(new Page("adopterregister", "Adopter Register", "","/adopter/register"));
-
 
         adopterPages.add(new Page("adopterprofile", "Profile", "","/adopter/profile"));
         adopterPages.add(new Page("adoptersearchpage", "Search for animal", "","/adopter/search/"));
@@ -85,6 +85,23 @@ public class PageDataService {
         return null;
     }
 
+    public Page getAnimalButton(String pageName) {
+        for (Page page : this.animalButtons) {
+            if (page.getName().equalsIgnoreCase(pageName)) return page;
+        }
+        return null;
+    }
+
+    public List<Page> getAnimalConfirmButtons() {
+        return animalConfirmButtons;
+    }
+
+    public Page getAnimalConfirmButton(String pageName) {
+        for (Page page : this.animalConfirmButtons) {
+            if (page.getName().equalsIgnoreCase(pageName)) return page;
+        }
+        return null;
+    }
     public List<Page> getAdopterPages() {
         return adopterPages;
     }

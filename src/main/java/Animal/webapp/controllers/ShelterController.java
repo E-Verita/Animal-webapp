@@ -30,12 +30,7 @@ public class ShelterController {
         this.animalService = animalService;
     }
 
-    @ModelAttribute
-    public void addAttributes(Model model) {
-        model.addAttribute("msg", "Welcome to the Netherlands!");
-    }
-
-    @GetMapping("/login")
+      @GetMapping("/login")
     public String showShelterLoginPage(
             @RequestParam(name = "status", required = false) String status,
             @RequestParam(name = "message", required = false) String message,
@@ -104,8 +99,9 @@ public class ShelterController {
                              @RequestParam(name = "message", required = false) String message,
                              Model model
     ) {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalButton("shelteranimals-add"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("animal", new Animal());
         model.addAttribute("type", Type.values());
@@ -132,8 +128,9 @@ public class ShelterController {
 
     @GetMapping("/animals/edit")
     public String editAnimals(Model model) {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalButton("shelteranimals-edit"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         return "shelteranimals-edit";
     }
@@ -143,9 +140,10 @@ public class ShelterController {
                                      @RequestParam(name = "message", required = false) String message,
                                      @CookieValue(value = "shelterId", required = false) Long shelterId,
                                      Model model) throws Exception {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalButton("shelteranimals-delete"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
@@ -172,7 +170,8 @@ public class ShelterController {
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalConfirmButton("shelteranimals-delete-confirm"));
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
@@ -197,8 +196,9 @@ public class ShelterController {
         model.addAttribute("animalList", animalService.findAllByShelterId(shelterId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalButton("shelteranimals-seeall"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "shelteranimals-seeall";
@@ -212,8 +212,9 @@ public class ShelterController {
                               Model model) throws Exception {
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalButton("shelteranimals-find"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "shelteranimals-find";
@@ -240,8 +241,9 @@ public class ShelterController {
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
-        model.addAttribute("pageInfo", pageDataService.getShelterPage("shelteranimals"));
+        model.addAttribute("pageInfo", pageDataService.getAnimalConfirmButton("shelteranimals-find-results"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         return "shelteranimals-find-results";
