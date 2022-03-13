@@ -49,6 +49,7 @@ public class PageDataService {
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
         availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adopter/menu"));
+        availablePages.add(new Page("adopterregister", "Adopter Register", "","/adopter/register"));
 
 
         adopterPages.add(new Page("adopterprofile", "Profile", "","/adopter/profile"));
