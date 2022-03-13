@@ -98,7 +98,8 @@
 /*background-image: linear-gradient(to right bottom, #071f27, #003c41, #005b4a, #297940, #72922a);  background-color: rgb(0, 128, 64);
 */
 body {
-background-image: linear-gradient(to right bottom, #071f27, #003c41, #005b4a, #297940, #72922a);  background-color: rgb(0, 128, 64)
+background-image: linear-gradient(to right bottom, #071f27, #003c41, #005b4a, #297940, #72922a) ;
+background-color: rgb(0, 128, 64)
 background-repeat: no-repeat;
 background-position: center;
 background-attachment: scroll;
@@ -227,3 +228,6 @@ color:#368a7f
   box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
