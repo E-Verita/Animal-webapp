@@ -3,6 +3,10 @@
 
 
 
+
+
+/* NAVBAR */
+
 .hoverable{
   display:inline-block;
   backface-visibility: hidden;
@@ -122,13 +126,46 @@ nav {
   opacity: .75 !important;
 }
 
+/* HOVER OVER NAV */
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+/* ALERTS  */
+
 .alert i[class^="bi-"]{
   font-size: 1.5em;
   line-height: 1;
 }
 
-table{
+/* TABLE  */
 
+table{
+margin:20px
 border-spacing: 20px;
 width: 90%
 
@@ -148,3 +185,8 @@ tr:nth-child(even) {
   margin-left: auto;
   margin-right: auto;
 }
+
+.specialcolor{
+color:#368a7f
+}
+

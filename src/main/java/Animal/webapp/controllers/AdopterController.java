@@ -84,7 +84,9 @@ public class AdopterController {
     }
 
     @GetMapping("/profile")
-    public String showAdopterProfile(Model model) {
+    public String showAdopterProfile(@CookieValue(value = "adopterId", required = false) Long adopterId,
+                                     Model model) {
+        model.addAttribute("adopter", adopterService.getAdopter(adopterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getAdopterPage("adopterprofile"));
         model.addAttribute("adopterPages", pageDataService.getAdopterPages());
