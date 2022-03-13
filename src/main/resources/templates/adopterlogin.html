@@ -16,47 +16,47 @@
     <source src="/dog.mp4" type="video/mp4">
 </video>
 
-
 <div class="content">
     <button id="myBtn" onclick="myFunction()">Pause</button>
-
-
     <main>
 
-    <div>
-        <div th:if="${status == 'signup_success'}" class="alert alert-success alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-check-circle-fill"></i>
-            <strong class="mx-2">Success!</strong> Registration complete! Please log in to continue!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-
-        <div th:if="${status == 'login_failed'}" class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
-            <i class="bi-exclamation-octagon-fill"></i>
-            <strong class="mx-2">Error!</strong> <span th:text="${message}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    </div>
-    <section>
-        <form method="post" action="/adopter/login">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-2">
-                    <input name="email" class="form-control" type="text" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-2">
-                    <input name="password" class="form-control" type="password" required>
-                </div>
+        <div>
+            <div th:if="${status == 'signup_success'}"
+                 class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+                <i class="bi-check-circle-fill"></i>
+                <strong class="mx-2">Success!</strong> Registration complete! Please log in to continue!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
 
-            <button type="submit" class="btn btn-primary">Sign in</button>
-            <button type="button" class="btn btn-secondary" ><a href="/adopter/register" style="color:white; text-decoration:none">Register</a></button>
-        </form>
-    </section>
-</main>
+            <div th:if="${status == 'login_failed'}"
+                 class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+                <i class="bi-exclamation-octagon-fill"></i>
+                <strong class="mx-2">Error!</strong> <span th:text="${message}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+        <section>
+            <form method="post" action="/adopter/login">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-2">
+                        <input name="email" class="form-control" type="text" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-2">
+                        <input name="password" class="form-control" type="password" required>
+                    </div>
+                </div>
 
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="button" class="btn btn-secondary"><a href="/adopter/register"
+                                                                   style="color:white; text-decoration:none">Register</a>
+                </button>
+            </form>
+        </section>
+    </main>
 </div>
 <script src="/myFormScript.js"></script>
 </body>
