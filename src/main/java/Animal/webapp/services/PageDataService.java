@@ -48,7 +48,6 @@ public class PageDataService {
         availablePages.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));
-        availablePages.add(new Page("adoptermenu", "Adopter Menu", "","/adopter/menu"));
         availablePages.add(new Page("adopterregister", "Adopter Register", "","/adopter/register"));
 
 
