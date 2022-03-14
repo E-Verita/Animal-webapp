@@ -7,6 +7,8 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="/css/menuStyle.css" rel="stylesheet">
 
 </head>
@@ -19,7 +21,8 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
-                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1 th:text="${pageInfo.getPageTitle}"></h1></a></li>
+                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
+                            th:text="${pageInfo.getPageTitle}"></h1></a></li>
                     <li><span class="nav-item" th:each="page:${adopterPages}"><span style="opacity:0;"> invisible</span>
                      <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
                    </span></li>
@@ -65,11 +68,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
 
-
-        <br>
         <div>
             <H5 th:text="${adopter.getName()}"></H5>
             <p> here you can see all animals that are open for <strong>adoption:</strong></p>
+        </div>
+
+        <div class="container">
+            <input class="form-control" id="myInput" type="text" placeholder="Search by animal type (cat/dog/mouse/rabbit)...  shelter name... animal name...">
+            <br>
         </div>
 
         <table class="center">
@@ -88,12 +94,11 @@
                 <th>I want to adopt!</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
             <tr th:if="${animalList.empty}">
                 <td colspan="2"> No Animals currently available in any of the shelters!</td>
             </tr>
             <tr th:each="animal : ${animalList}">
-                <td><span th:text="${animal.getAdoptionStatus()}"> Adoption status </span></td>
                 <td><span th:text="${animal.getName()}"> Name </span></td>
                 <td><img th:src="${animal.getPictureUrl()}" height="100" width="100" alt="${animal.getName()}"></td>
                 <td><span th:text="${animal.getType()}"> Type </span></td>
