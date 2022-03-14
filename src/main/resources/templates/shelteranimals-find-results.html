@@ -14,8 +14,7 @@
 <!-- Navigation -->
 
 <header>
-    <main></main>
-    <div class="container-fluid">
+    <div class="container-fluid pb-5">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
@@ -30,7 +29,7 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li><span class="nav-item" th:each="page:${animalButtons}"><span
-                            style="opacity:0;"> invisibleinvi</span>
+                            style="opacity:0;"> invis</span>
                                  <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
                                     th:text="${page.getPageTitle()}"></a>
                                 </span>
@@ -57,89 +56,54 @@
 
     <!-- Animal tables when animal found-->
 
+
     <section>
         <div th:if="${status == 'animal_finding_successful'}">
-            <div>
-                <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
-                <h5>General information</h5>
-                <table class="table col-sm-2">
-                    <thead>
-                    <tr>
-                        <th scope="col">Animal info</th>
-                        <th scope="col" th:text="${animal.getId()}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row" th:text="${animal.getName()}"></th>
-                        <td>Name</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getType()}"></th>
-                        <td>Type</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getAgeGroup()}"></th>
-                        <td>Age</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getInfo()}"></th>
-                        <td>About</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getRegistrationDate()}"></th>
-                        <td>Registered</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getAdoptionStatus()}"></th>
-                        <td>Adoption status</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <br>
-                <table class="table col-sm-2">
-                    <h5> Requirements for adoption</h5>
-
-                    <tbody>
-                    <tr>
-                        <th scope="row" th:text="${animal.getHousingType()}"></th>
-                        <td>Housing type</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getCanLiveWithSmallChildren()}"></th>
-                        <td>Can live with small children</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getCanLiveWithOtherAnimals()}"></th>
-                        <td>Can live with other animals</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getNeedsActiveLifestyle()}"></th>
-                        <td>Very active, needs active owner</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" th:text="${animal.getIsSick()}"></th>
-                        <td>Have pre-known health problems / disabilities?</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <section class="py-5">
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col-sm px-3">
+                            <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
+                            <div><p class="specialcolor">Registered: <h5 th:text="${animal.getRegistrationDate()}"></h5>
+                            </div>
+                            <div><p class="specialcolor">Adoption status: <h5
+                                    th:text="${animal.getAdoptionStatus()}"></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm px-3">
+                            <h3>Animal info</h3>
+                            <div><p class="specialcolor">ID: </p><h5 th:text="${animal.getId()}"></h5></div>
+                            <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5></div>
+                            <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5></div>
+                            <div><p class="specialcolor">Age group: <h5 th:text="${animal.getAgeGroup()}"></h5></div>
+                            <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
+                        </div>
+                        <div class="col-sm px-3">
+                            <h3>Requirements for adoption </h3>
+                            <div><p class="specialcolor">Housing type: </p><h5
+                                    th:text="${animal.getHousingType()}"></h5></div>
+                            <div><p class="specialcolor">Can live with small children: </p><h5
+                                    th:text="${animal.getCanLiveWithSmallChildren()}"></h5></div>
+                            <div><p class="specialcolor">Can live with other animals: </p><h5
+                                    th:text="${animal.getCanLiveWithOtherAnimals()}"></h5></div>
+                            <div><p class="specialcolor">Very active, needs active owner: </p><h5
+                                    th:text="${animal.getNeedsActiveLifestyle()}"></h5></div>
+                            <div><p class="specialcolor">Have pre-known health problems / disabilities: </p><h5
+                                    th:text="${animal.getIsSick()}"></h5></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </section>
 
     <!--    Find animal form:  -->
 
-    <section>
-        <br>
-        <h5> Find animal</h5>
-        <br>
+    <section class="py-5 centerform">
         <form method="post" action="/shelter/animals/find">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Animal's ID:</label>
-                <div class="col-sm-5">
-                    <input name="id" class="form-control" type="number" required>
-                </div>
+            <div class="form-group col-md-12 pb-4">
+                <label>Animal's ID:</label>
+                <input name="id" class="form-control" type="number" required>
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">Find</button>
         </form>
