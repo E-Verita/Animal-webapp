@@ -6,20 +6,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="/myFormStyle.css" rel="stylesheet">
+    <link href="/css/myFormStyle.css" rel="stylesheet">
 </head>
 
 <body>
 <!--Video-->
 
 <video autoplay muted loop id="myVideo">
-    <source src="/cat.mp4" type="video/mp4">
+    <source src="/media/cat.mp4" type="video/mp4">
 </video>
-
 
 <div class="content">
     <button id="myBtn" onclick="myFunction()">Pause</button>
-
 
     <main>
 
@@ -54,17 +52,16 @@
                 <h5>Sign in as a shelter: </h5>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <input name="email" class="form-control" type="text" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <input name="password" class="form-control" type="password" required>
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Sign in</button>
                 <button type="button" class="btn btn-secondary">
                     <a href="/shelter/register" style="color:white; text-decoration:none">Register</a>
@@ -73,6 +70,6 @@
         </section>
     </main>
 </div>
-<script src="/myFormScript.js"></script>
+<script src="/js/myFormScript.js"></script>
 </body>
 </html>
