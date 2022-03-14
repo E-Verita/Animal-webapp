@@ -16,7 +16,7 @@
 
 <header>
     <main></main>
-    <div class="container-fluid">
+    <div class="container-fluid pb-5">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
@@ -45,27 +45,19 @@
 <!--Confirmation warning-->
 
 <section>
-    <div th:if="${status == 'animal_to_DELETE_found'}"
-         class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+    <div th:if="${status == 'animal_to_DELETE_found'}">
         <i class="bi-exclamation-octagon-fill"></i>
         <strong class="mx-2">Warning!</strong>
-        Do you really want to delete this animal?
+        <h5>Do you really want to delete this animal?</h5>
 
         <form method="post" th:action="'/shelter/animals/delete/confirm?animalId='+ ${animal.getId()}">
             <button type="submit" class="btn btn-danger">Delete this animal</button>
             <a href="/shelter/animals/delete?status=animal_deletion_canceled" class="btn btn-light">Cancel
                 deletion</a>
         </form>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-
         <section>
-
-            <br>
-            <br>
-            <h5>General information</h5>
-            <table class="table col-sm-2">
-                <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
-
+            <div class="pb-4 pt-4"><img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}"></div>
+            <table>
                 <thead>
                 <tr>
                     <th scope="col">Animal info</th>

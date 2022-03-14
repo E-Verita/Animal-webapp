@@ -14,8 +14,7 @@
 <!-- Navigation -->
 
 <header>
-    <main></main>
-    <div class="container-fluid">
+    <div class="container-fluid pb-5">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
@@ -62,7 +61,7 @@
             <div>
                 <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
                 <h5>General information</h5>
-                <table class="table col-sm-2">
+                <table>
                     <thead>
                     <tr>
                         <th scope="col">Animal info</th>
@@ -98,7 +97,7 @@
                 </table>
 
                 <br>
-                <table class="table col-sm-2">
+                <table >
                     <h5> Requirements for adoption</h5>
 
                     <tbody>
