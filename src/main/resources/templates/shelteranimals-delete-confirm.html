@@ -15,7 +15,6 @@
 <!-- Navigation -->
 
 <header>
-    <main></main>
     <div class="container-fluid pb-5">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -43,57 +42,42 @@
 </header>
 
 <!--Confirmation warning-->
+<main>
+    <section>
+        <div th:if="${status == 'animal_to_DELETE_found'}">
+            <h4 style="color:red">
+                <strong> Warning!</strong><br>
+                Do you really want to delete this animal?</h4>
 
-<section>
-    <div th:if="${status == 'animal_to_DELETE_found'}">
-        <h4 style="color:red">
-            <strong> Warning!</strong><br>
-            Do you really want to delete this animal?</h4>
-
-        <form method="post" th:action="'/shelter/animals/delete/confirm?animalId='+ ${animal.getId()}">
-            <button type="submit" class="btn btn-danger">Delete this animal</button>
-            <a href="/shelter/animals/delete?status=animal_deletion_canceled" class="btn btn-light">Cancel
-                deletion</a>
-        </form>
-        <section>
-            <div class="pb-4 pt-4"><img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}"></div>
-            <table>
-                <thead>
-                <tr>
-                    <th scope="col">Animal info</th>
-                    <th scope="col" th:text="${animal.getId()}"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row" th:text="${animal.getName()}"></th>
-                    <td>Name</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getType()}"></th>
-                    <td>Type</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getAgeGroup()}"></th>
-                    <td>Age</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getInfo()}"></th>
-                    <td>About</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getRegistrationDate()}"></th>
-                    <td>Registered</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getAdoptionStatus()}"></th>
-                    <td>Adoption status</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
-</section>
+            <form method="post" th:action="'/shelter/animals/delete/confirm?animalId='+ ${animal.getId()}">
+                <button type="submit" class="btn btn-danger">Delete this animal</button>
+                <a href="/shelter/animals/delete?status=animal_deletion_canceled" class="btn btn-light">Cancel
+                    deletion</a>
+            </form>
+            <section class="py-5">
+                <div class="container pt-2">
+                    <div class="row">
+                        <div class="col-sm px-2">
+                            <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
+                            <div><p class="specialcolor">Registered: <h5 th:text="${animal.getRegistrationDate()}"></h5>
+                            </div>
+                            <div><p class="specialcolor">Adoption status: <h5
+                                    th:text="${animal.getAdoptionStatus()}"></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm px-2">
+                            <h3>Animal info</h3>
+                            <div><p class="specialcolor">ID: </p><h5 th:text="${animal.getId()}"></h5></div>
+                            <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5></div>
+                            <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5></div>
+                            <div><p class="specialcolor">Age group: <h5 th:text="${animal.getAgeGroup()}"></h5></div>
+                            <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/menuScript.js"></script>

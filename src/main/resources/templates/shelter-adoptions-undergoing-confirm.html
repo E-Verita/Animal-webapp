@@ -68,45 +68,43 @@
                 </div>
             </form>
             <section>
-                <section>
-                    <div class="container pt-3">
-                        <div class="row">
-                            <div class="col-sm">
-                                <h5>General information about adoption </h5>
-                                <br> <h5 th:text="${adoption.getId()}"></h5>
-                                <div><p class="specialcolor">Application received: </p><h5
-                                        th:text="${adoption.getSent()}"></h5></div>
-                                <div><p class="specialcolor">Information from adopter: </p><h5
-                                        th:text="${adoption.getAdoptersText()}"></h5></div>
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5>General information about adoption </h5>
+                            <br> <h5 th:text="${adoption.getId()}"></h5>
+                            <div><p class="specialcolor">Application received: </p><h5
+                                    th:text="${adoption.getSent()}"></h5></div>
+                            <div><p class="specialcolor">Information from adopter: </p><h5
+                                    th:text="${adoption.getAdoptersText()}"></h5></div>
+                        </div>
+                        <div class="col-sm">
+                            <h5>General information about adopter </h5>
+                            <div><p class="specialcolor">Name: </p><h5
+                                    th:text="${adoption.getAdopterId().getName()}"></h5></div>
+                            <div><p class="specialcolor">Age: </p><h5
+                                    th:text="${adoption.getAdopterId().getAge()}"></h5></div>
+                            <div><p class="specialcolor">Phone: </p><h5
+                                    th:text="${adoption.getAdopterId().getPhone()}"></h5></div>
+                            <div><p class="specialcolor">Email: </p><h5
+                                    th:text="${adoption.getAdopterId().getEmail()}"></h5></div>
+                        </div>
+                        <div class="col-sm">
+                            <h5>General information about animal </h5>
+                            <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5>
                             </div>
-                            <div class="col-sm">
-                                <h5>General information about adopter </h5>
-                                <div><p class="specialcolor">Name: </p><h5
-                                        th:text="${adoption.getAdopterId().getName()}"></h5></div>
-                                <div><p class="specialcolor">Age: </p><h5
-                                        th:text="${adoption.getAdopterId().getAge()}"></h5></div>
-                                <div><p class="specialcolor">Phone: </p><h5
-                                        th:text="${adoption.getAdopterId().getPhone()}"></h5></div>
-                                <div><p class="specialcolor">Email: </p><h5
-                                        th:text="${adoption.getAdopterId().getEmail()}"></h5></div>
+                            <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5>
                             </div>
-                            <div class="col-sm">
-                                <h5>General information about animal </h5>
-                                <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5>
-                                </div>
-                                <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5>
-                                </div>
-                                <div><p class="specialcolor">Age group: <h5
-                                        th:text="${animal.getAgeGroup()}"></h5></div>
-                                <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
-                            </div>
+                            <div><p class="specialcolor">Age group: <h5
+                                    th:text="${animal.getAgeGroup()}"></h5></div>
+                            <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
         </div>
     </section>
 </main>
-    <script src="/js/menuScript.js"></script>
+<script src="/js/menuScript.js"></script>
 </body>
 </html>
