@@ -46,9 +46,9 @@
 
 <section>
     <div th:if="${status == 'animal_to_DELETE_found'}">
-        <i class="bi-exclamation-octagon-fill"></i>
-        <strong class="mx-2">Warning!</strong>
-        <h5>Do you really want to delete this animal?</h5>
+        <h4 style="color:red">
+            <strong> Warning!</strong><br>
+            Do you really want to delete this animal?</h4>
 
         <form method="post" th:action="'/shelter/animals/delete/confirm?animalId='+ ${animal.getId()}">
             <button type="submit" class="btn btn-danger">Delete this animal</button>

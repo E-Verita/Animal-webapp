@@ -40,118 +40,73 @@
 <main>
 
 
-<!--Confirmation form-->
+    <!--Confirmation form-->
 
 
-<section>
-    <div th:if="${status == 'animal_to_adopt_found'}"
-         class="alert alert-danger alert-dismissible align-items-center fade show">
-        <i class="bi-exclamation-octagon-fill"></i>
-        <strong class="mx-2">Warning!</strong>
-        <h5> You are now finalizing adoption process.</h5>
-
-        <form method="post" th:action="'/shelter/undergoingadoptions/confirm?animalId='+ ${animal.getId()}">
-            <div>
-                <label>
-                    Additional information to adopter:
-                </label>
-
-                <div align="center">
-                    <textarea name="sheltersText" id="sheltersText" rows="4" cols="100" required> </textarea>
-                </div>
-                <button type="submit" class="btn btn-danger">Approve adoption!</button>
-                <a href="/shelter/undergoingadoptions?status=animal_adoption_canceled" class="btn btn-light">Cancel
-                </a>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-
+    <section>
+        <div th:if="${status == 'animal_to_adopt_found'}">
+            <i class="bi-exclamation-octagon-fill"></i>
+            <h4 style="color:red">
+                <strong> Warning!</strong><br>
+                You are now finalizing adoption process.</h4>
+            <div class="py-3">
+                <img th:src="${animal.getPictureUrl()}" height="200" width="200"
+                     alt="${animal.getName()}">
             </div>
-        </form>
 
-        <section>
-            <br>
-            <br>
-            <h5>General information about adoption </h5>
-            <table class="table col-sm-2">
-                <thead>
-                <tr>
-                    <th scope="col" th:text="${adoption.getId()}"></th>
-                    <th scope="col">Adoption info</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row" th:text="${adoption.getSent()}"></th>
-                    <td>Application received:</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${adoption.getAdoptersText()}"></th>
-                    <td>Information from adopter</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <section>
-            <br>
-            <br>
-            <h5>General information about the adopter </h5>
-            <table class="table col-sm-2">
-                <thead>
-                <tr>
-                    <th scope="row" th:text="${adoption.getAdopterId().getName()}"></th>
-                    <td>Adopter name</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row" th:text="${adoption.getAdopterId().getAge()}"></th>
-                    <td>Age</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${adoption.getAdopterId().getPhone()}"></th>
-                    <td>Name</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${adoption.getAdopterId().getEmail()}"></th>
-                    <td>Email</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <section>
-            <br>
-            <br>
-            <h5>General information about the animal </h5>
-            <table class="table col-sm-2">
-                <img th:src="${animal.getPictureUrl()}" height="200" width="200" alt="${animal.getName()}">
-
-                <thead>
-                <tr>
-                    <th scope="col" th:text="${animal.getName()}"></th>
-                    <th scope="col">Animal info</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row" th:text="${animal.getType()}"></th>
-                    <td>Type</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getAgeGroup()}"></th>
-                    <td>Age group</td>
-                </tr>
-                <tr>
-                    <th scope="row" th:text="${animal.getInfo()}"></th>
-                    <td>Info</td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
-</section>
-<script src="/js/menuScript.js"></script>
+            <form method="post" th:action="'/shelter/undergoingadoptions/confirm?animalId='+ ${animal.getId()}">
+                <div class="py-4">
+                    <label>
+                        Additional information to adopter:
+                    </label>
+                    <div class="py-4">
+                        <textarea name="sheltersText" id="sheltersText" rows="4" cols="100" required> </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Approve adoption!</button>
+                    <a href="/shelter/undergoingadoptions?status=animal_adoption_canceled" class="btn btn-light">Cancel
+                    </a>
+                </div>
+            </form>
+            <section>
+                <section>
+                    <div class="container pt-3">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h5>General information about adoption </h5>
+                                <br> <h5 th:text="${adoption.getId()}"></h5>
+                                <div><p class="specialcolor">Application received: </p><h5
+                                        th:text="${adoption.getSent()}"></h5></div>
+                                <div><p class="specialcolor">Information from adopter: </p><h5
+                                        th:text="${adoption.getAdoptersText()}"></h5></div>
+                            </div>
+                            <div class="col-sm">
+                                <h5>General information about adopter </h5>
+                                <div><p class="specialcolor">Name: </p><h5
+                                        th:text="${adoption.getAdopterId().getName()}"></h5></div>
+                                <div><p class="specialcolor">Age: </p><h5
+                                        th:text="${adoption.getAdopterId().getAge()}"></h5></div>
+                                <div><p class="specialcolor">Phone: </p><h5
+                                        th:text="${adoption.getAdopterId().getPhone()}"></h5></div>
+                                <div><p class="specialcolor">Email: </p><h5
+                                        th:text="${adoption.getAdopterId().getEmail()}"></h5></div>
+                            </div>
+                            <div class="col-sm">
+                                <h5>General information about animal </h5>
+                                <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5>
+                                </div>
+                                <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5>
+                                </div>
+                                <div><p class="specialcolor">Age group: <h5
+                                        th:text="${animal.getAgeGroup()}"></h5></div>
+                                <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+</main>
+    <script src="/js/menuScript.js"></script>
 </body>
 </html>
