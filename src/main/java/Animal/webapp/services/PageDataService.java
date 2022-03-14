@@ -33,11 +33,8 @@ public class PageDataService {
 
 
         shelterPages.add(new Page("shelterprofile", "Profile", "","/shelter/profile"));
-        shelterPages.add(new Page("shelteranimals", "Animals", "","/shelter/animals"));
         shelterPages.add(new Page("shelter-adoptions-undergoing", "Undergoing adoptions", "","/shelter/undergoingadoptions"));
         shelterPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/finishedadoptions"));
-
-
 
         animalButtons.add(new Page("shelteranimals-add", "Add Animal", "","/shelter/animals/add"));
         animalButtons.add(new Page("shelteranimals-edit", "Edit Animal", "","/shelter/animals/edit"));
@@ -47,8 +44,6 @@ public class PageDataService {
 
         animalConfirmButtons.add(new Page("shelteranimals-find-results", "Find Animal: Results", "","/shelter/animals/find/results"));
         animalConfirmButtons.add(new Page("shelteranimals-delete-confirm", "Delete Animal - Confirmation", "","/shelter/animals/delete/confirm"));
-
-
 
 
         availablePages.add(new Page("adopterlogin", "Adopter Login", "","/adopter/login"));

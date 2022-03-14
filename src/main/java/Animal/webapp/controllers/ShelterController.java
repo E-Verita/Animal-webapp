@@ -77,6 +77,7 @@ public class ShelterController {
 
     @GetMapping("/profile") //{make+adoptersId, if time}
     public String showShelterProfile(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) throws Exception {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelterprofile"));
@@ -255,6 +256,7 @@ public class ShelterController {
                                           @CookieValue(value = "shelterId", required = false) Long shelterId,
                                           Model model) throws Exception {
         model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.Undergoing));
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions-undergoing"));
         model.addAttribute("shelterPages", pageDataService.getShelterPages());
@@ -279,6 +281,7 @@ public class ShelterController {
                                   @RequestParam(name = "message", required = false) String message,
                                   @CookieValue(value = "shelterId", required = false) Long shelterId,
                                   @RequestParam(value = "animalId", required = false) Long animalId, Model model) throws Exception {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("adoption", animalService.findByAnimalId(animalId));
         model.addAttribute("animal", animalService.findAnimalById(animalId));
         model.addAttribute("shelter", shelterService.getShelter(shelterId));
@@ -304,6 +307,7 @@ public class ShelterController {
 
     @GetMapping("/finishedadoptions")
     public String showFinishedAdoptions(@CookieValue(value = "shelterId", required = false) Long shelterId, Model model) {
+        model.addAttribute("animalButtons", pageDataService.getAnimalButtons());
         model.addAttribute("adoptionList", animalService.findAllAdoptionsByStatusAndShelterId(shelterId, Status.Finished));
         model.addAttribute("appTitle", pageDataService.getAppTitle());
         model.addAttribute("pageInfo", pageDataService.getShelterPage("shelter-adoptions-finished"));
