@@ -166,10 +166,10 @@ nav {
 /* TABLE  */
 
 table{
+border-spacing: 20px;
   margin-left: auto;
   margin-right: auto;
-border-spacing: 20px;
-width: 90%
+width: 95%
 
 }
 
@@ -188,6 +188,20 @@ tr:nth-child(even) {
   margin-right: auto;
 }
 
+/* FORMS */
+
+.centerform {
+  display:flex;
+   justify-content: center;
+    margin-bottom:100px;
+   margin-top:50px;
+
+.element{
+    margin-bottom:100px;
+}
+
+}
+
 .specialcolor{
 color:#368a7f
 }
@@ -197,7 +211,7 @@ color:#368a7f
   background-image: url('/css/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
-  width: 100%;
+  width: 90%;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
@@ -206,7 +220,7 @@ color:#368a7f
 
 #myTable {
   border-collapse: collapse;
-  width: 100%;
+width: 95%
   border: 1px solid #ddd;
   font-size: 18px;
 }
