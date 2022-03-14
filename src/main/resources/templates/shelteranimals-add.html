@@ -30,8 +30,8 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li><span class="nav-item" th:each="page:${animalButtons}"><span
-                            style="opacity:0;">invisible</span>
-                     <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
+                            style="opacity:0;"> invis</span>
+                        <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
                         th:text="${page.getPageTitle()}"></a>
                     </span>
                     </li>
@@ -82,7 +82,7 @@
                     <label>Name</label>
                     <input name="name" class="form-control " type="text" required>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12 pb-4">
                     <label th:for="ageGroup">Age group</label>
                     <select name="ageGroup" class="form-control">
                         <option th:each="ageGroupOpt : ${animal.getAgeGroupList()}"
@@ -90,7 +90,7 @@
                                 th:value="${ageGroupOpt}">
                     </select>
                 </div>
-                <div class="form-group col-md-12 pb-4">
+                <div class="form-group col-md-12 pb-2">
                     <label class="col-sm-15 col-form-label">Is this animal suitable for adoption to a household with
                         small
                         children?</label>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-group col-md-12 pb-4">
+                <div class="form-group col-md-12 pb-2">
                     <label class="col-sm-15 col-form-label">Is this animal suitable for adoption to a household with
                         other
                         animals?</label>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-group col-md-12 pb-4">
+                <div class="form-group col-md-12 pb-2">
                     <label class="col-sm-15 col-form-label">Does this animal require extra amount of physical
                         activities?</label>
 
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-group col-md-12 pb-4">
+                <div class="form-group col-md-12 pb-2">
                     <label th:for="housingType">Which environment would be suitable for
                         animal?
                         <br>

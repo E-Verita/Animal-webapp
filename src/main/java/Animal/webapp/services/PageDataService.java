@@ -37,7 +37,7 @@ public class PageDataService {
         shelterPages.add(new Page("shelter-adoptions-finished", "Finished adoptions", "","/shelter/finishedadoptions"));
 
         animalButtons.add(new Page("shelteranimals-add", "Add Animal", "","/shelter/animals/add"));
-        animalButtons.add(new Page("shelteranimals-edit", "Edit Animal", "","/shelter/animals/edit"));
+//        animalButtons.add(new Page("shelteranimals-edit", "Edit Animal", "","/shelter/animals/edit"));
         animalButtons.add(new Page("shelteranimals-delete", "Delete Animal", "","/shelter/animals/delete"));
         animalButtons.add(new Page("shelteranimals-seeall", "See All Animals", "","/shelter/animals/all"));
         animalButtons.add(new Page("shelteranimals-find", "Find Animal by ID", "","/shelter/animals/find"));
