@@ -15,30 +15,30 @@
 <!-- Navigation -->
 
 <header>
-    <div class="container-fluid pb-5" >
-        <nav class="navbar navbar-inverse">
+    <nav class="pt-2">
+        <div class="container-fluid pb-5">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
-                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
+                    <li><a id="len1" class="hoverable index-color" href="/"><h6 th:text="${appTitle}"></h6></a></li>
+                    <li><a id="len4" class="hoverable titlecolor"><h1
                             th:text="${pageInfo.getPageTitle()}"></h1></a></li>
-                    <li><span class="nav-item" th:each="page:${shelterPages}"><span style="opacity:0;">invisible</span>
-                     <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><span class="nav-item" th:each="page:${shelterPages}"><span style="opacity:0;">invis</span>
+                     <a class="hoverable nav-color" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
                     </span></li>
-                </ul>
-            </div>
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><span class="nav-item" th:each="page:${animalButtons}"><span
-                            style="opacity:0;"> invis</span>
-                        <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
-                        th:text="${page.getPageTitle()}"></a>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><span class="nav-item" th:each="page:${animalButtons}"><span
+                        style="opacity:0;"> invis</span>
+                        <a class="hoverable animal-color" th:href="${page.getPageUrl()}"
+                           th:text="${page.getPageTitle()}"></a>
                     </span>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 <main>
     <!--    Warnings-->
