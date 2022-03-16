@@ -27,7 +27,6 @@ h1::before {
   margin-left: -300px;
   margin-top: -220px;
   height: 600px;
-  background: radial-gradient(ellipse closest-side, #444, black);
   z-index: -1;
 }
 h1 a {
@@ -54,21 +53,22 @@ h1 a {
   }
 }
 
-body {
-  background: black;
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-}
     </style>
+    <link href="/css/myFormStyle.css" rel="stylesheet">
 </head>
 <body>
-<h1><strong>Sheltered Animals</strong></h1>
+<video autoplay muted loop id="myVideo">
+    <source src="/media/video.mp4" type="video/mp4">
+</video>
+<div class="content">
+    <button id="myBtn" onclick="myFunction()">Pause</button>
+    <main>
+        <h1><strong>Sheltered Animals</strong></h1>
 
-<h1><a href="/shelter/login">Shelter</a></h1>
-<h1><a href="/adopter/login">Adopter</a></h1>
-
+        <h1><a href="/shelter/login">Shelter</a></h1>
+        <h1><a href="/adopter/login">Adopter</a></h1>
+    </main>
+</div>
+<script src="/js//myFormScript.js"></script>
 </body>
 </html>

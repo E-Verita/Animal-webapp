@@ -115,6 +115,11 @@ background-size: cover;
 }
 
 nav {
+color: #678e2d;
+font-size: 20px;
+font-weight: bold;
+  font-weight: 600;
+
   background: none !important;
   text-transform:uppercase;
   li {
@@ -125,6 +130,25 @@ nav {
     }
   }
 }
+/* NAV BAR COLORS */
+/* color: #1c6f43;
+*/
+.index-color{
+color: #368a7f
+}
+
+.titlecolor{
+color:white
+}
+
+.nav-color{
+color:white
+}
+
+.animal-color{
+color:#368a7f
+}
+
 
 .page-title {
   opacity: .75 !important;
@@ -206,7 +230,17 @@ tr:nth-child(even) {
 }
 
 .specialcolor{
-color:#368a7f
+/* color:#368a7f */
+color: #042c33;
+font-size: 18px;
+font-weight: bold;
+
+}
+
+.formatedtext{
+text-size: 15px
+padding-bottom: 20px
+text-decoration-thickness: 20px;
 }
 
 

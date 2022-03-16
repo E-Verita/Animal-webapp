@@ -17,12 +17,11 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
-                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
+                    <li><a id="len1" class="hoverable index-color" href="/"><h6 th:text="${appTitle}"></h6></a></li>
+                    <li><a id="len4" class="hoverable titlecolor"><h1
                             th:text="${pageInfo.getPageTitle}"></h1></a></li>
-
                     <li><span class="nav-item" th:each="page:${adopterPages}"><span style="opacity:0;"> invisible</span>
-                     <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+                     <a class="hoverable animal-color" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
                    </span></li>
                 </ul>
             </div>
@@ -34,19 +33,39 @@
 <!--Profile info-->
 
 <main>
-    <div><p class="specialcolor">ID: </p><h5 th:text="${adopter.getId()}"></h5></div>
-    <div><p class="specialcolor">Username: </p><h5 th:text="${adopter.getUsername()}"></h5></div>
-    <div><p class="specialcolor">Email: </p><h5 th:text="${adopter.getEmail()}"></h5></div>
-    <div><p class="specialcolor">Name: </p><h5 th:text="${adopter.getName()}"></h5></div>
-    <div><p class="specialcolor">Age: </p><h5 th:text="${adopter.getAge()}"></h5></div>
-    <div><p class="specialcolor">Phone number: </p><h5 th:text="${adopter.getPhone()}"></h5></div>
-    <div><p class="specialcolor">Have small child/children: </p><h5 th:text="${adopter.getHasSmallChildren()}"></h5>
-    </div>
-    <div><p class="specialcolor">Live in: </p><h5 th:text="${adopter.getHousingType()}"></h5></div>
-    <div><p class="specialcolor">Have other animals <h5 th:text="${adopter.getHasOtherAnimals()}"></h5></div>
-    <div><p class="specialcolor">Very active <h5 th:text="${adopter.getHasActiveLifestyle()}"></h5></div>
-    <div><p class="specialcolor">Ready to adopt also sick animal <h5 th:text="${adopter.getCanAdoptSickAnimal()}"></h5>
-    </div>
+    <div class="container pt-2">
+        <div class="row">
+            <div><h3 th:text="${adopter.getName()}"></h3></div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="pb-4"><p class="specialcolor">ID: </p><h5 th:text="${adopter.getId()}"></h5></div>
+                    <div class="pb-4"><p class="specialcolor">Username: </p><h5 th:text="${adopter.getUsername()}"></h5>
+                    </div>
+                    <div class="pb-4"><p class="specialcolor">Email: </p><h5 th:text="${adopter.getEmail()}"></h5></div>
+                    <div class="pb-4"><p class="specialcolor">Name: </p><h5 th:text="${adopter.getName()}"></h5></div>
+                    <div class="pb-4"><p class="specialcolor">Age: </p><h5 th:text="${adopter.getAge()}"></h5></div>
+                    <div class="pb-4"><p class="specialcolor">Phone number: </p><h5
+                            th:text="${adopter.getPhone()}"></h5>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="pb-4"><p class="specialcolor">Have small child/children: </p><h5
+                            th:text="${adopter.getHasSmallChildren()}"></h5>
+                    </div>
+                    <div class="pb-4"><p class="specialcolor">Live in: </p><h5
+                            th:text="${adopter.getHousingType()}"></h5>
+                    </div>
+                    <div class="pb-4"><p class="specialcolor">Have other animals <h5
+                            th:text="${adopter.getHasOtherAnimals()}"></h5></div>
+                    <div class="pb-4"><p class="specialcolor">Very active <h5
+                            th:text="${adopter.getHasActiveLifestyle()}"></h5>
+                    </div>
+                    <div class="pb-4"><p class="specialcolor">Ready to adopt also sick animal <h5
+                            th:text="${adopter.getCanAdoptSickAnimal()}"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
 </main>
 <script src="/js/menuScript.js"></script>
 </body>

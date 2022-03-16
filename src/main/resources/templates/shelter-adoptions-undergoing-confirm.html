@@ -12,30 +12,30 @@
 <!-- Navigation -->
 
 <header>
-    <div class="container-fluid pb-5">
-        <nav class="navbar navbar-inverse">
+    <nav class="pt-2">
+        <div class="container-fluid pb-5">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li><a id="len1" class="hoverable" href="/"><h6 th:text="${appTitle}"></h6></a></li>
-                    <li><a id="len4" class="hoverable" style="color:#368a7f"><h1
+                    <li><a id="len1" class="hoverable index-color" href="/"><h6 th:text="${appTitle}"></h6></a></li>
+                    <li><a id="len4" class="hoverable titlecolor"><h1
                             th:text="${pageInfo.getPageTitle()}"></h1></a></li>
-                    <li><span class="nav-item" th:each="page:${shelterPages}"><span style="opacity:0;"> invisible</span>
-                     <a class="hoverable" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><span class="nav-item" th:each="page:${shelterPages}"><span style="opacity:0;">invis</span>
+                     <a class="hoverable nav-color" th:href="${page.getPageUrl()}" th:text="${page.getPageTitle()}"></a>
                     </span></li>
-                </ul>
-            </div>
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><span class="nav-item" th:each="page:${animalButtons}"><span
-                            style="opacity:0;"> invis</span>
-                        <a class="hoverable specialcolor" th:href="${page.getPageUrl()}"
-                        th:text="${page.getPageTitle()}"></a>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><span class="nav-item" th:each="page:${animalButtons}"><span
+                        style="opacity:0;"> invis</span>
+                        <a class="hoverable animal-color" th:href="${page.getPageUrl()}"
+                           th:text="${page.getPageTitle()}"></a>
                     </span>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 <main>
 
@@ -67,35 +67,36 @@
                     </a>
                 </div>
             </form>
-            <section>
+            <section class="pb-5">
                 <div class="container pt-3">
                     <div class="row">
                         <div class="col-sm">
-                            <h5>General information about adoption </h5>
-                            <br> <h5 th:text="${adoption.getId()}"></h5>
-                            <div><p class="specialcolor">Application received: </p><h5
+                            <h4>General information about adoption </h4>
+                            <div class="pb-4"><p class="specialcolor">ID:</p><h5
+                                    th:text="${adoption.getId()}"></h5></div>
+                            <div class="pb-4"><p class="specialcolor">Application received: </p><h5
                                     th:text="${adoption.getSent()}"></h5></div>
-                            <div><p class="specialcolor">Information from adopter: </p><h5
+                            <div class="pb-4"><p class="specialcolor">Information from adopter: </p><h5
                                     th:text="${adoption.getAdoptersText()}"></h5></div>
                         </div>
                         <div class="col-sm">
-                            <h5>General information about adopter </h5>
-                            <div><p class="specialcolor">Name: </p><h5
+                            <h4>General information about adopter </h4>
+                            <div class="pb-4"><p class="specialcolor">Name: </p><h5
                                     th:text="${adoption.getAdopterId().getName()}"></h5></div>
-                            <div><p class="specialcolor">Age: </p><h5
+                            <div class="pb-4"><p class="specialcolor">Age: </p><h5
                                     th:text="${adoption.getAdopterId().getAge()}"></h5></div>
-                            <div><p class="specialcolor">Phone: </p><h5
+                            <div class="pb-4"><p class="specialcolor">Phone: </p><h5
                                     th:text="${adoption.getAdopterId().getPhone()}"></h5></div>
-                            <div><p class="specialcolor">Email: </p><h5
+                            <div class="pb-4"><p class="specialcolor">Email: </p><h5
                                     th:text="${adoption.getAdopterId().getEmail()}"></h5></div>
                         </div>
                         <div class="col-sm">
-                            <h5>General information about animal </h5>
-                            <div><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5>
+                            <h4>General information about animal </h4>
+                            <div class="pb-4"><p class="specialcolor">Name: </p><h5 th:text="${animal.getName()}"></h5>
                             </div>
-                            <div><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5>
+                            <div class="pb-4"><p class="specialcolor">Type: </p><h5 th:text="${animal.getType()}"></h5>
                             </div>
-                            <div><p class="specialcolor">Age group: <h5
+                            <div class="pb-4"><p class="specialcolor">Age group: <h5
                                     th:text="${animal.getAgeGroup()}"></h5></div>
                             <div><p class="specialcolor">Info: <h5 th:text="${animal.getInfo()}"></h5></div>
                         </div>
